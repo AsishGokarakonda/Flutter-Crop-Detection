@@ -132,15 +132,18 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Column(
-                  children: const [
-                    Padding(
-                  padding: EdgeInsets.only(right: 30.0),
-                  child: Text('Forgot Password?',
-                            textAlign: TextAlign.end,
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 15,)),
-                )
+                  children:  [
+                    GestureDetector(
+                      onTap: ()=>Navigator.pushNamed(context, MyRoutes.forgotPasswordRoute),
+                      child: const Padding(
+                                      padding: EdgeInsets.only(right: 30.0),
+                                      child: Text('Forgot Password?',
+                              textAlign: TextAlign.end,
+                                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 15,)),
+                                    ),
+                    )
                   ],
                 ),
               ],
@@ -152,11 +155,14 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height:25,
             ),
-            Container(
-              child: Text(
-                'Create New Account',
-                style: TextStyle(
-                    color: Colors.white
+            GestureDetector(
+              onTap: ()=>Navigator.pushNamed(context, MyRoutes.signupRoute),
+              child: Container(
+                child: Text(
+                  'Create New Account',
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
                 ),
               ),
             ),
