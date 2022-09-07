@@ -1,11 +1,11 @@
 import 'package:crop_recommend/HomePage.dart';
-import 'package:crop_recommend/onboarding/onboard.dart';
-import 'package:crop_recommend/signing/LoginPage.dart';
+import 'package:crop_recommend/screens/onboarding/onboard.dart';
+import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'package:crop_recommend/screens/forgotPassword.dart';
-import 'package:crop_recommend/signing/Signup.dart';
+import 'package:crop_recommend/screens/signing/forgotPassword.dart';
+import 'package:crop_recommend/screens/signing/signup_page.dart';
 void main() {
   runApp(const MyApp());
 }

@@ -1,6 +1,8 @@
+import 'package:crop_recommend/widgets/background_image.dart';
+import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// import 'package:flutter/src/foundation/key.dart';
+// import 'package:flutter/src/widgets/framework.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -8,35 +10,19 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      ShaderMask(
-        shaderCallback: (rect) => const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.center,
-          colors: [Color.fromARGB(255, 18, 17, 17), Colors.transparent],
-        ).createShader(rect),
-        blendMode: BlendMode.darken,
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/signup/login.jpg'),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black38, BlendMode.darken),
-            ),
-          ),
-        ),
-      ),
+      const BackgroundImage(bgimage: 'assets/signup/login.jpg'),
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          title: Text(
+          title: const Text(
             'Forgot Password',
             style: TextStyle(color: Colors.white),
           ),
@@ -49,14 +35,14 @@ class ForgotPassword extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     width: MediaQuery.of(context).size.width,
                     child: const Text(
                       'Enter your email so that we will send further instructions to reset your password',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(height:30),
+                  const SizedBox(height:30),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Container(
@@ -85,24 +71,8 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15),
-                  Container(
-                    height: 60.0,
-                    width: MediaQuery.of(context).size.width * 0.85,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Color.fromARGB(255, 183, 159, 62)),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Send',
-                          style: TextStyle(
-                              color: Colors.white,
-                              height: 1.4,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17.0),
-                        )),
-                  )
+                  const SizedBox(height: 15),
+                  const CurvedButton(buttonText: 'Send')
                 ],
               ),
             ),
