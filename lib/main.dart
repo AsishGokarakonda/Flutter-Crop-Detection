@@ -5,7 +5,7 @@ import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crop_recommend/screens/forgotPassword.dart';
-
+import 'package:crop_recommend/signing/Signup.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
           MyRoutes.homeRoute: (context) => const HomePage(),
           MyRoutes.loginRoute: (context) => const LoginPage(),
           MyRoutes.forgotPasswordRoute: (context) => const ForgotPassword(),
+          MyRoutes.signupRoute: (context) => const SignupPage(),
         });
   }
 }
