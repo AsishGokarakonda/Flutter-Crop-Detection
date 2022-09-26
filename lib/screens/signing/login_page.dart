@@ -1,6 +1,5 @@
 import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
-import 'package:crop_recommend/widgets/curved_text_field.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/src/foundation/key.dart';
@@ -143,3 +142,49 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
+class GetTextField extends StatelessWidget {
+  const GetTextField({
+    Key? key,
+    required this.icon,
+    required this.hint,
+    required this.inputType,
+    required this.inputAction,
+  }) : super(key: key);
+
+  final IconData icon;
+  final String hint;
+  final TextInputType inputType;
+  final TextInputAction inputAction;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        height: 60.0,
+        width: MediaQuery.of(context).size.width * 0.85,
+        decoration: BoxDecoration(
+          color: Colors.grey[500]?.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Center(
+          child: TextFormField(
+            cursorColor: Colors.white54,
+            style: TextStyle(color: Colors.white, height: 1.4),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(color: Colors.white),
+              prefixIcon: Icon(
+                icon,
+                color: Colors.white,
+              ),
+              hintText: hint,
+            ),
+            keyboardType: inputType,
+            textInputAction: inputAction,
+          ),
+        ),
+      ),
+    );
+  }
+}
