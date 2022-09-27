@@ -1,8 +1,11 @@
 // import 'package:crop_recommend/widgets/Exporting.dart';
+import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 // import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class _SignupPageState extends State<SignupPage> {
   static String username = "";
   static String email = "";
   static String password = "";
-  static String confirmpassword = "";
+  static String name = "";
 
   @override
   void initState() {
@@ -27,8 +30,20 @@ class _SignupPageState extends State<SignupPage> {
     super.initState();
   }
 
+  Future<void> _validationcheck() async{
+    final validation = _formkey.currentState!.validate();
+    if (validation) {
+      _formkey.currentState!.save();
+      print(username);
+      print(name);
+      print(email);
+      print(password);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         const BackgroundImage(bgimage: 'assets/signup/login.jpg'),
@@ -64,6 +79,7 @@ class _SignupPageState extends State<SignupPage> {
                       inputType: TextInputType.name,
                       inputAction: TextInputAction.next,
                     ),
+                    const GetTextField(icon: Icons.person, hint: 'Name', inputType: TextInputType.name, inputAction: TextInputAction.next,),
                     const GetTextField(
                       icon: Icons.email,
                       hint: 'Email',
@@ -121,11 +137,6 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ]),
                     ),
-                    const GetTextField(
-                        icon: FontAwesomeIcons.lock,
-                        hint: 'Confirm Password',
-                        inputType: TextInputType.visiblePassword,
-                        inputAction: TextInputAction.done),
                     const SizedBox(
                       height: 20,
                     ),
@@ -137,13 +148,24 @@ class _SignupPageState extends State<SignupPage> {
                           color: const Color.fromARGB(255, 183, 159, 62)),
                       child: TextButton(
                           onPressed: () {
-                            if (_formkey.currentState!.validate()) {
-                              _formkey.currentState!.save();
-                              print(_SignupPageState.username);
-                              print(_SignupPageState.email);
-                              print(_SignupPageState.password);
-                              print(_SignupPageState.confirmpassword);
-                            }
+                            // 10.196.10.23
+                            _validationcheck();
+                            const url = "http://10.196.10.23:8000/api/register/";
+                            http.post(Uri.parse(url), body: {
+                              "username": username,
+                              "name":name,
+                              "email": email,
+                              "password": password,
+                            }).then((response) {
+                              print(response.body);
+                              print(response.statusCode);
+                              if (response.statusCode ==200){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                              }
+                              else{
+                                print("error");
+                              }
+                            });
                           },
                           child: const Text(
                             'Signup',
@@ -152,7 +174,8 @@ class _SignupPageState extends State<SignupPage> {
                                 height: 1.4,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17.0),
-                          )),
+                          )
+                          ),
                     )
                   ]))
             ]),
@@ -231,8 +254,8 @@ class GetTextField extends StatelessWidget {
                               return null;
                             }
                           : (value) {
-                              if (value!.isEmpty) {
-                                return 'Confirm password cannot be empty';
+                              if (value!.length < 6) {
+                                return 'Name must be atleast 6 characters';
                               }
                               return null;
                             },
@@ -243,8 +266,8 @@ class GetTextField extends StatelessWidget {
                   _SignupPageState.email = value!;
                 } else if (hint == 'Password') {
                   _SignupPageState.password = value!;
-                } else if (hint == 'Confirm Password') {
-                  _SignupPageState.confirmpassword = value!;
+                } else if (hint == 'Name') {
+                  _SignupPageState.name = value!;
                 }
               },
             ),
