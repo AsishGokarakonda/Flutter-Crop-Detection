@@ -11,7 +11,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-  
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -21,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool hidepassword = true;
   // Create storage
-final storage = const FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   static String username = "";
   static String password = "";
 
-    Future<void> _validationcheck() async{
+  Future<void> _validationcheck() async {
     final validation = _formkey.currentState!.validate();
     if (validation) {
       _formkey.currentState!.save();
@@ -34,7 +34,6 @@ final storage = const FlutterSecureStorage();
       print(password);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -144,21 +143,49 @@ final storage = const FlutterSecureStorage();
                 child: TextButton(
                     onPressed: () {
                       _validationcheck();
-                      const url = "http://10.196.10.23:8000/api/login/";
-                      http.post(Uri.parse(url), body: {
-                        "username": username,
-                        "password": password,
-                      }).then((response) async {
-                        print(response.body);
-                        if (response.statusCode == 200){
-                        var data = json.decode(response.body);
-                        print(data);
-                        await storage.write(key: "jwt", value: data["jwt"]);
-                        print("cool");
-                        Map<String, String> allValues = await storage.readAll();
-                        print(allValues);
-                        }
-                      });
+                      // if there is no error in the form then send the data to the server
+                      if (_formkey.currentState!.validate()) {
+                        // if there is no error in the form then send the data to the server
+                        const url = "http://10.196.9.193:8000/api/login/";
+                        http.post(Uri.parse(url), body: {
+                          "username": username,
+                          "password": password,
+                        }).then((response) async {
+                          print(response.body);
+                          if (response.statusCode == 200) {
+                            var data = json.decode(response.body);
+                            print(data['status']);
+                            if (data['status'] == "success") {
+                              await storage.write(
+                                  key: "jwt", value: data["jwt"]);
+                              Map<String, String> allValues =
+                                  await storage.readAll();
+                              // delete the stack and replace it with the new route
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  MyRoutes.homeRoute, (route) => false);
+                            } else {
+                              // show error message popup
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text("Error"),
+                                      content: const Text(
+                                          "Username or password is incorrect"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Ok"))
+                                      ],
+                                    );
+                                  });
+                            }
+                          }
+                        });
+                      }
+                      // if clause ends here
                     },
                     child: Text(
                       'Login',
