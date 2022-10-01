@@ -1,5 +1,11 @@
 import 'dart:io';
 
+import 'package:crop_recommend/screens/home/cropchoice_page.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:crop_recommend/screens/home/crophealth_page.dart';
+import 'package:crop_recommend/screens/home/profile_page.dart';
+import 'package:crop_recommend/screens/home/root_page.dart';
+import 'package:crop_recommend/screens/home/scan_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,6 +23,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  int _bottomNavIndex=0;
   File ? image;
   final picker = ImagePicker();
   bool showspinner = false;
@@ -84,122 +92,70 @@ class _HomePageState extends State<HomePage> {
 
 
 
+List <Widget> pages = const [
+  RootPage(),
+  CropHealth(),
+  CropChoice(),
+  ProfilePage()
+];
+
+
+List<IconData> iconList = [
+  Icons.home,
+  Icons.health_and_safety,
+  Icons.select_all,
+  Icons.person
+];
+
+
+List<String> titlelist = [
+  'Home',
+  'Crop Health',
+  'Crop Choice',
+  'Profile'
+];
+
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-      inAsyncCall: showspinner,
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Home Page'),)
-        ,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: (){
-                  getImage();
-                },
-                child: Container(
-                  
-                  child: image == null ? const Text('No Image Selected') : 
-                  Container(
-                    child:Center(child: Image.file(
-                      File(image!.path).absolute,
-                      height: 100,
-                      width: 100,
-                      fit:BoxFit.cover,
-                    ),
-                    )
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20,),
-              GestureDetector(
-                onTap: (){
-                  uploadImage(image!);
-                },
-                // if image is selected then upload button should be enabled
-                child: image == null ? const Text('') : Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.deepOrange,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  width: MediaQuery.of(context).size.width - 150,
-                  alignment: Alignment.center,
-                  child: const Text('Upload Image', style: TextStyle(color: Colors.white, fontSize: 16),),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                // logout button
-                child: GestureDetector(
-                  onTap: () async {
-                    final storage = FlutterSecureStorage();
-                    await storage.delete(key: 'jwt');
-                    Navigator.pushReplacementNamed(context, '/login');
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.deepOrange,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    width: MediaQuery.of(context).size.width - 150,
-                    alignment: Alignment.center,
-                    child: const Text('Logout', style: TextStyle(color: Colors.white, fontSize: 16),),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                // get crops button
-                child: GestureDetector(
-                  onTap: () async {
-                    getCrops();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.deepOrange,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    width: MediaQuery.of(context).size.width - 150,
-                    alignment: Alignment.center,
-                    child: const Text('Get Crops', style: TextStyle(color: Colors.white, fontSize: 16),),
-                  ),
-                ),
-              ),
-                // get images from the database and display them in a list view
-              // FutureBuilder(
-              //   future: getCrops(),
-              //   builder: (context, snapshot){
-              //     if(snapshot.hasData){
-              //       return ListView.builder(
-              //         shrinkWrap: true,
-              //         itemCount: snapshot.data.length,
-              //         itemBuilder: (context, index){
-              //           return Container(
-              //             child: Image.network(snapshot.data[index].image),
-              //           );
-              //         },
-              //       );
-              //     }
-              //     else{
-              //       return const Text('No Data');
-              //     }
-              //   },
-              // ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(titlelist[_bottomNavIndex],
+            style: TextStyle(color: Colors.black54,
+            fontWeight:FontWeight.w500,
+            fontSize: 24 ),),
+            Icon(Icons.notifications,color: Colors.black54,size:30.0)
+          ],
           ),
-        )
-        
-        
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0.0,
+      ),
+      body:IndexedStack(
+        index: _bottomNavIndex,
+        children: pages,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // getImage();
+          // uploadImage(image!);
+          // getCrops();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const ScanPage()));
+        },
+        child: Image.asset('assets/home/scanimg.png',height: 30.0,),
+        backgroundColor: Colors.blue,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        splashColor: Colors.blue,
+        activeColor: Colors.blue,
+        inactiveColor: Colors.black54,
+        icons: iconList,
+        activeIndex: _bottomNavIndex,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.softEdge,
+        onTap: (index) => setState(() => _bottomNavIndex = index),
       ),
     );
   }
