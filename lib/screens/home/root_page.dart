@@ -14,8 +14,8 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     int _selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
-    
-    List<String> _plantTypes =[
+
+    List<String> _plantTypes = [
       'Recommended',
       'Indoor',
       'Outdoor',
@@ -23,13 +23,16 @@ class _RootPageState extends State<RootPage> {
       'Supplement'
     ];
 
+    
 
-    return  Scaffold(
+
+
+    return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-                     Container(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
             padding: const EdgeInsets.only(top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,9 +73,98 @@ class _RootPageState extends State<RootPage> {
               ],
             ),
           ),
-          ],
-        )
-      ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: 50,
+              width: size.width,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _plantTypes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedIndex = index;
+                            });
+                          },
+                          child: Text(
+                            _plantTypes[index],
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: _selectedIndex == index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              color: _selectedIndex == index
+                                  ? Colors.blue
+                                  : Colors.black54.withOpacity(.6),
+                            ),
+                          )),
+                    );
+                  })),
+          SizedBox(
+            height : size.height * .26,
+            child : ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) {
+                // display images and a text below it 
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black45.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  width: size.width * .4,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: size.height * .2,
+                        width: size.width * .4,
+                        decoration: BoxDecoration(
+                          color: Colors.black45.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        // keep the image in the center of the container with cicular border to image
+                        child: Center(
+                          child: Container(
+                            // height: size.height * .15,
+                            // width: size.width * .3,
+                            decoration: BoxDecoration(
+                              color: Colors.black45.withOpacity(.1),
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                image: AssetImage('assets/home/plant1.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Plant Name',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54.withOpacity(.6),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            ),
+          ),
+          Container(
+            
+          ),
+
+        ],
+      )),
     );
   }
 }
