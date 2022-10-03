@@ -69,6 +69,7 @@ flutter:
     - assets/onboard/
     - assets/signup/
     - assets/home/
+    - images/crops/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

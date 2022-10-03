@@ -6,6 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
   @override
@@ -13,33 +14,37 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-    List <Plant> crops = [];
-    void getCrops() async {
-    try{
-    final storage = FlutterSecureStorage();
-    var jwt = await storage.read(key: 'jwt');
-    // pass jwt token in the header
-    var response = await http.get(Uri.parse('http://10.196.9.193:8000/api/getcrop/'), headers: {
-      'jwt': jwt!,
-    });
-    print(response.body);
-    var data = json.decode(response.body);
-    data.forEach((crop){
-      Plant p = Plant(
-        id: crop['id'],
-        user: crop['user'],
-        crop_name: crop['crop_name'],
-        image: crop['image'],
-        cropdisease: crop['cropdisease'],
-      );
-    crops.add(p);
-    });
-    print(crops.length);
-    }
-    catch(e){
+  List<Plant> crops = [];
+  Future<List<Plant>> getCrops() async {
+    try {
+      final storage = FlutterSecureStorage();
+      var jwt = await storage.read(key: 'jwt');
+      // pass jwt token in the header
+      var response = await http
+          .get(Uri.parse('http://10.196.9.193:8000/api/getcrop/'), headers: {
+        'jwt': jwt!,
+      });
+      crops = [];
+      print(response.body);
+      var data = json.decode(response.body);
+      data.forEach((crop) {
+        Plant p = Plant(
+          id: crop['id'],
+          user: crop['user'],
+          crop_name: crop['crop_name'],
+          image: crop['image'],
+          cropdisease: crop['cropdisease'],
+        );
+        crops.add(p);
+      });
+      print(crops.length);
+      return crops;
+    } catch (e) {
       print(e);
+      return crops;
     }
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -49,9 +54,9 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-  // create list of plant type
-  // getCrops();
-  print(crops);
+    // create list of plant type
+    // getCrops();
+    print(crops);
     int _selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
 
@@ -63,9 +68,7 @@ class _RootPageState extends State<RootPage> {
       'Supplement'
     ];
 
-      // get all the crops from the database
-
-
+    // get all the crops from the database
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -117,8 +120,7 @@ class _RootPageState extends State<RootPage> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               height: 50,
               width: size.width,
-              child: 
-              ListView.builder(
+              child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _plantTypes.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -143,72 +145,116 @@ class _RootPageState extends State<RootPage> {
                             ),
                           )),
                     );
-                  })
-                  ),
-          SizedBox(
-            height : size.height * .26,
-            child : ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                // display the crops from crops list after making the api call
+                  })),
+            // display the crops here with FutureBuilder
+            FutureBuilder(
+              future: getCrops(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return SizedBox(
+                    // keep height relative to the screen size
+                    height: 200.0,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: crops.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        // display the crops from crops list after making the api call
 
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black45.withOpacity(.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  width: size.width * .4,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: size.height * .2,
-                        width: size.width * .4,
-                        decoration: BoxDecoration(
-                          color: Colors.black45.withOpacity(.1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        // keep the image in the center of the container with cicular border to image
-                        child: Center(
-                          child: Container(
-                            // height: size.height * .15,
-                            // width: size.width * .3,
-                            decoration: BoxDecoration(
-                              color: Colors.black45.withOpacity(.1),
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                image: AssetImage('assets/home/plant1.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black45.withOpacity(.1),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'Plant Name',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54.withOpacity(.6),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          width: 150.0,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 150.0,
+                                width: 150.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      // if image is not available then display the default image
+                                      crops[index].image.substring(1) == null
+                                          ? 'assets/home/plant1.jpg'
+                                          :
+                                      crops[index].image.substring(1),
+                                      
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      // if the crop name is too long then display only 10 characters
+                                      crops[index].crop_name.length > 10
+                                          ? crops[index].crop_name.substring(0, 13)
+                                          : crops[index].crop_name,
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      crops[index].cropdisease,
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+
+          // keep a log out button here
+          Center(
+            // logout button
+            child: GestureDetector(
+              onTap: () async {
+                final storage = FlutterSecureStorage();
+                await storage.delete(key: 'jwt');
+                Navigator.pushReplacementNamed(context, '/login');
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.deepOrange,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                width: MediaQuery.of(context).size.width - 150,
+                alignment: Alignment.center,
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
             ),
           ),
-          Container(
-            
-          ),
-
         ],
       )),
     );
   }
-
 }
