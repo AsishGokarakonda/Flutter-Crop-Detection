@@ -1,17 +1,57 @@
+import 'dart:convert';
+
+import 'package:crop_recommend/models/plant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
-
   @override
   State<RootPage> createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {
+    List <Plant> crops = [];
+    void getCrops() async {
+    try{
+    final storage = FlutterSecureStorage();
+    var jwt = await storage.read(key: 'jwt');
+    // pass jwt token in the header
+    var response = await http.get(Uri.parse('http://10.196.9.193:8000/api/getcrop/'), headers: {
+      'jwt': jwt!,
+    });
+    print(response.body);
+    var data = json.decode(response.body);
+    data.forEach((crop){
+      Plant p = Plant(
+        id: crop['id'],
+        user: crop['user'],
+        crop_name: crop['crop_name'],
+        image: crop['image'],
+        cropdisease: crop['cropdisease'],
+      );
+    crops.add(p);
+    });
+    print(crops.length);
+    }
+    catch(e){
+      print(e);
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    getCrops();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+  // create list of plant type
+  // getCrops();
+  print(crops);
     int _selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
 
@@ -23,7 +63,7 @@ class _RootPageState extends State<RootPage> {
       'Supplement'
     ];
 
-    
+      // get all the crops from the database
 
 
 
@@ -77,7 +117,8 @@ class _RootPageState extends State<RootPage> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               height: 50,
               width: size.width,
-              child: ListView.builder(
+              child: 
+              ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _plantTypes.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -102,14 +143,16 @@ class _RootPageState extends State<RootPage> {
                             ),
                           )),
                     );
-                  })),
+                  })
+                  ),
           SizedBox(
             height : size.height * .26,
             child : ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
-                // display images and a text below it 
+                // display the crops from crops list after making the api call
+
                 return Container(
                   decoration: BoxDecoration(
                     color: Colors.black45.withOpacity(.1),
@@ -167,4 +210,5 @@ class _RootPageState extends State<RootPage> {
       )),
     );
   }
+
 }
