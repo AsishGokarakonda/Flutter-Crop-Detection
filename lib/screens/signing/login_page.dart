@@ -59,7 +59,8 @@ class _LoginPageState extends State<LoginPage> {
                   icon: Icons.person,
                   hint: 'Username',
                   inputType: TextInputType.name,
-                  inputAction: TextInputAction.next),
+                  inputAction: TextInputAction.next,
+                  ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 30.0, top: 10.0, right: 20.0, bottom: 10.0),
@@ -146,7 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                       // if there is no error in the form then send the data to the server
                       if (_formkey.currentState!.validate()) {
                         // if there is no error in the form then send the data to the server
-                        const url = "http://10.196.9.193:8000/api/login/";
+                        const url = "http://10.196.10.195:8000/api/login/";
+                        // if server is not running then show error message
+
                         http.post(Uri.parse(url), body: {
                           "username": username,
                           "password": password,
