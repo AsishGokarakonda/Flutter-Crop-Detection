@@ -37,7 +37,7 @@ class _ScanPageState extends State<ScanPage> {
       showspinner = true;
     });
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://10.196.10.195:8000/api/addcrop/'));
+        'POST', Uri.parse('http://10.196.12.31:8000/api/addcrop/'));
     // get jwt token from secure storage
     final storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
@@ -62,6 +62,17 @@ class _ScanPageState extends State<ScanPage> {
     print(request.files);
     var response = await request.send();
     print(response.statusCode);
+    // save the image in images folder using imagepicker
+    // get image path and keep it in a variable
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    } else {
+      print('No Image Selected');
+    }
+
     setState(() {
       showspinner = false;
     });

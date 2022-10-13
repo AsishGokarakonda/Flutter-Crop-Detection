@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
     final storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
     // pass jwt token in the header
-    var response = await http.get(Uri.parse('http://10.196.9.193:8000/api/getcrop/'), headers: {
+    var response = await http.get(Uri.parse('http://10.196.12.31:8000/api/getcrop/'), headers: {
       'jwt': jwt!,
     });
     print(response.body);

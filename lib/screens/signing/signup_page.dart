@@ -150,7 +150,7 @@ class _SignupPageState extends State<SignupPage> {
                           onPressed: () {
                             // 10.196.10.23
                             _validationcheck();
-                            const url = "http://10.196.10.23:8000/api/register/";
+                            const url = "http://10.196.10.195:8000/api/register/";
                             http.post(Uri.parse(url), body: {
                               "username": username,
                               "name":name,

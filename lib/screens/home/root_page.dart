@@ -21,7 +21,7 @@ class _RootPageState extends State<RootPage> {
       var jwt = await storage.read(key: 'jwt');
       // pass jwt token in the header
       var response = await http
-          .get(Uri.parse('http://10.196.10.195:8000/api/getcrop/'), headers: {
+          .get(Uri.parse('http://10.196.12.31:8000/api/getcrop/'), headers: {
         'jwt': jwt!,
       });
       crops = [];
@@ -38,6 +38,9 @@ class _RootPageState extends State<RootPage> {
         crops.add(p);
       });
       print(crops.length);
+      setState(() {
+        crops = crops;
+      });
       return crops;
     } catch (e) {
       print(e);
