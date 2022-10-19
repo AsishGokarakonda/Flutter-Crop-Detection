@@ -6,6 +6,9 @@
 <key>NSCAMERAUSAGEDESCRIPTION</key>
 <string>Camera is used to take pictures</string>
 
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Location is used to find nearby places</string>
+
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Gallery is used to select pictures</string>
 

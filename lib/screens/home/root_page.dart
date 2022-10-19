@@ -64,11 +64,11 @@ class _RootPageState extends State<RootPage> {
     Size size = MediaQuery.of(context).size;
 
     List<String> _plantTypes = [
-      'Recommended',
-      'Indoor',
-      'Outdoor',
-      'Garden',
-      'Supplement'
+      'Latest',
+      'Potato',
+      'Tomato',
+      'Wheat',
+      'Rice',
     ];
 
     // get all the crops from the database

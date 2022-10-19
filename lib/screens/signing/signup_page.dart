@@ -1,11 +1,16 @@
 // import 'package:crop_recommend/widgets/Exporting.dart';
+
 import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 // import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-
+import 'dart:convert';
+// import GeoLocator
+import 'package:geolocator/geolocator.dart';
+// import permission handler
+import 'package:permission_handler/permission_handler.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -22,11 +27,47 @@ class _SignupPageState extends State<SignupPage> {
   static String email = "";
   static String password = "";
   static String name = "";
+  // create a variable for latitude of decimal type with 7 digits after decimal
+  static double latitude = 0.0000000;
+  // create a variable for longitude of decimal type with 7 digits after decimal
+  static double longitude = 0.0000000;
+  var locationmessage = "";
+  void  getlocation() async {
+    if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
+  // Use location.
+      print("Hi");
+      // get permission to access location
+      var permission = await Permission.locationWhenInUse.request();
+      // check if permission is granted
+      if (permission == PermissionStatus.granted) {
+        // get current location
+    var position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    var lastposition = await Geolocator.getLastKnownPosition();
+    print(position);
+    print(lastposition);
+    setState(() {
+      locationmessage = "$position";
+      latitude = position.latitude;
+      longitude = position.longitude;
+    });
+      } else {
+        print("Location Permission Denied");
+      }
 
+}else{
+  // Open app settings.
+  print("COOL");
+  openAppSettings();
+}
+
+  }
   @override
   void initState() {
     // TODO: implement initState
-
+    
+    getlocation();
+    // PermissionHandler().requestPermissions([PermissionGroup.location]);
     super.initState();
   }
 
@@ -43,7 +84,7 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-
+    // getlocation();
     return Stack(
       children: [
         const BackgroundImage(bgimage: 'assets/signup/login.jpg'),
@@ -138,7 +179,15 @@ class _SignupPageState extends State<SignupPage> {
                       ]),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
+                    ),
+                                       Text(
+                      "Please give location permission",
+                      style: TextStyle(color: Colors.white),
+                      
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     Container(
                       height: 60.0,
@@ -150,12 +199,15 @@ class _SignupPageState extends State<SignupPage> {
                           onPressed: () {
                             // 10.196.10.23
                             _validationcheck();
-                            const url = "http://10.196.10.195:8000/api/register/";
+                            const url = "http://10.196.12.31:8000/api/register/";
                             http.post(Uri.parse(url), body: {
                               "username": username,
                               "name":name,
                               "email": email,
                               "password": password,
+                              // latitude is of type DecimalField
+                              "latitude": latitude.toString(),
+                              "longitude": longitude.toString(),
                             }).then((response) {
                               print(response.body);
                               print(response.statusCode);
@@ -176,6 +228,7 @@ class _SignupPageState extends State<SignupPage> {
                                 fontSize: 17.0),
                           )
                           ),
+                          
                     )
                   ]))
             ]),
@@ -272,6 +325,7 @@ class GetTextField extends StatelessWidget {
               },
             ),
           ),
+
         ),
       ]),
     );

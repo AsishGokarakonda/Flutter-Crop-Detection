@@ -162,7 +162,10 @@ class ProfileWidget extends StatelessWidget {
     return GestureDetector(
       // if title is Log Out then navigate to login page
       onTap: title == 'Log Out'
-          ? () {
+          ? () async {
+            // remove jwt from secure storage
+                final storage = FlutterSecureStorage();
+                await storage.delete(key: 'jwt');
               Navigator.pushNamed(context, '/login');
             }
           : () {},
