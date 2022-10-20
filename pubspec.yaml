@@ -43,6 +43,7 @@ dependencies:
   animated_bottom_navigation_bar: ^1.1.0
   geolocator: ^9.0.2
   permission_handler: ^10.2.0
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

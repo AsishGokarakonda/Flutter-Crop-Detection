@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -166,7 +167,7 @@ class ProfileWidget extends StatelessWidget {
             // remove jwt from secure storage
                 final storage = FlutterSecureStorage();
                 await storage.delete(key: 'jwt');
-              Navigator.pushNamed(context, '/login');
+                Navigator.pushNamedAndRemoveUntil(context,MyRoutes.loginRoute, (route) => false);
             }
           : () {},
       child: Container(

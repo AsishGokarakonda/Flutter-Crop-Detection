@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+
 class _LoginPageState extends State<LoginPage> {
   bool changebutton = false;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -33,6 +34,27 @@ class _LoginPageState extends State<LoginPage> {
       print(username);
       print(password);
     }
+  }
+
+  // check if already logged in
+  var jwt;
+  Future checklogin() async{
+      final storage = FlutterSecureStorage();
+      jwt = await storage.read(key: 'jwt');
+      if(jwt != null){
+            Navigator.pushNamedAndRemoveUntil(context,MyRoutes.newrootRoute, (route) => false);
+      }
+      return false;
+  }
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // check if already logged in or not
+    checklogin();
+    super.initState();
   }
 
   @override

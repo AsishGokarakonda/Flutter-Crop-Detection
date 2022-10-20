@@ -54,11 +54,9 @@ class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     movetologin(BuildContext context) async {
-
       await Future.delayed(const Duration(seconds: 1, milliseconds: 20));
       // ignore: use_build_context_synchronously
-      await Navigator.pushNamed(context, MyRoutes.loginRoute);
-    
+      Navigator.of(context).pushNamedAndRemoveUntil(MyRoutes.loginRoute, (route) => false);
   }
     return Scaffold(
       body: Container(
@@ -100,7 +98,9 @@ class _OnboardingState extends State<Onboarding> {
         ),
       ),
       bottomSheet: isLastPage ? InkWell(
-                      onTap: () => movetologin(context),
+                      onTap: () => {
+
+                        movetologin(context)},
                       child: AnimatedContainer(
                         // color: Colors.white,
                         duration: const Duration(seconds: 1),
