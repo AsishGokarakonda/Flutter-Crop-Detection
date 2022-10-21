@@ -18,11 +18,35 @@ class _NewRootPageState extends State<NewRootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('New Root'),
+        appBar: // make background transparent
+            AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          // center title
+          centerTitle: true,
+          // caption below title
+
+          title: Column(children: [
+            SizedBox(
+              height: 10,
+            ),
+            const Text(
+              'Kisan Suvidha ',
+              style: TextStyle(color: Colors.black),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            const Text(
+              'A Smart App',
+              style: TextStyle(color: Colors.black38, fontSize: 12),
+            ),
+          ]),
         ),
         body: Column(children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Row(
               // space between the two buttons
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -30,7 +54,8 @@ class _NewRootPageState extends State<NewRootPage> {
                 // create a rounded button and keep a image inside it and on press of that
 
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                     child: Column(
                       children: [
                         Container(
@@ -44,14 +69,16 @@ class _NewRootPageState extends State<NewRootPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        const Text('Crop Choice',style: TextStyle(
-                          color: Colors.black
-                        ),)
+                        const Text(
+                          'Crop Choice',
+                          style: TextStyle(color: Colors.black),
+                        )
                       ],
                     )),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      // go to Profile page
+                      Navigator.pushNamed(context, '/profile');
                     },
                     child: Column(
                       children: [
@@ -95,7 +122,8 @@ class _NewRootPageState extends State<NewRootPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        const Text('Crop Health')
+                        const Text('Crop Health',
+                            style: TextStyle(color: Colors.black))
                       ],
                     )),
                 TextButton(
@@ -106,14 +134,15 @@ class _NewRootPageState extends State<NewRootPage> {
                           width: 100,
                           height: 100,
                           child: Image.asset(
-                            'assets/home/pest.png',
+                            'assets/home/weed.png',
                             height: 100,
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        const Text('Pest Management')
+                        const Text('Weed Management',
+                            style: TextStyle(color: Colors.black))
                       ],
                     )),
               ]),
@@ -141,25 +170,28 @@ class _NewRootPageState extends State<NewRootPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        const Text('Market Choice')
+                        const Text('Market Choice',
+                            style: TextStyle(color: Colors.black))
                       ],
                     )),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/pesthome');},
                     child: Column(
                       children: [
                         Container(
                           width: 100,
                           height: 100,
                           child: Image.asset(
-                            'assets/home/weed.png',
+                            'assets/home/pest.png',
                             height: 100,
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        const Text('Weed Management')
+                        const Text('Pest Management',
+                            style: TextStyle(color: Colors.black))
                       ],
                     )),
               ]),

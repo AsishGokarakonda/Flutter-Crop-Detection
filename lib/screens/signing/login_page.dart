@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                   await storage.readAll();
                               // delete the stack and replace it with the new route
                               Navigator.pushNamedAndRemoveUntil(context,
-                                  MyRoutes.homeRoute, (route) => false);
+                                  MyRoutes.newrootRoute, (route) => false);
                             } else {
                               // show error message popup
                               showDialog(

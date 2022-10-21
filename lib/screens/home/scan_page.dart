@@ -34,43 +34,43 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   Future<void> uploadImage(File file) async {
-    // setState(() {
-    //   showspinner = true;
-    // });
-    // var request = http.MultipartRequest(
-    //     'POST', Uri.parse('http://10.196.12.31:8000/api/addcrop/'));
-    // // get jwt token from secure storage
-    // final storage = FlutterSecureStorage();
-    // var jwt = await storage.read(key: 'jwt');
-    // Map<String, String> headers = {
-    //   'Content-type': 'multipart/form-data',
-    //   'Accept': 'application/json',
-    //   'jwt': jwt!,
-    // };
-    // request.files.add(
-    //   http.MultipartFile(
-    //     'image',
-    //     file.readAsBytes().asStream(),
-    //     file.lengthSync(),
-    //     filename: basename(file.path),
-    //   ),
-    // );
-    // print(basename(file.path));
-    // request.headers.addAll(headers);
-    // request.fields.addAll({
-    //   'crop_name': 'potato',
-    // });
-    // var response = await request.send();
-    // // save the image in images folder using imagepicker
-    // // get image path and keep it in a variable
-    // final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    // if (pickedFile != null) {
-    //   setState(() {
-    //     image = File(pickedFile.path);
-    //   });
-    // } else {
-    //   print('No Image Selected');
-    // }
+    setState(() {
+      showspinner = true;
+    });
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://10.196.12.31:8000/api/addcrop/'));
+    // get jwt token from secure storage
+    final storage = FlutterSecureStorage();
+    var jwt = await storage.read(key: 'jwt');
+    Map<String, String> headers = {
+      'Content-type': 'multipart/form-data',
+      'Accept': 'application/json',
+      'jwt': jwt!,
+    };
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        file.readAsBytes().asStream(),
+        file.lengthSync(),
+        filename: basename(file.path),
+      ),
+    );
+    print(basename(file.path));
+    request.headers.addAll(headers);
+    request.fields.addAll({
+      'crop_name': 'potato',
+    });
+    var response = await request.send();
+    // save the image in images folder using imagepicker
+    // get image path and keep it in a variable
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    } else {
+      print('No Image Selected');
+    }
     // save the image file in assets folder
     
 

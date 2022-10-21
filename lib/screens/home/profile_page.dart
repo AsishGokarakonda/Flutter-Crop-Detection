@@ -47,71 +47,52 @@ Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        height: size.height * 1.3,
-        width: size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 150,
-              child: const CircleAvatar(
-                radius: 60,
-                backgroundImage: ExactAssetImage('assets/profile/profile.png'),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Container(
+          padding: const EdgeInsets.all(16),
+          width: size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 150,
+                child: const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: ExactAssetImage('assets/profile/profile.png'),
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+      
+                ),
               ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            // SizedBox(
-            //   width: size.width * .3,
-            //   child: Row(
-            //     children: [
-            //       Text(
-            //         'John Doe',
-            //         style: TextStyle(
-            //           color: Colors.black12,
-            //           fontSize: 20,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // Text(
-            //   'johndoe@gmail.com',
-            //   style: TextStyle(
-            //     color: Colors.black.withOpacity(.3),
-            //   ),
-            // ),
-
-            // show user details after fetching from api
-            Text(
-              userdetails?.name ?? 'loading',
-              style: const TextStyle(
-                color: Colors.black12,
-                fontSize: 20,
+              // show user details after fetching from api
+              Text(
+                userdetails?.name ?? 'loading',
+                style: const TextStyle(
+                  color: Colors.black12,
+                  fontSize: 20,
+                ),
               ),
-            ),
-            Text(
-              userdetails?.email ?? 'loading',
-              style: TextStyle(
-                color: Colors.black.withOpacity(.3),
+              Text(
+                userdetails?.email ?? 'loading',
+                style: TextStyle(
+                  color: Colors.black.withOpacity(.3),
+                ),
               ),
-            ),
-
-
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              height: size.height * .5,
-              width: size.width,
-              child: Column(
+      
+      
+              const SizedBox(
+                height: 30,
+              ),
+              
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [
                   ProfileWidget(
@@ -123,12 +104,12 @@ Widget build(BuildContext context) {
                     title: 'Settings',
                   ),
                   ProfileWidget(
-                    icon: Icons.notifications,
-                    title: 'Notifications',
+                    icon: Icons.settings,
+                    title: 'FAQs',
                   ),
                   ProfileWidget(
-                    icon: Icons.chat,
-                    title: 'FAQs',
+                    icon: Icons.settings,
+                    title: 'About Us',
                   ),
                   ProfileWidget(
                     icon: Icons.logout,
@@ -136,10 +117,12 @@ Widget build(BuildContext context) {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        ]
       ),
+
     ));
   }
 }
