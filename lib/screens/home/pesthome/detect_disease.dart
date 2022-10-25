@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -20,7 +22,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
   File? image;
   final picker = ImagePicker();
   bool showspinner = false;
-
+  bool showdialog = false;
+  String? disease;
   Future getImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -32,7 +35,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
     }
   }
 
-  Future<void> uploadImage(File file) async {
+  Future<void> uploadImage(File file, BuildContext context ) async {
     setState(() {
       showspinner = true;
     });
@@ -62,20 +65,42 @@ class _DetectDiseaseState extends State<DetectDisease> {
     var response = await request.send();
     // save the image in images folder using imagepicker
     // get image path and keep it in a variable
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        image = File(pickedFile.path);
-      });
-    } else {
-      print('No Image Selected');
-    }
-    // save the image file in assets folder
-
     setState(() {
       showspinner = false;
-    });
+
+      var secresponse = http.Response.fromStream(response);
+      secresponse.then((value) {
+        print(value.body);
+        // decode the json response
+        var decoded = jsonDecode(value.body);
+        print(decoded['cropdisease']);
+        disease = decoded['cropdisease'];
+        // it is opening gallery again. I want to show the dialog box here
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Disease'),
+              content: Text(disease!),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+
+      });
+
     image = null;
+    });
+    // get crop_disese from response
+    // show the disease in a dialog box
+
   }
 
   @override
@@ -121,7 +146,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      getImage();
+                        getImage();
+                      
                     },
                     child: Container(
                       child: image == null
@@ -170,7 +196,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                   ),
                    GestureDetector(
                           onTap: () {
-                            uploadImage(image!);
+                            uploadImage(image!, context);
                           },
                           // if image is selected then upload button should be enabled
                           child: image == null
@@ -190,6 +216,22 @@ class _DetectDiseaseState extends State<DetectDisease> {
                                   ),
                                 ),
                         ),
+                        // showdialog
+                        //     ? AlertDialog(
+                        //         title: const Text('Disease'),
+                        //         content: Text("Disease is ${disease}"),
+                        //         actions: [
+                        //           TextButton(
+                        //             onPressed: () {
+                        //               setState(() {
+                        //                 showdialog = false;
+                        //               });
+                        //             },
+                        //             child: const Text('Close'),
+                        //           )
+                        //         ],
+                        //       )
+                        //     : const Text(''),
                 ],
               ),
             ]

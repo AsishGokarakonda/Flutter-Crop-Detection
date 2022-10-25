@@ -62,6 +62,7 @@ class _PestHomeState extends State<PestHome> {
                 // button navigate to the detect disease page
               TextButton(
                   onPressed: () {
+                    Navigator.pushNamed(context, '/yourcrops');
                   },
                   child: Column(
                     children: [

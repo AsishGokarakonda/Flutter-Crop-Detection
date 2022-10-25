@@ -8,4 +8,5 @@ class MyRoutes {
   static String newrootRoute = '/newroot';
   static String detectdiseaseRoute = '/detectdisease';
   static String pesthomeRoute = '/pesthome';
+  static String yourcropRoute = '/yourcrops';
 }
