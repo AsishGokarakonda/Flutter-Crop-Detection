@@ -1,4 +1,3 @@
-import 'package:crop_recommend/screens/home/scan_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,7 +14,12 @@ class _AdminHomeState extends State<AdminHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Home'),
+        backgroundColor: Colors.transparent,
+        // remove the back button
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        centerTitle: true,
+        title: const Text('Your Crops',style: TextStyle(color: Colors.black),),
       ),
     );
   }

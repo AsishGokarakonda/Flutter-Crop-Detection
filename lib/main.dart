@@ -1,10 +1,9 @@
-import 'package:crop_recommend/HomePage.dart';
 import 'package:crop_recommend/screens/home/adminhome/admin_home.dart';
 import 'package:crop_recommend/screens/home/pesthome/detect_disease.dart';
-import 'package:crop_recommend/screens/home/new_root_page.dart';
+import 'package:crop_recommend/screens/home/all_home_page.dart';
 import 'package:crop_recommend/screens/home/pesthome/pest_home.dart';
 import 'package:crop_recommend/screens/home/pesthome/your_crops.dart';
-import 'package:crop_recommend/screens/home/profile_page.dart';
+import 'package:crop_recommend/screens/profile/profile_page.dart';
 import 'package:crop_recommend/screens/onboarding/onboard.dart';
 import 'package:crop_recommend/screens/signing/admin_login.dart';
 import 'package:crop_recommend/screens/signing/before_login.dart';
@@ -46,12 +45,11 @@ class MyApp extends StatelessWidget {
 
         initialRoute: initScreen == 0 ? MyRoutes.onboardingRoute : MyRoutes.beforeloginRoute,
         routes: {
-          MyRoutes.homeRoute: (context) => const HomePage(),
           MyRoutes.loginRoute: (context) => const LoginPage(),
           MyRoutes.forgotPasswordRoute: (context) => const ForgotPassword(),
           MyRoutes.signupRoute: (context) => const SignupPage(),
           MyRoutes.onboardingRoute: (context) => const Onboarding(),
-          MyRoutes.newrootRoute: (context) => const NewRootPage(),
+          MyRoutes.newrootRoute: (context) => const AllHomePage(),
           MyRoutes.detectdiseaseRoute: (context) => const DetectDisease(),
           MyRoutes.pesthomeRoute: (context) => const PestHome(),
           MyRoutes.profileRoute: (context) => const ProfilePage(),

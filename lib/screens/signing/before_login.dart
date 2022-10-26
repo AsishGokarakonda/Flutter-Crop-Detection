@@ -21,13 +21,23 @@ class _BeforeLoginState extends State<BeforeLogin> {
     jwt = await storage.read(key: 'jwt');
     if (jwt != null) {
       // if user is admin then redirect to admin home page
-      var response = await http.get(
-        Uri.parse('http://10.196.12.31:8000/api/user/'));
-      var data = json.decode(response.body);
-      if (data['is_superuser'] == true) {
+      // pass jwt token in header
+      var request = http.Request(
+          'GET', Uri.parse('http://10.196.12.31:8000/api/user/'));
+      request.headers.addAll(<String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'jwt': jwt,
+      });
+      var response = await request.send();
+      // get response body
+      var responseBody = await response.stream.bytesToString();
+      // convert response body to json
+      var responseJson = jsonDecode(responseBody);
+      // if user is admin then redirect to admin home page
+      if (responseJson['is_superuser'] == true) {
         Navigator.pushNamed(context, MyRoutes.adminhomeRoute);
       } else {
-        Navigator.pushNamed(context, MyRoutes.homeRoute);
+        Navigator.pushNamed(context, MyRoutes.newrootRoute);
       }
     }
     return false;

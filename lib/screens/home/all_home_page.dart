@@ -7,14 +7,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class NewRootPage extends StatefulWidget {
-  const NewRootPage({Key? key}) : super(key: key);
+class AllHomePage extends StatefulWidget {
+  const AllHomePage({Key? key}) : super(key: key);
 
   @override
-  State<NewRootPage> createState() => _NewRootPageState();
+  State<AllHomePage> createState() => _AllHomePageState();
 }
 
-class _NewRootPageState extends State<NewRootPage> {
+class _AllHomePageState extends State<AllHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -56,7 +56,7 @@ class _OnboardingState extends State<Onboarding> {
     movetologin(BuildContext context) async {
       await Future.delayed(const Duration(seconds: 1, milliseconds: 20));
       // ignore: use_build_context_synchronously
-      Navigator.of(context).pushNamedAndRemoveUntil(MyRoutes.loginRoute, (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(MyRoutes.beforeloginRoute, (route) => false);
   }
     return Scaffold(
       body: Container(
