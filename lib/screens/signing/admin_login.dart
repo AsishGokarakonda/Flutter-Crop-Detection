@@ -9,15 +9,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class AdminLoginPage extends StatefulWidget {
+  const AdminLoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<AdminLoginPage> createState() => _AdminLoginPageState();
 }
 
 
-class _LoginPageState extends State<LoginPage> {
+class _AdminLoginPageState extends State<AdminLoginPage> {
   bool changebutton = false;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool hidepassword = true;
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
       final storage = FlutterSecureStorage();
       jwt = await storage.read(key: 'jwt');
       if(jwt != null){
-            Navigator.pushNamedAndRemoveUntil(context,MyRoutes.newrootRoute, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context,MyRoutes.adminhomeRoute, (route) => false);
       }
       return false;
   }
@@ -130,35 +130,35 @@ class _LoginPageState extends State<LoginPage> {
                         keyboardType: TextInputType.visiblePassword,
                         textInputAction: TextInputAction.next,
                         onSaved: (value) {
-                          _LoginPageState.password = value!;
+                          _AdminLoginPageState.password = value!;
                         },
                       ),
                     ),
                   ),
                 ]),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.pushNamed(
-                            context, MyRoutes.forgotPasswordRoute),
-                        child: const Padding(
-                          padding: EdgeInsets.only(right: 30.0),
-                          child: Text('Forgot Password?',
-                              textAlign: TextAlign.end,
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 15,
-                              )),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     Column(
+              //       children: [
+              //         GestureDetector(
+              //           onTap: () => Navigator.pushNamed(
+              //               context, MyRoutes.forgotPasswordRoute),
+              //           child: const Padding(
+              //             padding: EdgeInsets.only(right: 30.0),
+              //             child: Text('Forgot Password?',
+              //                 textAlign: TextAlign.end,
+              //                 style: TextStyle(
+              //                   color: Colors.blue,
+              //                   fontSize: 15,
+              //                 )),
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ],
+              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -174,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                       // if there is no error in the form then send the data to the server
                       if (_formkey.currentState!.validate()) {
                         // if there is no error in the form then send the data to the server
-                        const url = "http://10.196.12.31:8000/api/login/";
+                        const url = "http://10.196.12.31:8000/api/loginsuperuser/";
                         // if server is not running then show error message
             
                         http.post(Uri.parse(url), body: {
@@ -192,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                                   await storage.readAll();
                               // delete the stack and replace it with the new route
                               Navigator.pushNamedAndRemoveUntil(context,
-                                  MyRoutes.newrootRoute, (route) => false);
+                                  MyRoutes.adminhomeRoute, (route) => false);
                             } else {
                               // show error message popup
                               showDialog(
@@ -230,18 +230,18 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 25,
               ),
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, MyRoutes.signupRoute),
-                child: Container(
-                  child: Text(
-                    'Create New Account',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // GestureDetector(
+              //   onTap: () => Navigator.pushNamed(context, MyRoutes.signupRoute),
+              //   child: Container(
+              //     child: Text(
+              //       'Create New Account',
+              //       style: TextStyle(color: Colors.white),
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10,
+              // ),
             ]),
           ),
         )
@@ -249,46 +249,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-// class DropdownButtonExample extends StatefulWidget {
-//   const DropdownButtonExample({super.key});
-
-//   @override
-//   State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
-// }
-
-// class _DropdownButtonExampleState extends State<DropdownButtonExample> {
-//   List<String> list = <String>['Admin', 'User'];
-//   String dropdownValue = list.first;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return DropdownButton<String>(
-//       value: dropdownValue,
-//       icon: const Icon(Icons.arrow_downward),
-//       elevation: 16,
-//       style: const TextStyle(color: Colors.deepPurple),
-//       underline: Container(
-//         height: 2,
-//         color: Colors.deepPurpleAccent,
-//       ),
-//       onChanged: (String? value) {
-//         // This is called when the user selects an item.
-//         setState(() {
-//           dropdownValue = value!;
-//         });
-//       },
-//       items: list.map<DropdownMenuItem<String>>((String value) {
-//         return DropdownMenuItem<String>(
-//           value: value,
-//           child: Text(value),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }
-
 
 class GetTextField extends StatelessWidget {
   const GetTextField({
@@ -350,9 +310,9 @@ class GetTextField extends StatelessWidget {
                     },
               onSaved: (value) {
                 if (hint == 'Username') {
-                  _LoginPageState.username = value!;
+                  _AdminLoginPageState.username = value!;
                 } else if (hint == 'Password') {
-                  _LoginPageState.password = value!;
+                  _AdminLoginPageState.password = value!;
                 }
               },
             ),

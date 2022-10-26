@@ -43,158 +43,159 @@ class _NewRootPageState extends State<NewRootPage> {
             ),
           ]),
         ),
-        body: Column(children: [
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-              // space between the two buttons
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // create a rounded button and keep a image inside it and on press of that
-
-                TextButton(
-                    onPressed: () {
-                    },
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/cropchoice.png',
+        body: SingleChildScrollView(
+          child: Column(children: [
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+                // space between the two buttons
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // create a rounded button and keep a image inside it and on press of that
+                  TextButton(
+                      onPressed: () {
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/cropchoice.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Crop Choice',
-                          style: TextStyle(color: Colors.black),
-                        )
-                      ],
-                    )),
-                TextButton(
-                    onPressed: () {
-                      // go to Profile page
-                      Navigator.pushNamed(context, '/profile');
-                    },
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/dashboard.png',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text(
+                            'Crop Choice',
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                      )),
+                  TextButton(
+                      onPressed: () {
+                        // go to Profile page
+                        Navigator.pushNamed(context, '/profile');
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/dashboard.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Your Dashboard',
-                            style: TextStyle(color: Colors.black))
-                      ],
-                    )),
-              ]),
-          SizedBox(
-            height: 15,
-          ),
-          Row(
-              // space between the two buttons
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // create a rounded button and keep a image inside it and on press of that
-
-                TextButton(
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/crophealth.png',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text('Your Dashboard',
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      )),
+                ]),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+                // space between the two buttons
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // create a rounded button and keep a image inside it and on press of that
+        
+                  TextButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/crophealth.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Crop Health',
-                            style: TextStyle(color: Colors.black))
-                      ],
-                    )),
-                TextButton(
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/weed.png',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text('Crop Health',
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      )),
+                  TextButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/weed.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Weed Management',
-                            style: TextStyle(color: Colors.black))
-                      ],
-                    )),
-              ]),
-          SizedBox(
-            height: 15,
-          ),
-          Row(
-              // space between the two buttons
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // create a rounded button and keep a image inside it and on press of that
-
-                TextButton(
-                    onPressed: () {},
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/market.png',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text('Weed Management',
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      )),
+                ]),
+            SizedBox(
+              height: 15,
+            ),
+            Row(
+                // space between the two buttons
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // create a rounded button and keep a image inside it and on press of that
+        
+                  TextButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/market.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Market Choice',
-                            style: TextStyle(color: Colors.black))
-                      ],
-                    )),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/pesthome');},
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset(
-                            'assets/home/pest.png',
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text('Market Choice',
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      )),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/pesthome');},
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 100,
                             height: 100,
+                            child: Image.asset(
+                              'assets/home/pest.png',
+                              height: 100,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        const Text('Pest Management',
-                            style: TextStyle(color: Colors.black))
-                      ],
-                    )),
-              ]),
-        ]));
+                          SizedBox(
+                            height: 10,
+                          ),
+                          const Text('Pest Management',
+                              style: TextStyle(color: Colors.black))
+                        ],
+                      )),
+                ]),
+          ]),
+        ));
   }
 }

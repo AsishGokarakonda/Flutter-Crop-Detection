@@ -9,4 +9,7 @@ class MyRoutes {
   static String detectdiseaseRoute = '/detectdisease';
   static String pesthomeRoute = '/pesthome';
   static String yourcropRoute = '/yourcrops';
+  static String adminloginRoute = '/adminlogin';
+  static String beforeloginRoute = '/beforelogin';
+  static String adminhomeRoute = '/adminhome';
 }

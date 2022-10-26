@@ -150,7 +150,7 @@ class ProfileWidget extends StatelessWidget {
             // remove jwt from secure storage
                 final storage = FlutterSecureStorage();
                 await storage.delete(key: 'jwt');
-                Navigator.pushNamedAndRemoveUntil(context,MyRoutes.loginRoute, (route) => false);
+                Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
             }
           : () {},
       child: Container(

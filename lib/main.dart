@@ -1,10 +1,13 @@
 import 'package:crop_recommend/HomePage.dart';
+import 'package:crop_recommend/screens/home/adminhome/admin_home.dart';
 import 'package:crop_recommend/screens/home/pesthome/detect_disease.dart';
 import 'package:crop_recommend/screens/home/new_root_page.dart';
 import 'package:crop_recommend/screens/home/pesthome/pest_home.dart';
 import 'package:crop_recommend/screens/home/pesthome/your_crops.dart';
 import 'package:crop_recommend/screens/home/profile_page.dart';
 import 'package:crop_recommend/screens/onboarding/onboard.dart';
+import 'package:crop_recommend/screens/signing/admin_login.dart';
+import 'package:crop_recommend/screens/signing/before_login.dart';
 import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primarySwatch: Colors.deepOrange),
         // if it is first time, go to onboarding page else go to login page if jwt is null else go to home page
 
-        initialRoute: initScreen == 0 ? MyRoutes.onboardingRoute : MyRoutes.loginRoute,
+        initialRoute: initScreen == 0 ? MyRoutes.onboardingRoute : MyRoutes.beforeloginRoute,
         routes: {
           MyRoutes.homeRoute: (context) => const HomePage(),
           MyRoutes.loginRoute: (context) => const LoginPage(),
@@ -53,6 +56,9 @@ class MyApp extends StatelessWidget {
           MyRoutes.pesthomeRoute: (context) => const PestHome(),
           MyRoutes.profileRoute: (context) => const ProfilePage(),
           MyRoutes.yourcropRoute: (context) => const YourCrops(),
+          MyRoutes.adminloginRoute:(context) => const AdminLoginPage(),
+          MyRoutes.beforeloginRoute:(context) => const BeforeLogin(),
+          MyRoutes.adminhomeRoute:(context) => const AdminHome(),
         });
   }
 }
