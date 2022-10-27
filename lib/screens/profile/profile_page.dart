@@ -7,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:crop_recommend/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:crop_recommend/utils/api.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final storage = FlutterSecureStorage();
     final jwt = await storage.read(key: 'jwt');
     var response = await http.get(
-      Uri.parse('http://10.196.12.31:8000/api/user/'), headers: {
+      Uri.parse('${APILoad.api}/api/user/'), headers: {
         'jwt': jwt!,
       });
     print(response.body);

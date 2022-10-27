@@ -1,6 +1,7 @@
 // import 'package:crop_recommend/widgets/Exporting.dart';
 
 import 'package:crop_recommend/screens/signing/login_page.dart';
+import 'package:crop_recommend/utils/api.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 // import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:flutter/material.dart';
@@ -199,7 +200,7 @@ class _SignupPageState extends State<SignupPage> {
                           onPressed: () {
                             // 10.196.10.23
                             _validationcheck();
-                            const url = "http://10.196.12.31:8000/api/register/";
+                            var url = "${APILoad.api}/api/register/";
                             http.post(Uri.parse(url), body: {
                               "username": username,
                               "name":name,

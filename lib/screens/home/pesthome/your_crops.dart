@@ -6,6 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:crop_recommend/utils/api.dart';
 
 class YourCrops extends StatefulWidget {
   const YourCrops({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _YourCropsState extends State<YourCrops> {
       var jwt = await storage.read(key: 'jwt');
       // pass jwt token in the header
       var response = await http
-          .get(Uri.parse('http://10.196.12.31:8000/api/getcrop/'), headers: {
+          .get(Uri.parse('${APILoad.api}/crops/getcrop/'), headers: {
         'jwt': jwt!,
       });
       crops = [];
@@ -167,7 +168,7 @@ class _YourCropsState extends State<YourCrops> {
                     height: 200.0,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: 5 > crops.length ? crops.length : 5,
                       itemBuilder: (BuildContext context, int index) {
                         // display the crops from crops list after making the api call
 
@@ -190,7 +191,7 @@ class _YourCropsState extends State<YourCrops> {
                                   ),
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                        "http://10.196.12.31:8000${crops[crops.length - index-1].image}"),
+                                        "${APILoad.api}${crops[crops.length - index-1].image}"),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

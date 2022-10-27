@@ -11,4 +11,5 @@ class MyRoutes {
   static String adminloginRoute = '/adminlogin';
   static String beforeloginRoute = '/beforelogin';
   static String adminhomeRoute = '/adminhome';
+  static String allusersRoute = '/allusers';
 }

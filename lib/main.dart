@@ -1,4 +1,5 @@
 import 'package:crop_recommend/screens/home/adminhome/admin_home.dart';
+import 'package:crop_recommend/screens/home/adminhome/all_users.dart';
 import 'package:crop_recommend/screens/home/pesthome/detect_disease.dart';
 import 'package:crop_recommend/screens/home/all_home_page.dart';
 import 'package:crop_recommend/screens/home/pesthome/pest_home.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
           MyRoutes.adminloginRoute:(context) => const AdminLoginPage(),
           MyRoutes.beforeloginRoute:(context) => const BeforeLogin(),
           MyRoutes.adminhomeRoute:(context) => const AdminHome(),
+          MyRoutes.allusersRoute:(context) => const AllUsers(),
         });
   }
 }

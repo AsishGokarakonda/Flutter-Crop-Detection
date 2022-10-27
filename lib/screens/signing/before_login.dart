@@ -6,7 +6,7 @@ import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
+import 'package:crop_recommend/utils/api.dart';
 class BeforeLogin extends StatefulWidget {
   const BeforeLogin({Key? key}) : super(key: key);
 
@@ -23,7 +23,7 @@ class _BeforeLoginState extends State<BeforeLogin> {
       // if user is admin then redirect to admin home page
       // pass jwt token in header
       var request = http.Request(
-          'GET', Uri.parse('http://10.196.12.31:8000/api/user/'));
+          'GET', Uri.parse('${APILoad.api}/api/user/'));
       request.headers.addAll(<String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'jwt': jwt,

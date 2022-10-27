@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:flutter/src/foundation/key.dart';
 // import 'package:flutter/src/widgets/framework.dart';
+import 'package:crop_recommend/utils/api.dart';
 
 class AdminLoginPage extends StatefulWidget {
   const AdminLoginPage({Key? key}) : super(key: key);
@@ -174,7 +175,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       // if there is no error in the form then send the data to the server
                       if (_formkey.currentState!.validate()) {
                         // if there is no error in the form then send the data to the server
-                        const url = "http://10.196.12.31:8000/api/loginsuperuser/";
+                        var url = "${APILoad.api}/api/loginsuperuser/";
                         // if server is not running then show error message
             
                         http.post(Uri.parse(url), body: {

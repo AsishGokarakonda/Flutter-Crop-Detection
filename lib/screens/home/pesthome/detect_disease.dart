@@ -11,6 +11,7 @@ import 'package:path/path.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:crop_recommend/utils/api.dart';
 class DetectDisease extends StatefulWidget {
   const DetectDisease({Key? key}) : super(key: key);
 
@@ -40,7 +41,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
       showspinner = true;
     });
     var request = http.MultipartRequest(
-        'POST', Uri.parse('http://10.196.12.31:8000/api/addcrop/'));
+        'POST', Uri.parse( '${APILoad.api}/crops/addcrop/'));
     // get jwt token from secure storage
     final storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
