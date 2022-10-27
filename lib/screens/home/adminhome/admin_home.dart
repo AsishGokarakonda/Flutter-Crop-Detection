@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
 
@@ -88,8 +88,43 @@ class _AdminHomeState extends State<AdminHome> {
                       )
                     ],
                   )),
-            ],)
-          ])
+            ],
+            ),
+            // keep logout button here
+            // on press of logout button clear the jwt token from the secure storage
+            // and navigate to the login page
+            TextButton(
+                onPressed: () {
+                  // delete jwt token from secure storage
+                  final storage = FlutterSecureStorage();
+                  storage.delete(key: 'jwt');
+                  Navigator.pushNamed(context, '/adminlogin');
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                          color: Colors.blue[100],
+                          borderRadius: BorderRadius.circular(20)),
+                      child: const Icon(
+                        Icons.logout,
+                        color: Colors.black,
+                        size: 70,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.blue[300]),
+                    )
+                  ],
+                )),
+          ]
+          )
         ,))
     );
   }

@@ -46,7 +46,21 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       final storage = FlutterSecureStorage();
       jwt = await storage.read(key: 'jwt');
       if(jwt != null){
+        // get user type
+        var response = await http.get(Uri.parse('${APILoad.api}/api/user/'), headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'jwt': '$jwt'
+        });
+        var data = jsonDecode(response.body);
+        if(data['is_superuser'] == true){
             Navigator.pushNamedAndRemoveUntil(context,MyRoutes.adminhomeRoute, (route) => false);
+        }
+        else{
+          // remove jwt from storage
+          await storage.delete(key: 'jwt');
+          Navigator.pushNamedAndRemoveUntil(context,MyRoutes.adminloginRoute, (route) => false);
+        }
       }
       return false;
   }

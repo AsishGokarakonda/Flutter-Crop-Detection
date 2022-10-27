@@ -16,35 +16,29 @@ class AllUsers extends StatefulWidget {
 }
 
 class _AllUsersState extends State<AllUsers> {
-  List<User> users = [];
-    void getusers() async {
-    try {
-      final storage = FlutterSecureStorage();
-      var jwt = await storage.read(key: 'jwt');
-      // pass jwt token in the header
-      var response = await http
-          .get(Uri.parse('${APILoad.api}/api/user/'), headers: {
-        'jwt': jwt!,
-      });
-      print(response.body);
-      users=[];
-      var data = json.decode(response.body);
-      // store the user details in userdetails variable
-      data.forEach((user) {
-        User p = User(
-          id: user['id'],
-          username: user['username'],
-          name: user['name'],
-          email: user['email'],
-        );
-        users.add(p);
-        setState(() {
-          users = users;
-        });
-      });
-    } catch (e) {
-      print(e);
-    }
+  // get all users from api and store it in a variable of type list of user and return it
+  Future<List<User>> getusers() async {
+    final storage = FlutterSecureStorage();
+    var jwt = await storage.read(key: 'jwt');
+    var response = await http.get(Uri.parse('${APILoad.api}/api/getusers/'), headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'jwt': '$jwt',
+    });
+
+      var data = jsonDecode(response.body);
+      List<User> users = [];
+      for (var u in data) {
+        User user = User(
+            id: u['id'],
+            username: u['username'],
+            name: u['name'],
+            email: u['email'],
+            );
+        users.add(user);
+      }
+      return users;
+    
   }
   @override
   void initState() {
@@ -63,7 +57,33 @@ class _AllUsersState extends State<AllUsers> {
         title: const Text('All users',style: TextStyle(color: Colors.black),),
       ),
       body: Column(children: [
-      ],)
+        Expanded(
+          child: FutureBuilder(
+            future: getusers(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.data == null) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [ListTile(
+                        title: Text(snapshot.data[index].username),
+                        subtitle: Text(snapshot.data[index].email),
+                      ),
+                      const Divider(),
+                      ]
+                    );
+                  },
+                );
+              }
+            },
+          ),
+        ),
+      ]),
     );
   }
 }
