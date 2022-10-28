@@ -1,3 +1,4 @@
+import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -63,7 +64,7 @@ class _AdminHomeState extends State<AdminHome> {
                 // button navigate to the detect disease page
               TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/yourcrops');
+                    Navigator.pushNamed(context, '/usermaps');
                   },
                   child: Column(
                     children: [
@@ -98,7 +99,7 @@ class _AdminHomeState extends State<AdminHome> {
                   // delete jwt token from secure storage
                   final storage = FlutterSecureStorage();
                   storage.delete(key: 'jwt');
-                  Navigator.pushNamed(context, '/adminlogin');
+                  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
                 },
                 child: Column(
                   children: [

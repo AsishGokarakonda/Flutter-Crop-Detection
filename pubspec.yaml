@@ -39,6 +39,7 @@ dependencies:
   geolocator: ^9.0.2
   permission_handler: ^10.2.0
   shared_preferences: ^2.0.15
+  google_maps_flutter: ^2.2.1
 
 dev_dependencies:
   flutter_test:
