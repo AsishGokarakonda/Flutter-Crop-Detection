@@ -42,7 +42,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
         // if it is first time, go to onboarding page else go to login page if jwt is null else go to home page
 
         initialRoute: initScreen == 0 ? MyRoutes.onboardingRoute : MyRoutes.beforeloginRoute,

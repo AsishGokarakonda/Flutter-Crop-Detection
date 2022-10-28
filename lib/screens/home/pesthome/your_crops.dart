@@ -27,7 +27,6 @@ class _YourCropsState extends State<YourCrops> {
         'jwt': jwt!,
       });
       crops = [];
-      print(response.body);
       var data = json.decode(response.body);
       data.forEach((crop) {
         Plant p = Plant(
@@ -39,7 +38,6 @@ class _YourCropsState extends State<YourCrops> {
         );
         crops.add(p);
       });
-      print(crops.length);
       setState(() {
         crops = crops;
       });
@@ -61,7 +59,6 @@ class _YourCropsState extends State<YourCrops> {
   Widget build(BuildContext context) {
     // create list of plant type
     // getCrops();
-    print(crops);
     int _selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
 
@@ -259,6 +256,127 @@ class _YourCropsState extends State<YourCrops> {
           //     ),
           //   ),
           // ),
+          SizedBox(
+            height: 20,
+          ),
+          // Keep heading here
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: const Text(
+                'History',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          // display all the crops in Row with a scrollable list using listview.builder
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: crops.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.black45.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                margin: const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
+                width: 150.0,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 150.0,
+                      width: 150.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)
+                        ),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              "${APILoad.api}${crops[crops.length - index-1].image}"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 150,
+                      width: 150,
+                      // keep padding such that the text is in center of the container
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "Crop Name",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                              // if the crop name is too long then display 6 characters and keep dots at the end
+                              crops[crops.length - index-1].crop_name.length > 15
+                                  ? crops[crops.length - index-1].crop_name.substring(0, 15) + "..."
+                                  : crops[crops.length - index-1].crop_name,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                              ),
+                            ),
+                            ]
+                          ),
+                                                        Container(
+                                // remove margin from the top
+                                width: 100,
+                                child: Divider(
+                                  color: Colors.black,
+                                  thickness: 1,
+                                ),
+                              ),
+                          Column(
+                            children: [
+                              Center(
+                                child: Text(
+                                  "Disease",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              // a line to separate the text
+                              Text(
+                              crops[crops.length - index-1].cropdisease,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),]
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       )),
     );

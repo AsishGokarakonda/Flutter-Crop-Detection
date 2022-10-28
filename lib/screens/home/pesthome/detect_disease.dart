@@ -26,7 +26,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
   bool showdialog = false;
   String? disease;
   Future getImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         image = File(pickedFile.path);
@@ -61,7 +61,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
     print(basename(file.path));
     request.headers.addAll(headers);
     request.fields.addAll({
-      'crop_name': 'potato',
+      'crop_name': 'cucumberpotato',
     });
     var response = await request.send();
     // save the image in images folder using imagepicker
@@ -136,7 +136,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                     height: 10,
                   ),
                    Text(
-                    'Upload image of a crop to detect disease',
+                    'Take a photo of a crop to detect disease',
                     style: GoogleFonts.secularOne(
                       fontSize: 13,
                       color: Color.fromARGB(255, 172, 172, 173),

@@ -4,9 +4,11 @@ import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crop_recommend/utils/api.dart';
+
 class BeforeLogin extends StatefulWidget {
   const BeforeLogin({Key? key}) : super(key: key);
 
@@ -22,8 +24,7 @@ class _BeforeLoginState extends State<BeforeLogin> {
     if (jwt != null) {
       // if user is admin then redirect to admin home page
       // pass jwt token in header
-      var request = http.Request(
-          'GET', Uri.parse('${APILoad.api}/api/user/'));
+      var request = http.Request('GET', Uri.parse('${APILoad.api}/api/user/'));
       request.headers.addAll(<String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'jwt': jwt,
@@ -45,42 +46,46 @@ class _BeforeLoginState extends State<BeforeLogin> {
 
   @override
   void initState() {
-    // TODO: implement initState
     // check if already logged in or not
     checklogin();
     super.initState();
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
   }
 
   @override
   Widget build(BuildContext context) {
     //  this  is the first page that will be shown to the user in which he can either select admin or user
     return Scaffold(
-        appBar:  AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-
-        centerTitle: true,
-        title: Column(children: [
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Column(children: const [
             SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               'Login',
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(
               height: 5,
             ),
-            const Text(
+            Text(
               'Login as admin or user',
               style: TextStyle(color: Colors.black38, fontSize: 12),
             ),
           ]),
-      ),
+        ),
         body: Column(
           // space between the two buttons
           // center the buttons horizontally
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // center the buttons vertically
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextButton(
                 onPressed: () {
@@ -90,12 +95,12 @@ class _BeforeLoginState extends State<BeforeLogin> {
                   child: Column(
                     children: [
                       Container(
-                        width: 100,
-                        height: 100,
+                        width: 90,
+                        height: 90,
                         decoration: BoxDecoration(
                             color: Colors.red[300],
                             borderRadius: BorderRadius.circular(20)),
-                        child:const Icon(
+                        child: const Icon(
                           Icons.admin_panel_settings_rounded,
                           color: Colors.black,
                           size: 70,
@@ -104,14 +109,14 @@ class _BeforeLoginState extends State<BeforeLogin> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         'Admin',
                         style: TextStyle(color: Colors.red),
                       )
                     ],
                   ),
                 )),
-                           TextButton(
+            TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');
                 },
@@ -124,10 +129,10 @@ class _BeforeLoginState extends State<BeforeLogin> {
                           color: Colors.blue[300],
                           borderRadius: BorderRadius.circular(20)),
                       child: const Icon(
-                          Icons.person,
-                          color: Colors.black,
-                          size: 70,
-                        ),
+                        Icons.person,
+                        color: Colors.black,
+                        size: 70,
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -138,7 +143,6 @@ class _BeforeLoginState extends State<BeforeLogin> {
                     )
                   ],
                 )),
-
           ],
         ));
   }

@@ -180,11 +180,11 @@ class _AllHomePageState extends State<AllHomePage> {
                       child: Column(
                         children: [
                           Container(
-                            width: 100,
+                            width: 80,
                             height: 100,
                             child: Image.asset(
                               'assets/home/pest.png',
-                              height: 100,
+                              height: 80,
                             ),
                           ),
                           SizedBox(

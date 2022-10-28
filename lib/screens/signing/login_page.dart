@@ -4,6 +4,7 @@ import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:flutter/src/foundation/key.dart';
@@ -59,10 +60,16 @@ class _LoginPageState extends State<LoginPage> {
     // check if already logged in or not
     checklogin();
     super.initState();
+        SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
+    // keep constrain of not rotating the screen
+
     return Stack(
       children: [
         const BackgroundImage(bgimage: 'assets/signup/login.jpg'),
