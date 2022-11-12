@@ -330,8 +330,7 @@ class GetTextField extends StatelessWidget {
                       : hint == 'Area'
                           ? (value) {
                             // check if value is float or not
-                              if (value!.isEmpty || // value is not float
-                                  double.tryParse(value) == null) {
+                              if (value!.isEmpty) {
                                 return 'Area must be a number';
                               }
                               return null;

@@ -162,7 +162,7 @@ class _YourCropsState extends State<YourCrops> {
                 if (snapshot.hasData) {
                   return SizedBox(
                     // keep height relative to the screen size
-                    height: 200.0,
+                    height: 240.0,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: 5 > crops.length ? crops.length : 5,
@@ -179,7 +179,7 @@ class _YourCropsState extends State<YourCrops> {
                           child: Column(
                             children: [
                               Container(
-                                height: 150.0,
+                                height: 180.0,
                                 width: 150.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(

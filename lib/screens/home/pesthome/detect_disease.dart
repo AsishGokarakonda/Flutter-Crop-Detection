@@ -50,18 +50,19 @@ class _DetectDiseaseState extends State<DetectDisease> {
       'Accept': 'application/json',
       'jwt': jwt!,
     };
+    // here image is sent by multipart request which converts it to binary and sends it
     request.files.add(
       http.MultipartFile(
         'image',
-        file.readAsBytes().asStream(),
-        file.lengthSync(),
-        filename: basename(file.path),
+        file.readAsBytes().asStream(), // image is converted to binary
+        file.lengthSync(), // length of the image measured in bytes (binary)
+        filename: basename(file.path), // file.path is the path of the image basename() is used to get the name of the image
       ),
     );
     print(basename(file.path));
     request.headers.addAll(headers);
     request.fields.addAll({
-      'crop_name': 'cucumberpotato',
+      'crop_name': 'banana',
     });
     var response = await request.send();
     // save the image in images folder using imagepicker
