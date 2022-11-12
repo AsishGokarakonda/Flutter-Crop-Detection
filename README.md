@@ -37,7 +37,7 @@ lib/
 |- utils/
 |- widgets/
 |- main.dart
-
+```
 
 ### models
 
@@ -47,6 +47,7 @@ This directory contains all the data models used in the app.
 constants/
 |- plant.dart
 |- user.dart
+```
 
 ### screens
 
@@ -58,15 +59,8 @@ home/
 |- pesthome/
 |- all_home_page.dart
 
-
-### utils
-
-This directory contains all the helper functions and utilities used in the app.
-
 ```
-utils/
-|- api.dart
-|- routes.dart
+
 
 ### widgets
 
@@ -78,6 +72,9 @@ widgets/
 |- curved_buttons.dart
 |- curved_text_field.dart
 |- exporting.dart
+```
+
+
 
 ### Main
 
@@ -85,3 +82,4 @@ This is the starting point of the app.
 
 ```
 main.dart
+```
