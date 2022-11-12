@@ -16,6 +16,16 @@ Go to project root and execute the following command in console to get the requi
 flutter pub get 
 ```
 
+**Step 3:**
+
+Run the project using the following command:
+
+```
+flutter run
+```
+
+
+
 ### Folder Structure
 Here is the core folder structure which flutter provides.
 
