@@ -101,6 +101,10 @@ Widget build(BuildContext context) {
                     title: 'My Profile',
                   ),
                   ProfileWidget(
+                    icon: Icons.add,
+                    title: 'Add Field',
+                  ),
+                  ProfileWidget(
                     icon: Icons.settings,
                     title: 'Settings',
                   ),
@@ -146,8 +150,14 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       // if title is Log Out then navigate to login page
-      onTap: title == 'Log Out'
+      onTap: title =='Add Field'
           ? () async {
+            print("Hi");
+            Navigator.pushNamed(context, '/addfield');
+            }
+      : title == 'Log Out'
+          ? () async {
+            print("Hi");
             // remove jwt from secure storage
                 final storage = FlutterSecureStorage();
                 await storage.delete(key: 'jwt');

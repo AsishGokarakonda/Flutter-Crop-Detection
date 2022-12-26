@@ -13,4 +13,5 @@ class MyRoutes {
   static String adminhomeRoute = '/adminhome';
   static String allusersRoute = '/allusers';
   static String usermapsRoute = '/usermaps';
+  static String addFieldRoute = '/addfield';
 }

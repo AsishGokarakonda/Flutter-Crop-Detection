@@ -11,6 +11,8 @@ import 'package:crop_recommend/screens/signing/admin_login.dart';
 import 'package:crop_recommend/screens/signing/before_login.dart';
 import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/utils/routes.dart';
+import 'package:crop_recommend/screens/profile/add_field.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:crop_recommend/screens/signing/forgotPassword.dart';
@@ -63,6 +65,7 @@ class MyApp extends StatelessWidget {
           MyRoutes.adminhomeRoute:(context) => const AdminHome(),
           MyRoutes.allusersRoute:(context) => const AllUsers(),
           MyRoutes.usermapsRoute:(context) => const UserMaps(),
+          MyRoutes.addFieldRoute:(context) => const AddField(),
         });
   }
 }
