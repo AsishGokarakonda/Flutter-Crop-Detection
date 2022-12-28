@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:crop_recommend/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crop_recommend/utils/api.dart';
@@ -18,7 +16,7 @@ class AllUsers extends StatefulWidget {
 class _AllUsersState extends State<AllUsers> {
   // get all users from api and store it in a variable of type list of user and return it
   Future<List<User>> getusers() async {
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
     var response = await http.get(Uri.parse('${APILoad.api}/api/getusers/'), headers: {
       'Content-Type': 'application/json',

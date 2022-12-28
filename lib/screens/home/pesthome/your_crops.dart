@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:crop_recommend/models/plant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crop_recommend/utils/api.dart';
@@ -16,14 +14,14 @@ class YourCrops extends StatefulWidget {
 }
 
 class _YourCropsState extends State<YourCrops> {
-   List<Plant> crops = [];
+  List<Plant> crops = [];
   Future<List<Plant>> getCrops() async {
     try {
-      final storage = FlutterSecureStorage();
+      const storage = FlutterSecureStorage();
       var jwt = await storage.read(key: 'jwt');
       // pass jwt token in the header
-      var response = await http
-          .get(Uri.parse('${APILoad.api}/crops/getcrop/'), headers: {
+      var response =
+          await http.get(Uri.parse('${APILoad.api}/crops/getcrop/'), headers: {
         'jwt': jwt!,
       });
       crops = [];
@@ -32,7 +30,7 @@ class _YourCropsState extends State<YourCrops> {
         Plant p = Plant(
           id: crop['id'],
           user: crop['user'],
-          crop_name: crop['crop_name'],
+          cropName: crop['crop_name'],
           image: crop['image'],
           cropdisease: crop['cropdisease'],
         );
@@ -43,14 +41,12 @@ class _YourCropsState extends State<YourCrops> {
       });
       return crops;
     } catch (e) {
-      print(e);
       return crops;
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     getCrops();
     super.initState();
   }
@@ -59,10 +55,10 @@ class _YourCropsState extends State<YourCrops> {
   Widget build(BuildContext context) {
     // create list of plant type
     // getCrops();
-    int _selectedIndex = 0;
+    int selectedIndex = 0;
     Size size = MediaQuery.of(context).size;
 
-    List<String> _plantTypes = [
+    List<String> plantTypes = [
       'Latest',
       'Potato',
       'Tomato',
@@ -78,7 +74,10 @@ class _YourCropsState extends State<YourCrops> {
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         centerTitle: true,
-        title: const Text('Your Crops',style: TextStyle(color: Colors.black),),
+        title: const Text(
+          'Your Crops',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -94,6 +93,10 @@ class _YourCropsState extends State<YourCrops> {
                     horizontal: 16.0,
                   ),
                   width: size.width * .9,
+                  decoration: BoxDecoration(
+                    color: Colors.black45.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -117,10 +120,6 @@ class _YourCropsState extends State<YourCrops> {
                       // ),
                     ],
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.black45.withOpacity(.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
                 )
               ],
             ),
@@ -131,106 +130,112 @@ class _YourCropsState extends State<YourCrops> {
               width: size.width,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _plantTypes.length,
+                  itemCount: plantTypes.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              _selectedIndex = index;
+                              selectedIndex = index;
                             });
                           },
                           child: Text(
-                            _plantTypes[index],
+                            plantTypes[index],
                             style: TextStyle(
                               fontSize: 16.0,
-                              fontWeight: _selectedIndex == index
+                              fontWeight: selectedIndex == index
                                   ? FontWeight.bold
                                   : FontWeight.normal,
-                              color: _selectedIndex == index
+                              color: selectedIndex == index
                                   ? Colors.blue
                                   : Colors.black54.withOpacity(.6),
                             ),
                           )),
                     );
                   })),
-            // display the crops here with FutureBuilder
-            FutureBuilder(
-              future: getCrops(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return SizedBox(
-                    // keep height relative to the screen size
-                    height: 240.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5 > crops.length ? crops.length : 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        // display the crops from crops list after making the api call
+          // display the crops here with FutureBuilder
+          FutureBuilder(
+            future: getCrops(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return SizedBox(
+                  // keep height relative to the screen size
+                  height: 240.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5 > crops.length ? crops.length : 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      // display the crops from crops list after making the api call
 
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black45.withOpacity(.1),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          width: 150.0,
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 180.0,
-                                width: 150.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
-                                  ),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        "${APILoad.api}${crops[crops.length - index-1].image}"),
-                                    fit: BoxFit.cover,
-                                  ),
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black45.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        width: 150.0,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 180.0,
+                              width: 150.0,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "${APILoad.api}${crops[crops.length - index - 1].image}"),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      // if the crop name is too long then display only 10 characters
-                                      crops[crops.length - index-1].crop_name.length > 10
-                                          ? crops[crops.length - index-1].crop_name.substring(0, 13)
-                                          : crops[crops.length - index-1].crop_name,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    // if the crop name is too long then display only 10 characters
+                                    crops[crops.length - index - 1]
+                                                .cropName
+                                                .length >
+                                            10
+                                        ? crops[crops.length - index - 1]
+                                            .cropName
+                                            .substring(0, 13)
+                                        : crops[crops.length - index - 1]
+                                            .cropName,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    Text(
-                                      crops[crops.length - index-1].cropdisease,
-                                      style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                                  ),
+                                  Text(
+                                    crops[crops.length - index - 1].cropdisease,
+                                    style: const TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
 
           // keep a log out button here
           // Center(
@@ -256,7 +261,7 @@ class _YourCropsState extends State<YourCrops> {
           //     ),
           //   ),
           // ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           // Keep heading here
@@ -266,20 +271,19 @@ class _YourCropsState extends State<YourCrops> {
               child: const Text(
                 'History',
                 style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue
-                ),
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           // display all the crops in Row with a scrollable list using listview.builder
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: crops.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
@@ -287,7 +291,8 @@ class _YourCropsState extends State<YourCrops> {
                   color: Colors.black45.withOpacity(.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                margin: const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
                 width: 150.0,
                 child: Row(
                   children: [
@@ -295,15 +300,14 @@ class _YourCropsState extends State<YourCrops> {
                       height: 150.0,
                       width: 150.0,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)
-                        ),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20)),
                         image: DecorationImage(
                           image: NetworkImage(
-                              "${APILoad.api}${crops[crops.length - index-1].image}"),
+                              "${APILoad.api}${crops[crops.length - index - 1].image}"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -318,57 +322,59 @@ class _YourCropsState extends State<YourCrops> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Center(
-                                child: Text(
-                                  "Crop Name",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Center(
+                                  child: Text(
+                                    "Crop Name",
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Text(
-                              // if the crop name is too long then display 6 characters and keep dots at the end
-                              crops[crops.length - index-1].crop_name.length > 15
-                                  ? crops[crops.length - index-1].crop_name.substring(0, 15) + "..."
-                                  : crops[crops.length - index-1].crop_name,
-                              style: TextStyle(
-                                fontSize: 14.0,
+                                Text(
+                                  // if the crop name is too long then display 6 characters and keep dots at the end
+                                  crops[crops.length - index - 1]
+                                              .cropName
+                                              .length >
+                                          15
+                                      ? "${crops[crops.length - index - 1].cropName.substring(0, 15)}..."
+                                      : crops[crops.length - index - 1]
+                                          .cropName,
+                                  style: const TextStyle(
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ]),
+                          const SizedBox(
+                            // remove margin from the top
+                            width: 100,
+                            child: Divider(
+                              color: Colors.black,
+                              thickness: 1,
+                            ),
+                          ),
+                          Column(children: [
+                            const Center(
+                              child: Text(
+                                "Disease",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            ]
-                          ),
-                                                        Container(
-                                // remove margin from the top
-                                width: 100,
-                                child: Divider(
-                                  color: Colors.black,
-                                  thickness: 1,
-                                ),
-                              ),
-                          Column(
-                            children: [
-                              Center(
-                                child: Text(
-                                  "Disease",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              // a line to separate the text
-                              Text(
-                              crops[crops.length - index-1].cropdisease,
-                              style: TextStyle(
+                            // a line to separate the text
+                            Text(
+                              crops[crops.length - index - 1].cropdisease,
+                              style: const TextStyle(
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.normal,
                               ),
-                            ),]
-                          ),
+                            ),
+                          ]),
                         ],
                       ),
                     )

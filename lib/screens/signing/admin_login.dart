@@ -1,13 +1,9 @@
 import 'dart:convert';
-
-import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:crop_recommend/utils/api.dart';
 
 class AdminLoginPage extends StatefulWidget {
@@ -28,22 +24,18 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
 
   static String username = "";
   static String password = "";
-  List<String> _locations = ['Admin', 'User']; // Option 2
-  String _selectedLocation = 'User'; // Option 2
 
   Future<void> _validationcheck() async {
     final validation = _formkey.currentState!.validate();
     if (validation) {
       _formkey.currentState!.save();
-      print(username);
-      print(password);
     }
   }
 
   // check if already logged in
-  var jwt;
+  dynamic jwt;
   Future checklogin() async{
-      final storage = FlutterSecureStorage();
+      const storage = FlutterSecureStorage();
       jwt = await storage.read(key: 'jwt');
       if(jwt != null){
         // get user type
@@ -69,7 +61,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     // check if already logged in or not
     checklogin();
     super.initState();
@@ -122,11 +113,11 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         validator: (value) =>
                             value!.isEmpty ? 'Password cannot be empty' : null,
                         cursorColor: Colors.white54,
-                        style: TextStyle(color: Colors.white, height: 1.4),
+                        style: const TextStyle(color: Colors.white, height: 1.4),
                         obscureText: hidepassword,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(color: Colors.white),
                           prefixIcon: InkWell(
                             onTap: () {
                               setState(() {
@@ -196,15 +187,11 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                           "username": username,
                           "password": password,
                         }).then((response) async {
-                          print(response.body);
                           if (response.statusCode == 200) {
                             var data = json.decode(response.body);
-                            print(data['status']);
                             if (data['status'] == "success") {
                               await storage.write(
                                   key: "jwt", value: data["jwt"]);
-                              Map<String, String> allValues =
-                                  await storage.readAll();
                               // delete the stack and replace it with the new route
                               Navigator.pushNamedAndRemoveUntil(context,
                                   MyRoutes.adminhomeRoute, (route) => false);
@@ -232,9 +219,9 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       }
                       // if clause ends here
                     },
-                    child: Text(
+                    child: const Text(
                       'Login',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           height: 1.4,
                           fontWeight: FontWeight.bold,
@@ -298,10 +285,10 @@ class GetTextField extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.85,
             child: TextFormField(
               cursorColor: Colors.white54,
-              style: TextStyle(color: Colors.white, height: 1.4),
+              style: const TextStyle(color: Colors.white, height: 1.4),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
                 prefixIcon: Icon(
                   icon,
                   color: Colors.white,

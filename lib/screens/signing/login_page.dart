@@ -1,14 +1,11 @@
 import 'dart:convert';
 
-import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:crop_recommend/utils/api.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +14,6 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
 
 class _LoginPageState extends State<LoginPage> {
   bool changebutton = false;
@@ -29,38 +25,33 @@ class _LoginPageState extends State<LoginPage> {
 
   static String username = "";
   static String password = "";
-  List<String> _locations = ['Admin', 'User']; // Option 2
-  String _selectedLocation = 'User'; // Option 2
 
   Future<void> _validationcheck() async {
     final validation = _formkey.currentState!.validate();
     if (validation) {
       _formkey.currentState!.save();
-      print(username);
-      print(password);
     }
   }
 
   // check if already logged in
-  var jwt;
-  Future checklogin() async{
-      final storage = FlutterSecureStorage();
-      jwt = await storage.read(key: 'jwt');
-      if(jwt != null){
-            Navigator.pushNamedAndRemoveUntil(context,MyRoutes.newrootRoute, (route) => false);
-      }
-      return false;
+  dynamic jwt;
+  Future checklogin() async {
+    const storage = FlutterSecureStorage();
+    final jwt = await storage.read(key: 'jwt');
+    if (jwt != null) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, MyRoutes.newrootRoute, (route) => false);
+    }
+    return false;
   }
-
-
 
   @override
   void initState() {
-    // TODO: implement initState
     // check if already logged in or not
     checklogin();
     super.initState();
-        SystemChrome.setPreferredOrientations([
+    // keep constrain of not rotating the screen
+    SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
@@ -68,8 +59,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // keep constrain of not rotating the screen
-
     return Stack(
       children: [
         const BackgroundImage(bgimage: 'assets/signup/login.jpg'),
@@ -87,15 +76,14 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 40,
                       fontWeight: FontWeight.bold),
                 ),
-                
               )),
               // make a dropdown button for selecting the type of user (admin or farmer)
               const GetTextField(
-                  icon: Icons.person,
-                  hint: 'Username',
-                  inputType: TextInputType.name,
-                  inputAction: TextInputAction.next,
-                  ),
+                icon: Icons.person,
+                hint: 'Username',
+                inputType: TextInputType.name,
+                inputAction: TextInputAction.next,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
                     left: 30.0, top: 10.0, right: 20.0, bottom: 10.0),
@@ -115,11 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (value) =>
                             value!.isEmpty ? 'Password cannot be empty' : null,
                         cursorColor: Colors.white54,
-                        style: TextStyle(color: Colors.white, height: 1.4),
+                        style: const TextStyle(color: Colors.white, height: 1.4),
                         obscureText: hidepassword,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(color: Colors.white),
                           prefixIcon: InkWell(
                             onTap: () {
                               setState(() {
@@ -184,20 +172,16 @@ class _LoginPageState extends State<LoginPage> {
                         // if there is no error in the form then send the data to the server
                         var url = "${APILoad.api}/api/login/";
                         // if server is not running then show error message
-            
+
                         http.post(Uri.parse(url), body: {
                           "username": username,
                           "password": password,
                         }).then((response) async {
-                          print(response.body);
                           if (response.statusCode == 200) {
                             var data = json.decode(response.body);
-                            print(data['status']);
                             if (data['status'] == "success") {
                               await storage.write(
                                   key: "jwt", value: data["jwt"]);
-                              Map<String, String> allValues =
-                                  await storage.readAll();
                               // delete the stack and replace it with the new route
                               Navigator.pushNamedAndRemoveUntil(context,
                                   MyRoutes.newrootRoute, (route) => false);
@@ -225,9 +209,9 @@ class _LoginPageState extends State<LoginPage> {
                       }
                       // if clause ends here
                     },
-                    child: Text(
+                    child: const Text(
                       'Login',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.white,
                           height: 1.4,
                           fontWeight: FontWeight.bold,
@@ -240,14 +224,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(context, MyRoutes.signupRoute),
-                child: Container(
-                  child: Text(
-                    'Create New Account',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                child: const Text(
+                  'Create New Account',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
             ]),
@@ -257,7 +239,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
 
 // class DropdownButtonExample extends StatefulWidget {
 //   const DropdownButtonExample({super.key});
@@ -297,7 +278,6 @@ class _LoginPageState extends State<LoginPage> {
 //   }
 // }
 
-
 class GetTextField extends StatelessWidget {
   const GetTextField({
     Key? key,
@@ -331,10 +311,10 @@ class GetTextField extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.85,
             child: TextFormField(
               cursorColor: Colors.white54,
-              style: TextStyle(color: Colors.white, height: 1.4),
+              style: const TextStyle(color: Colors.white, height: 1.4),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
                 prefixIcon: Icon(
                   icon,
                   color: Colors.white,

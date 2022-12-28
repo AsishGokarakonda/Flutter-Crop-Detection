@@ -1,10 +1,6 @@
 import 'dart:convert';
-
-import 'package:crop_recommend/widgets/curved_buttons.dart';
 import 'package:crop_recommend/utils/routes.dart';
-import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:crop_recommend/utils/api.dart';
@@ -17,9 +13,9 @@ class BeforeLogin extends StatefulWidget {
 }
 
 class _BeforeLoginState extends State<BeforeLogin> {
-  var jwt;
+  dynamic jwt;
   Future checklogin() async {
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     jwt = await storage.read(key: 'jwt');
     if (jwt != null) {
       // if user is admin then redirect to admin home page

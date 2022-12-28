@@ -1,11 +1,4 @@
-import 'dart:convert';
-
-import 'package:crop_recommend/models/plant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AllHomePage extends StatefulWidget {
   const AllHomePage({Key? key}) : super(key: key);
@@ -26,18 +19,18 @@ class _AllHomePageState extends State<AllHomePage> {
           centerTitle: true,
           // caption below title
 
-          title: Column(children: [
+          title: Column(children: const [
             SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               'Kisan Suvidha ',
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(
               height: 5,
             ),
-            const Text(
+            Text(
               'A Smart App',
               style: TextStyle(color: Colors.black38, fontSize: 12),
             ),
@@ -45,7 +38,7 @@ class _AllHomePageState extends State<AllHomePage> {
         ),
         body: SingleChildScrollView(
           child: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -58,7 +51,7 @@ class _AllHomePageState extends State<AllHomePage> {
                       },
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
@@ -66,7 +59,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text(
@@ -82,7 +75,7 @@ class _AllHomePageState extends State<AllHomePage> {
                       },
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
@@ -90,7 +83,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text('Your Dashboard',
@@ -98,7 +91,7 @@ class _AllHomePageState extends State<AllHomePage> {
                         ],
                       )),
                 ]),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -111,7 +104,7 @@ class _AllHomePageState extends State<AllHomePage> {
                       onPressed: () {},
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
@@ -119,7 +112,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text('Crop Health',
@@ -130,7 +123,7 @@ class _AllHomePageState extends State<AllHomePage> {
                       onPressed: () {},
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
@@ -138,7 +131,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text('Weed Management',
@@ -146,7 +139,7 @@ class _AllHomePageState extends State<AllHomePage> {
                         ],
                       )),
                 ]),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -159,7 +152,7 @@ class _AllHomePageState extends State<AllHomePage> {
                       onPressed: () {},
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
@@ -167,7 +160,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text('Market Choice',
@@ -179,7 +172,7 @@ class _AllHomePageState extends State<AllHomePage> {
                         Navigator.pushNamed(context, '/pesthome');},
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 80,
                             height: 100,
                             child: Image.asset(
@@ -187,7 +180,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               height: 80,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           const Text('Pest Management',

@@ -7,11 +7,11 @@ import 'package:crop_recommend/widgets/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'dart:convert';
 // import GeoLocator
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 // import permission handler
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -63,8 +63,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     // getlocation();
     // PermissionHandler().requestPermissions([PermissionGroup.location]);
     super.initState();
@@ -74,10 +72,10 @@ class _SignupPageState extends State<SignupPage> {
     final validation = _formkey.currentState!.validate();
     if (validation) {
       _formkey.currentState!.save();
-      print(username);
-      print(name);
-      print(email);
-      print(password);
+      // print(username);
+      // print(name);
+      // print(email);
+      // print(password);
     }
   }
 
@@ -154,11 +152,11 @@ class _SignupPageState extends State<SignupPage> {
                                     : null,
                                 cursorColor: Colors.white54,
                                 style:
-                                    TextStyle(color: Colors.white, height: 1.4),
+                                    const TextStyle(color: Colors.white, height: 1.4),
                                 obscureText: hidepassword,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintStyle: const TextStyle(color: Colors.white),
                                   prefixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -200,10 +198,10 @@ class _SignupPageState extends State<SignupPage> {
                                   _formkey.currentState!.validate();
                               if (validation) {
                                 _formkey.currentState!.save();
-                                print(username);
-                                print(name);
-                                print(email);
-                                print(password);
+                                // print(username);
+                                // print(name);
+                                // print(email);
+                                // print(password);
                                 var url = "${APILoad.api}/api/register/";
                               http.post(Uri.parse(url), body: {
                                 "username": username,
@@ -214,8 +212,8 @@ class _SignupPageState extends State<SignupPage> {
                                 // "latitude": latitude.toString(),
                                 // "longitude": longitude.toString(),
                               }).then((response) {
-                                print(response.body);
-                                print(response.statusCode);
+                                // print(response.body);
+                                // print(response.statusCode);
                                 if (response.statusCode == 200) {
                                   Navigator.push(
                                       context,
@@ -223,7 +221,7 @@ class _SignupPageState extends State<SignupPage> {
                                           builder: (context) =>
                                               const LoginPage()));
                                 } else {
-                                  print("error");
+                                  // print("error");
                                 }
                               });
                               }
@@ -282,10 +280,10 @@ class GetTextField extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.85,
             child: TextFormField(
               cursorColor: Colors.white54,
-              style: TextStyle(color: Colors.white, height: 1.4),
+              style: const TextStyle(color: Colors.white, height: 1.4),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.white),
                 prefixIcon: Icon(
                   icon,
                   color: Colors.white,

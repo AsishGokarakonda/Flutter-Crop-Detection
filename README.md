@@ -80,7 +80,6 @@ This directory contains all the custom widgets used in the app.
 widgets/
 |- background_image.dart
 |- curved_buttons.dart
-|- curved_text_field.dart
 |- exporting.dart
 ```
 

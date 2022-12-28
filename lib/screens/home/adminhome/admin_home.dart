@@ -1,7 +1,5 @@
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -29,8 +27,6 @@ class _AdminHomeState extends State<AdminHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-              
-
               // make a rounded button and keep a image inside it and on press of that
               // button navigate to the detect disease page
               TextButton(
@@ -97,7 +93,7 @@ class _AdminHomeState extends State<AdminHome> {
             TextButton(
                 onPressed: () {
                   // delete jwt token from secure storage
-                  final storage = FlutterSecureStorage();
+                  const storage = FlutterSecureStorage();
                   storage.delete(key: 'jwt');
                   Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
                 },

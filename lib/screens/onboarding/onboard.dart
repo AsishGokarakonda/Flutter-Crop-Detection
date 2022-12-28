@@ -1,9 +1,6 @@
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -38,7 +35,7 @@ class _OnboardingState extends State<Onboarding> {
     ),
     child: Column(mainAxisAlignment: MainAxisAlignment.center,
 
-    children: [ urlImage =='noimg' ? const SizedBox(height: 10.0,) :  Container(child: Image.asset(urlImage,fit: BoxFit.cover,width: MediaQuery.of(context).size.height * 0.25)),
+    children: [ urlImage =='noimg' ? const SizedBox(height: 10.0,) :  Image.asset(urlImage,fit: BoxFit.cover,width: MediaQuery.of(context).size.height * 0.25),
     const SizedBox(height: 64),
     Text(title,
     style: const TextStyle(color: Color.fromARGB(255, 94, 94, 94),fontSize: 32,fontWeight: FontWeight.bold),
@@ -68,7 +65,7 @@ class _OnboardingState extends State<Onboarding> {
             setState(() => isLastPage = index ==2);
           },
           children: [
-            buildPage(color: Color.fromARGB(77, 136, 255, 63),
+            buildPage(color: const Color.fromARGB(77, 136, 255, 63),
             urlImage: 'noimg',
             title: 'Welcome !',
             subtitle: 'This is a simple app to help you detect what crops are best and detect diseases',

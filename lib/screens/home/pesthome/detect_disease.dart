@@ -1,14 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:path/path.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:crop_recommend/utils/api.dart';
@@ -32,7 +29,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
         image = File(pickedFile.path);
       });
     } else {
-      print('No Image Selected');
+      // print('No Image Selected');
     }
   }
 
@@ -43,7 +40,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
     var request = http.MultipartRequest(
         'POST', Uri.parse( '${APILoad.api}/crops/addcrop/'));
     // get jwt token from secure storage
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
     Map<String, String> headers = {
       'Content-type': 'multipart/form-data',
@@ -59,7 +56,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
         filename: basename(file.path), // file.path is the path of the image basename() is used to get the name of the image
       ),
     );
-    print(basename(file.path));
+    // print(basename(file.path));
     request.headers.addAll(headers);
     request.fields.addAll({
       'crop_name': 'banana',
@@ -72,24 +69,22 @@ class _DetectDiseaseState extends State<DetectDisease> {
 
       var secresponse = http.Response.fromStream(response);
       secresponse.then((value) {
-        print(value.body);
         // decode the json response
         var decoded = jsonDecode(value.body);
-        print(decoded['cropdisease']);
         disease = decoded['cropdisease'];
         // it is opening gallery again. I want to show the dialog box here
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Disease'),
+              title: const Text('Disease'),
               content: Text(disease!),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('OK'),
+                  child: const Text('OK'),
                 ),
               ],
             );
@@ -133,14 +128,14 @@ class _DetectDiseaseState extends State<DetectDisease> {
                         fontWeight: FontWeight.bold,
                         color: Colors.green[300]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                    Text(
                     'Take a photo of a crop to detect disease',
                     style: GoogleFonts.secularOne(
                       fontSize: 13,
-                      color: Color.fromARGB(255, 172, 172, 173),
+                      color: const Color.fromARGB(255, 172, 172, 173),
                     ),
                   ),
                   const SizedBox(
@@ -163,7 +158,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                                 decoration: BoxDecoration(
                                     color: Colors.grey.shade200,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
+                                        const BorderRadius.all(Radius.circular(10))),
                                 child: const Icon(
                                   Icons.upload_file,
                                   color: Colors.black,
@@ -182,15 +177,14 @@ class _DetectDiseaseState extends State<DetectDisease> {
                                 ),
                               )
                             ])
-                          : Container(
-                              child: Center(
-                              child: Image.file(
-                                File(image!.path).absolute,
-                                height: 200,
-                                width: 200,
-                                fit: BoxFit.cover,
-                              ),
-                            )),
+                          : Center(
+                          child: Image.file(
+                            File(image!.path).absolute,
+                            height: 200,
+                            width: 200,
+                            fit: BoxFit.cover,
+                          ),
+                            ),
                     ),
                   ),
                   const SizedBox(

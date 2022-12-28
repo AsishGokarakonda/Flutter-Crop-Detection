@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:crop_recommend/utils/api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -23,7 +21,7 @@ class _UserMapsState extends State<UserMaps> {
 
   Future getLocations() async {
     // get jwt token from secure storage
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     var jwt = await storage.read(key: 'jwt');
     var response = await http.get(
       Uri.parse('${APILoad.api}/api/getuserlocation/'),
@@ -33,7 +31,6 @@ class _UserMapsState extends State<UserMaps> {
       },
     );
     var data = json.decode(response.body);
-    print(data);
     // keep them in Marker objects
     List<Marker> markers = [];
     for (var i = 0; i < data.length; i++) {
@@ -86,7 +83,7 @@ class _UserMapsState extends State<UserMaps> {
         title: const Text('User Maps',style: TextStyle(color: Colors.black),),
       ),
       body: GoogleMap(
-        initialCameraPosition: CameraPosition(
+        initialCameraPosition: const CameraPosition(
           target: LatLng(17, 85),
           zoom: 3,
         ),

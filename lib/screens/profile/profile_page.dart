@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:crop_recommend/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -20,26 +18,22 @@ class _ProfilePageState extends State<ProfilePage> {
   User? userdetails;
 
   Future getUserDetails() async {
-    final storage = FlutterSecureStorage();
+    const storage = FlutterSecureStorage();
     final jwt = await storage.read(key: 'jwt');
     var response = await http.get(
       Uri.parse('${APILoad.api}/api/user/'), headers: {
         'jwt': jwt!,
       });
-    print(response.body);
     var data = json.decode(response.body);
     // store the user details in userdetails variable
     userdetails = User.fromJson(data);
     setState(() {
       userdetails = userdetails;
     });
-    print(userdetails!.name);
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    print("hello");
     getUserDetails();
     super.initState();
   }
@@ -50,7 +44,7 @@ Widget build(BuildContext context) {
         body: SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Container(
@@ -61,13 +55,13 @@ Widget build(BuildContext context) {
             children: [
               Container(
                 width: 150,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+      
+                ),
                 child: const CircleAvatar(
                   radius: 60,
                   backgroundImage: ExactAssetImage('assets/profile/profile.png'),
-                ),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-      
                 ),
               ),
               const SizedBox(
@@ -152,14 +146,12 @@ class ProfileWidget extends StatelessWidget {
       // if title is Log Out then navigate to login page
       onTap: title =='Add Field'
           ? () async {
-            print("Hi");
             Navigator.pushNamed(context, '/addfield');
             }
       : title == 'Log Out'
           ? () async {
-            print("Hi");
             // remove jwt from secure storage
-                final storage = FlutterSecureStorage();
+                const storage = FlutterSecureStorage();
                 await storage.delete(key: 'jwt');
                 Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
             }
@@ -181,7 +173,7 @@ class ProfileWidget extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

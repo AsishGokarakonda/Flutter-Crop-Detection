@@ -15,21 +15,19 @@ import 'package:crop_recommend/screens/profile/add_field.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:crop_recommend/screens/signing/forgotPassword.dart';
+import 'package:crop_recommend/screens/signing/forgot_password.dart';
 import 'package:crop_recommend/screens/signing/signup_page.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-var jwt;
 int initScreen=0;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final storage = FlutterSecureStorage();
-  jwt = await storage.read(key: 'jwt');
+  // final storage = FlutterSecureStorage();
+  // jwt = await storage.read(key: 'jwt');
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  initScreen = (await prefs.getInt("initScreen")) ?? 0;
+  initScreen = (prefs.getInt("initScreen")) ?? 0;
   await prefs.setInt("initScreen", 1);
-  print('initScreen ${initScreen}');
+  // print('initScreen ${initScreen}');
   runApp(const MyApp());
 }
 
