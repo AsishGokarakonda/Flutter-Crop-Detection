@@ -40,6 +40,7 @@ dependencies:
   permission_handler: ^10.2.0
   shared_preferences: ^2.0.15
   google_maps_flutter: ^2.2.1
+  flutter_local_notifications: ^10.0.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/home/
     - images/crops/
     - assets/profile/
+    - assets/cropchoice/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

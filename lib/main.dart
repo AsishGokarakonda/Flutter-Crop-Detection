@@ -12,6 +12,8 @@ import 'package:crop_recommend/screens/signing/before_login.dart';
 import 'package:crop_recommend/screens/signing/login_page.dart';
 import 'package:crop_recommend/utils/routes.dart';
 import 'package:crop_recommend/screens/profile/add_field.dart';
+import 'package:crop_recommend/screens/cropchoice/choice_home.dart';
+import 'package:crop_recommend/screens/cropchoice/cottonchoice/cotton_home.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,6 +28,7 @@ Future<void> main() async {
   // jwt = await storage.read(key: 'jwt');
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = (prefs.getInt("initScreen")) ?? 0;
+  // initScreen = 0;
   await prefs.setInt("initScreen", 1);
   // print('initScreen ${initScreen}');
   runApp(const MyApp());
@@ -64,6 +67,8 @@ class MyApp extends StatelessWidget {
           MyRoutes.allusersRoute:(context) => const AllUsers(),
           MyRoutes.usermapsRoute:(context) => const UserMaps(),
           MyRoutes.addFieldRoute:(context) => const AddField(),
+          MyRoutes.cropchoice:(context) => const CropChoiceHome(),
+          MyRoutes.cottonchoicehome:(context) => const CottonCropHome(),
         });
   }
 }

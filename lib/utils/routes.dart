@@ -14,4 +14,6 @@ class MyRoutes {
   static String allusersRoute = '/allusers';
   static String usermapsRoute = '/usermaps';
   static String addFieldRoute = '/addfield';
+  static String cropchoice = '/cropchoice';
+  static String cottonchoicehome = '/cottonchoicehome';
 }

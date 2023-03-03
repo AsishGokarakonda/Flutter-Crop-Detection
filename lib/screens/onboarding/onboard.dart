@@ -23,15 +23,10 @@ class _OnboardingState extends State<Onboarding> {
     required String urlImage,
     required String title,
     required String subtitle,
-    required String backgroundImg,
   })=>Container(
     // write a condition such that if backgroundImg is not nobg then it should show color:color else it should show backgroundImg in decoration
     decoration: BoxDecoration(
       color: color,
-      image: DecorationImage(
-        image: AssetImage(backgroundImg),
-        fit: BoxFit.fill,
-      ),
     ),
     child: Column(mainAxisAlignment: MainAxisAlignment.center,
 
@@ -65,32 +60,24 @@ class _OnboardingState extends State<Onboarding> {
             setState(() => isLastPage = index ==2);
           },
           children: [
-            buildPage(color: const Color.fromARGB(77, 136, 255, 63),
-            urlImage: 'noimg',
-            title: 'Welcome !',
-            subtitle: 'This is a simple app to help you detect what crops are best and detect diseases',
-            backgroundImg: 'assets/onboard/login.png'
+            buildPage(color: Colors.white,
+            urlImage: 'assets/onboard/onefirstpage.png',
+            title: 'Manage crops',
+            subtitle: 'Gives updates on your crops and helps you to manage them',
             ),
-
 // color: Color.fromARGB(77, 136, 255, 63),
             buildPage(color: Colors.white,
             urlImage: 'assets/onboard/page1.png',
             title: 'Check Health',
             subtitle: 'Take a photo, upload and check if crop is healthy or not',
-            backgroundImg: 'nobg'
             ),
 // Color.fromARGB(77, 242, 255, 0),
             buildPage(color: Colors.white,
             urlImage: 'assets/onboard/page2.png',
             title: 'Best Crop',
             subtitle: 'Select a best crop from your area based on prices, weather and many more...',
-            backgroundImg: 'nobg'
             ),
 
-            // buildPage(color: Color.fromARGB(77, 222, 219, 219),
-            // urlImage: 'assets/onboard/page1.png',
-            // title: 'Community',
-            // subtitle: 'ask questions and get answers from users across all over the world'),
           ],
         ),
       ),

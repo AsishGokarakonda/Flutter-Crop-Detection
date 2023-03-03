@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 
-class AllHomePage extends StatefulWidget {
-  const AllHomePage({Key? key}) : super(key: key);
+class CropChoiceHome extends StatefulWidget {
+  const CropChoiceHome({super.key});
 
   @override
-  State<AllHomePage> createState() => _AllHomePageState();
+  State<CropChoiceHome> createState() => _CropChoiceHomeState();
 }
 
-class _AllHomePageState extends State<AllHomePage> {
+class _CropChoiceHomeState extends State<CropChoiceHome> {
+  bool cotton = false;
+  bool banana = false;
+  bool tomato = false;
+  bool sugarcane = false;
+  bool wheat = false;
+  bool potato = false;
+
   @override
   Widget build(BuildContext context) {
+    bool _isChecked = false;
+    bool _isVisible = false;
     return Scaffold(
         appBar: // make background transparent
             AppBar(
+          // remove the back button
+          automaticallyImplyLeading: false,
+          //increase the height of the appbar
+          toolbarHeight: 110,
+          // give border color to the appbar
           backgroundColor: Colors.transparent,
           elevation: 0,
           // center title
@@ -24,15 +38,15 @@ class _AllHomePageState extends State<AllHomePage> {
               height: 10,
             ),
             Text(
-              'Kisan Suvidha ',
-              style: TextStyle(color: Colors.black),
+              'Select Your Crop',
+              style: TextStyle(color: Colors.green, fontSize: 20),
             ),
             SizedBox(
-              height: 5,
+              height: 7,
             ),
             Text(
-              'A Smart App',
-              style: TextStyle(color: Colors.black38, fontSize: 12),
+              'Select a crop so that we can help you',
+              style: TextStyle(color: Colors.black54, fontSize: 13),
             ),
           ]),
         ),
@@ -45,19 +59,20 @@ class _AllHomePageState extends State<AllHomePage> {
                 // space between the two buttons
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // create a rounded button and keep a image inside it and on press of that
-                  TextButton(
-                      onPressed: () {
-                        // go to Crop Choice page
-                        Navigator.pushNamed(context, '/cropchoice');
-                      },
+
+                  Container(
+
+                      // onPressed: () {
+                      //   // go to Crop Choice page
+                      //   Navigator.pushNamed(context, '/cottonchoicehome');
+                      // },
                       child: Column(
                         children: [
                           SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/cropchoice.png',
+                              'assets/cropchoice/cottoncrop.png',
                               height: 100,
                             ),
                           ),
@@ -65,30 +80,26 @@ class _AllHomePageState extends State<AllHomePage> {
                             height: 10,
                           ),
                           const Text(
-                            'Crop Choice',
+                            'Cotton',
                             style: TextStyle(color: Colors.black),
                           )
                         ],
                       )),
-                  TextButton(
-                      onPressed: () {
-                        // go to Profile page
-                        Navigator.pushNamed(context, '/profile');
-                      },
+                  Container(
                       child: Column(
                         children: [
                           SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/dashboard.png',
+                              'assets/cropchoice/bananacrop.png',
                               height: 100,
                             ),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Your Dashboard',
+                          const Text('Banana',
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -101,42 +112,40 @@ class _AllHomePageState extends State<AllHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // create a rounded button and keep a image inside it and on press of that
-        
-                  TextButton(
-                      onPressed: () {},
+
+                  Container(
                       child: Column(
                         children: [
                           SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/crophealth.png',
+                              'assets/cropchoice/sugarcanecrop.png',
                               height: 100,
                             ),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Crop Health',
+                          const Text('Sugarcane',
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
-                  TextButton(
-                      onPressed: () {},
+                  Container(
                       child: Column(
                         children: [
                           SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/weed.png',
+                              'assets/cropchoice/tomatocrop.png',
                               height: 100,
                             ),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Weed Management',
+                          const Text('Tomato',
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -149,37 +158,34 @@ class _AllHomePageState extends State<AllHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // create a rounded button and keep a image inside it and on press of that
-        
-                  TextButton(
-                      onPressed: () {},
+
+                  Container(
                       child: Column(
                         children: [
                           SizedBox(
                             width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/market.png',
+                              'assets/cropchoice/wheatcrop.png',
                               height: 100,
                             ),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Market Choice',
+                          const Text('Wheat',
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/pesthome');},
+                  Container(
                       child: Column(
                         children: [
                           SizedBox(
-                            width: 80,
+                            width: 100,
                             height: 100,
                             child: Image.asset(
-                              'assets/home/pest.png',
-                              height: 80,
+                              'assets/cropchoice/potatocrop.png',
+                              height: 100,
                             ),
                           ),
                           const SizedBox(
