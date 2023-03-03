@@ -8,17 +8,17 @@ class CropChoiceHome extends StatefulWidget {
 }
 
 class _CropChoiceHomeState extends State<CropChoiceHome> {
-  bool cotton = false;
-  bool banana = false;
-  bool tomato = false;
-  bool sugarcane = false;
-  bool wheat = false;
-  bool potato = false;
-
+    Map<String, bool> cropsbool = {
+    'Cotton': false,
+    'Banana': false,
+    'Tomato': false,
+    'Sugarcane': false,
+    'Wheat': false,
+    'Potato': false,
+  };
   @override
   Widget build(BuildContext context) {
-    bool _isChecked = false;
-    bool _isVisible = false;
+
     return Scaffold(
         appBar: // make background transparent
             AppBar(
@@ -59,50 +59,67 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                 // space between the two buttons
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (cropsbool['Cotton'] == false) {
+                          cropsbool['Cotton'] = true;
+                        } else {
+                          cropsbool['Cotton'] = false;
+                        }
+                      });
+                    },
+                    child: Container(
+                        child: Column(
+                          children: [
+                            // show checkbox icon if the crops bool value is true
 
-                  Container(
-
-                      // onPressed: () {
-                      //   // go to Crop Choice page
-                      //   Navigator.pushNamed(context, '/cottonchoicehome');
-                      // },
-                      child: Column(
-                        children: [
+                          // ( cropsbool['Cotton']! ? Icon(Icons.check_circle, color: Colors.green,  ) : Container( height:  , )),
                           SizedBox(
                             width: 100,
-                            height: 100,
-                            child: Image.asset(
-                              'assets/cropchoice/cottoncrop.png',
-                              height: 100,
-                            ),
-                          ),
-                          const SizedBox(
                             height: 10,
+                            child: cropsbool['Cotton']! ? Container(
+                              // align the icon to the right of the container
+                              alignment: Alignment.centerRight,
+                              child: const Icon(Icons.check_circle, color: Colors.green,   ),
+                            )  : Container()
                           ),
-                          const Text(
-                            'Cotton',
-                            style: TextStyle(color: Colors.black),
-                          )
-                        ],
-                      )),
-                  Container(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Image.asset(
-                              'assets/cropchoice/bananacrop.png',
+                            SizedBox(
+                              width: 100,
                               height: 100,
+                              child: Image.asset(
+                                'assets/cropchoice/cottoncrop.png',
+                                height: 100,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text('Banana',
-                              style: TextStyle(color: Colors.black))
-                        ],
-                      )),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              'Cotton',
+                              style: TextStyle(color: Colors.black),
+                            )
+                          ],
+                        )),
+
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        height: 100,
+                        child: Image.asset(
+                          'assets/cropchoice/bananacrop.png',
+                          height: 100,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Banana',
+                          style: TextStyle(color: Colors.black))
+                    ],
+                  ),
                 ]),
             const SizedBox(
               height: 15,
@@ -158,7 +175,8 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // create a rounded button and keep a image inside it and on press of that
-
+// wrap this in a gesture detector and on tap of this button navigate to the next page
+                  
                   Container(
                       child: Column(
                         children: [
@@ -191,7 +209,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Pest Management',
+                          const Text('Potato',
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
