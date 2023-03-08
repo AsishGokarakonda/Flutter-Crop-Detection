@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:crop_recommend/utils/api.dart'; 
+import 'package:crop_recommend/utils/api.dart';
 import 'package:crop_recommend/screens/cropchoice/cropchoice_home.dart';
+
+import '../../utils/routes.dart';
 
 class SelectedCropsHome extends StatefulWidget {
   const SelectedCropsHome({super.key});
@@ -10,40 +12,124 @@ class SelectedCropsHome extends StatefulWidget {
 }
 
 class _SelectedCropsHomeState extends State<SelectedCropsHome> {
-  int length = Cropchoiceselection.selectedcrops.length; 
+  int length = Cropchoiceselection.selectedcrops.length;
 
   @override
   Widget build(BuildContext context) {
-    return length!=0? SelectedCropsHome(context): const CropChoiceHome();
+    return length != 0 ? SelectedCropsHome(context) : const CropChoiceHome();
   }
-
-
 
   // ignore: non_constant_identifier_names
   Scaffold SelectedCropsHome(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      title: const Text('Selected Crops'),
-    ),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'You have no selected crops',
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/selectavailablecrops');
+        appBar: AppBar(
+          // back button color
+          iconTheme: const IconThemeData(color: Colors.black),
+          //increase the height of the appbar
+          toolbarHeight: 110,
+          // give border color to the appbar
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          // center title
+          centerTitle: true,
+          // caption below title
+
+          title: Column(children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Selected Crops',
+              style: TextStyle(color: Colors.yellow[800], fontSize: 20),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+          ]),
+        ),
+        // show all the selected crops with vertically scrollable list
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+               ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: length,
+            itemBuilder: (BuildContext context, int index) {
+              return TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, MyRoutes.cottonchoicehome);
+                },
+                child: Container(
+                  // align 
+                  decoration: BoxDecoration(
+                    color: Colors.black45.withOpacity(.1),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
+                  // width: 150.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Image.asset(
+                      'assets/cropchoice/${Cropchoiceselection.selectedcrops[index]}.png',
+                      height: 100,
+                    ),
+                  ),
+                   Text(Cropchoiceselection.selectedcrops[index],
+                      style: const TextStyle(color: Colors.black, fontSize: 20)
+                      ),
+                      const SizedBox(
+                        width: 1,
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
-            child: const Text('Select Crops'),
           ),
-        ],
-      ),
-    ),
-  );
-  // ignore: non_constant_identifier_names
+
+                        SizedBox(
+                height: 10,
+              ),
+          TextButton(
+                          style: TextButton.styleFrom(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              backgroundColor: Colors.green[500],
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)))),
+                onPressed: (){
+                Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
+                // remove /selectavailablecrops from the stack
+                // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
+                // // now navigate to the next page
+                Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
+              } , child: Text('Add Crops',style: TextStyle(color: Colors.white, fontSize: 20),)),
+              SizedBox(
+                height: 10,
+              ),
+        ]
+        ),
+        )
+
+        );
+
+    // TextButton(onPressed: () {
+    //                             Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
+    //                     // remove /selectavailablecrops from the stack
+    //                     // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
+    //                     // // now navigate to the next page
+    //                     Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
+    // } , child: Text('Add Crops')
+    // )
+
+    // ignore: non_constant_identifier_names
 //   Scaffold Choosingcrops(BuildContext context) {
 //     return Scaffold(
 //       appBar: // make background transparent
@@ -80,7 +166,6 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //       // body: Cropchoiceselection.selectedcrops.length == 0
 //       //     ? const CropChoiceBody()
 //       //     : const SelectedCropBody());
-
 
 //       body: SingleChildScrollView(
 //         child: Column(children: [

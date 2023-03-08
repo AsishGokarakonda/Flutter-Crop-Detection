@@ -124,6 +124,7 @@ class _YourCropsState extends State<YourCrops> {
               ],
             ),
           ),
+          // display planttypes here.
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               height: 50,
@@ -237,30 +238,6 @@ class _YourCropsState extends State<YourCrops> {
             },
           ),
 
-          // keep a log out button here
-          // Center(
-          //   // logout button
-          //   child: GestureDetector(
-          //     onTap: () async {
-          //       final storage = FlutterSecureStorage();
-          //       await storage.delete(key: 'jwt');
-          //       Navigator.pushReplacementNamed(context, '/login');
-          //     },
-          //     child: Container(
-          //       padding: const EdgeInsets.symmetric(vertical: 16),
-          //       decoration: BoxDecoration(
-          //         color: Colors.deepOrange,
-          //         borderRadius: BorderRadius.circular(30),
-          //       ),
-          //       width: MediaQuery.of(context).size.width - 150,
-          //       alignment: Alignment.center,
-          //       child: const Text(
-          //         'Logout',
-          //         style: TextStyle(color: Colors.white, fontSize: 16),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           const SizedBox(
             height: 20,
           ),

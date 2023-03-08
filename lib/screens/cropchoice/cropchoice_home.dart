@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:crop_recommend/utils/api.dart'; 
+import 'package:crop_recommend/utils/api.dart';
+
+import '../../utils/routes.dart'; 
 
 class CropChoiceHome extends StatefulWidget {
   const CropChoiceHome({super.key});
@@ -96,7 +98,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/cottoncrop.png',
+                        'assets/cropchoice/Cotton.png',
                         height: 100,
                       ),
                     ),
@@ -141,7 +143,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/bananacrop.png',
+                        'assets/cropchoice/Banana.png',
                         height: 100,
                       ),
                     ),
@@ -194,7 +196,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/sugarcanecrop.png',
+                        'assets/cropchoice/Sugarcane.png',
                         height: 100,
                       ),
                     ),
@@ -237,7 +239,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/tomatocrop.png',
+                        'assets/cropchoice/Tomato.png',
                         height: 100,
                       ),
                     ),
@@ -291,7 +293,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/wheatcrop.png',
+                        'assets/cropchoice/Wheat.png',
                         height: 100,
                       ),
                     ),
@@ -334,7 +336,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/potatocrop.png',
+                        'assets/cropchoice/Potato.png',
                         height: 100,
                       ),
                     ),
@@ -374,7 +376,13 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     actions: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          //  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.cropchoice, (route) => false);
+                          // remove all the routes from the stack and add /home to the stack
+                          Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
+                          // remove /selectavailablecrops from the stack
+                          // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
+                          // // now navigate to the next page
+                          Navigator.pushNamed(context, MyRoutes.cropchoice);
                         },
                         child: const Text(
                           'Ok',
