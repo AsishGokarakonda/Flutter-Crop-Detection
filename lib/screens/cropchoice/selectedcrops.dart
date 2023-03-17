@@ -35,7 +35,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
           // caption below title
 
           title: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(

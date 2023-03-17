@@ -15,12 +15,14 @@ import 'package:crop_recommend/screens/profile/add_field.dart';
 import 'package:crop_recommend/screens/cropchoice/selectedcrops.dart';
 import 'package:crop_recommend/screens/cropchoice/cottonchoice/cotton_home.dart';
 import 'package:crop_recommend/screens/cropchoice/cropchoice_home.dart';
+import 'package:crop_recommend/screens/home/pesthome/disease_checkcrop.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:crop_recommend/screens/signing/forgot_password.dart';
 import 'package:crop_recommend/screens/signing/signup_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 int initScreen=0;
 Future<void> main() async {
@@ -71,6 +73,7 @@ class MyApp extends StatelessWidget {
           MyRoutes.cropchoice:(context) => const SelectedCropsHome(),
           MyRoutes.selectavailablecrops:(context) => const CropChoiceHome(),
           MyRoutes.cottonchoicehome:(context) => const CottonCropHome(),
+          MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop()
         });
   }
 }

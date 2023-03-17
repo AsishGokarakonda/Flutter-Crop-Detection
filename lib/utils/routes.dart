@@ -17,4 +17,5 @@ class MyRoutes {
   static String cropchoice = '/cropchoice';
   static String selectavailablecrops = '/selectavailablecrops';
   static String cottonchoicehome = '/cottonchoicehome';
+  static String diseasecheckcrop = '/diseasecheckcrop';
 }

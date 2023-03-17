@@ -9,6 +9,7 @@ import 'package:path/path.dart';
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:crop_recommend/utils/api.dart';
+import '../../../utils/api.dart';
 class DetectDisease extends StatefulWidget {
   const DetectDisease({Key? key}) : super(key: key);
 
@@ -121,21 +122,23 @@ class _DetectDiseaseState extends State<DetectDisease> {
             child: Column(children: [
               Column(
                 children: [
-                   Text(
-                    'Detect the disesase',
-                    style: TextStyle(
-                        fontSize: 18,
+// show the selected crop from pestmanagement in api.dart file here
+                  Text(
+                    'Selected Crop: ${PestManagement.diseaseselectedcrop}',
+                    style: const TextStyle(
+                      color: Colors.green ,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green[300]),
+                    ),
                   ),
+
                   const SizedBox(
                     height: 10,
                   ),
                    Text(
-                    'Take a photo of a crop to detect disease',
-                    style: GoogleFonts.secularOne(
-                      fontSize: 13,
-                      color: const Color.fromARGB(255, 172, 172, 173),
+                    'Tap on the below icon to take a picture',
+                    style: const TextStyle(
+                        fontSize: 15,
                     ),
                   ),
                   const SizedBox(
@@ -144,7 +147,6 @@ class _DetectDiseaseState extends State<DetectDisease> {
                   GestureDetector(
                     onTap: () {
                         getImage();
-                      
                     },
                     child: Container(
                       child: image == null
@@ -175,6 +177,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 20,
                                 ),
+
                               )
                             ])
                           : Center(

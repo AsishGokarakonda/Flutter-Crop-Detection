@@ -19,3 +19,8 @@ class Cropchoiceselection{
     'Potato': false,
   };
 }
+
+
+class PestManagement{
+  static String diseaseselectedcrop = '';
+}
