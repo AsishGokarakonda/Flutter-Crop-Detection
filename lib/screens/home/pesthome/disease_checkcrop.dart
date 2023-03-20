@@ -352,7 +352,6 @@ return Scaffold(
             if (PestManagement.diseaseselectedcrop.isEmpty) {
               return;
             }
-            // show a dialog box which will show the selected crops
             showDialog(
                 context: context,
                 builder: (context) {

@@ -11,16 +11,11 @@ class Cropchoiceselection{
     'Sugarcane': false,
     'Wheat': false,
     'Potato': false,
-    'Potato': false,
-    'Potato': false,
-    'Potato': false,
-    'Potato': false,
-    'Potato': false,
-    'Potato': false,
   };
 }
 
 
 class PestManagement{
   static String diseaseselectedcrop = '';
+  static String dayaftersowing = '';
 }

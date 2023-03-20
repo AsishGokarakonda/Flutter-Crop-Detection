@@ -68,7 +68,6 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
                   ),
                   margin:
                       const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
-                  // width: 150.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,7 +93,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
             },
           ),
 
-                        SizedBox(
+          const SizedBox(
                 height: 10,
               ),
           TextButton(
