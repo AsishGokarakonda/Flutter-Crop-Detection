@@ -64,6 +64,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
     request.headers.addAll(headers);
     request.fields.addAll({
       'crop_name': PestManagement.diseaseselectedcrop,
+      'dayaftersowing':das
     });
     var response = await request.send();
     // save the image in images folder using imagepicker
@@ -170,9 +171,9 @@ class _DetectDiseaseState extends State<DetectDisease> {
                     height: 10,
                   ),
 
-                  Text(
+                  const Text(
                     'Tap on the below icon to take a picture',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                     ),
                   ),

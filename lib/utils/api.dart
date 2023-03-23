@@ -1,5 +1,7 @@
 class APILoad{
-  static String api = 'http://192.168.29.109:8000';
+  static String api = 'http://10.196.10.102:8000';
+  // this should be the ip address of the machine where the server is running. 
+  // for simplicity connect phone and laptop to same wifi and use the ip address of the laptop
 }
 
 class Cropchoiceselection{
