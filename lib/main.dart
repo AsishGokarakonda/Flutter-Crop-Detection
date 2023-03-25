@@ -18,9 +18,16 @@ import '../../../screens/cropchoice/cropchoice_home.dart';
 import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
+import '../../../screens/profile/settings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+
+// import 'utils/app_translation.dart';
+
+import '../../utils/app_translation.dart';
+
 
 
 int initScreen=0;
@@ -38,8 +45,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        translations: AppTranslation() ,
+        locale: const Locale('en', 'US'),
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -65,7 +74,8 @@ class MyApp extends StatelessWidget {
           MyRoutes.cropchoice:(context) => const SelectedCropsHome(),
           MyRoutes.selectavailablecrops:(context) => const CropChoiceHome(),
           MyRoutes.cottonchoicehome:(context) => const CottonCropHome(),
-          MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop()
+          MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
+          MyRoutes.settingsRoute:(context) => const SettingsPage(),
         });
   }
 }

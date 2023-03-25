@@ -39,25 +39,29 @@ class _LoginPageState extends State<LoginPage> {
     const storage = FlutterSecureStorage();
     final jwt = await storage.read(key: 'jwt');
     if (jwt != null) {
-      // do a get request to check if jwt is valid or not
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('${APILoad.api}/api/checkjwt/'));
-      Map<String, String> headers = {
-      'Content-type': 'multipart/form-data',
-      'Accept': 'application/json',
-      'jwt': jwt,
-    };
-      request.headers.addAll(headers);
-      var response = await request.send();
-      if (response.statusCode == 200) {
-        var secresponse = http.Response.fromStream(response);
-        var data = jsonDecode((await secresponse).body);
-        if (data['status'] == 'success') {
-          // ignore: use_build_context_synchronously
+
+
           Navigator.pushNamedAndRemoveUntil(
             context, MyRoutes.newrootRoute, (route) => false);
-        }
-      }
+    //   // do a get request to check if jwt is valid or not
+    //   var request = http.MultipartRequest(
+    //       'POST', Uri.parse('${APILoad.api}/api/checkjwt/'));
+    //   Map<String, String> headers = {
+    //   'Content-type': 'multipart/form-data',
+    //   'Accept': 'application/json',
+    //   'jwt': jwt,
+    // };
+    //   request.headers.addAll(headers);
+    //   var response = await request.send();
+    //   if (response.statusCode == 200) {
+    //     var secresponse = http.Response.fromStream(response);
+    //     var data = jsonDecode((await secresponse).body);
+    //     if (data['status'] == 'success') {
+    //       // ignore: use_build_context_synchronously
+    //       Navigator.pushNamedAndRemoveUntil(
+    //         context, MyRoutes.newrootRoute, (route) => false);
+    //     }
+    //   }
     }
     return false;
   }

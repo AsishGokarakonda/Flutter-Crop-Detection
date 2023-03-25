@@ -155,6 +155,10 @@ class ProfileWidget extends StatelessWidget {
                 await storage.delete(key: 'jwt');
                 Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
             }
+      : title == 'Settings'
+      ? () {
+        Navigator.pushNamed(context, '/settings');
+      }
           : () {},
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 18),
