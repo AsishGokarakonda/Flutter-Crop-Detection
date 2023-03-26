@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PestHome extends StatefulWidget {
   const PestHome({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _PestHomeState extends State<PestHome> {
         iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         centerTitle: true,
-        title: const Text('Pest Management',style: TextStyle(color: Colors.black),),
+        title: Text('Pest Management'.tr,style: TextStyle(color: Colors.black),),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -51,7 +52,7 @@ class _PestHomeState extends State<PestHome> {
                         height: 10,
                       ),
                        Text(
-                        'Detect Disease',
+                        'Detect Disease'.tr,
                         style: TextStyle(color: Colors.red[300]),
                       )
                     ],
@@ -79,7 +80,7 @@ class _PestHomeState extends State<PestHome> {
                         height: 10,
                       ),
                       Text(
-                        'Your Crops',
+                        'Your Crops'.tr,
                         style: TextStyle(color: Colors.green[300]),
                       )
                     ],

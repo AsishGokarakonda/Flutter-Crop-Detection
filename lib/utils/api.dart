@@ -21,3 +21,8 @@ class PestManagement{
   static String diseaseselectedcrop = '';
   static String dayaftersowing = '';
 }
+
+
+class Settings{
+  static String language = 'en_US';
+}

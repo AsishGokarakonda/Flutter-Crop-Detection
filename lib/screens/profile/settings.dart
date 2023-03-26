@@ -2,7 +2,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../utils/api.dart';
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -65,6 +65,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         onPressed: () {
                           // change the language to english
                           Get.updateLocale(const Locale('en','US'));
+                          Settings.language = 'en_US';
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.28,
@@ -74,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: Text('English'.tr,style: TextStyle(color: Colors.black )),
+                            child: Text('English'.tr,style: TextStyle(color: Settings.language == 'en_US' ? Colors.green : Colors.black )),
                           ),
                         ),
                       ),
@@ -82,6 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         onPressed: () {
                           // change the language to hindi
                           Get.updateLocale(const Locale('hi','IN'));
+                          Settings.language = 'hi_IN';
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.28,
@@ -91,7 +93,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: Text('Hindi'.tr,style: TextStyle(color: Colors.black )),
+                            child: Text('Hindi'.tr,style: TextStyle(color: Settings.language == 'hi_IN' ? Colors.green : Colors.black )),
                           ),
                         ),
                       ),
@@ -100,6 +102,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         onPressed: () {
                           // change the language to kannada
                           Get.updateLocale(const Locale('kn','IN'));
+                          Settings.language = 'kn_IN';
                         },
                         child: Container(
                           // add on click function to change the language
@@ -110,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: Text('Kannada'.tr,style: TextStyle(color: Colors.black ) ,),
+                            child: Text('Kannada'.tr,style: TextStyle(color: Settings.language == 'kn_IN' ? Colors.green : Colors.black ) ,),
                           ),
                         ),
                       ),

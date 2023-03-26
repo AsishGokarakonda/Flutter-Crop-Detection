@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import '../../../utils/api.dart';
 import '../../../utils/routes.dart'; 
+import 'package:get/get.dart';
 
 class DiseaseCheckCrop extends StatefulWidget {
   const DiseaseCheckCrop({super.key});
@@ -28,19 +29,19 @@ return Scaffold(
       centerTitle: true,
       // caption below title
 
-      title: Column(children: const [
+      title: Column(children:  [
         SizedBox(
           height: 10,
         ),
         Text(
-          'Select Your Crop',
+          'Select Your Crop'.tr,
           style: TextStyle(color: Colors.green, fontSize: 20),
         ),
         SizedBox(
           height: 7,
         ),
         Text(
-          'Select a crop to detect disease',
+          'Select a crop to detect disease'.tr,
           style: TextStyle(color: Colors.black54, fontSize: 13),
         ),
       ]),
@@ -100,8 +101,8 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Cotton',
+                     Text(
+                      'Cotton'.tr,
                       style: TextStyle(color: Colors.black),
                     )
                   ],
@@ -110,8 +111,8 @@ return Scaffold(
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (PestManagement.diseaseselectedcrop!='Banana'){
-                      PestManagement.diseaseselectedcrop='Banana';
+                    if (PestManagement.diseaseselectedcrop!='Banana'.tr){
+                      PestManagement.diseaseselectedcrop='Banana'.tr;
                     }
                     else{
                       PestManagement.diseaseselectedcrop='';
@@ -123,7 +124,7 @@ return Scaffold(
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: PestManagement.diseaseselectedcrop=='Banana'
+                        child: PestManagement.diseaseselectedcrop=='Banana'.tr
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -144,7 +145,7 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Banana',
+                     Text('Banana'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -162,8 +163,8 @@ return Scaffold(
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (PestManagement.diseaseselectedcrop!='Sugarcane'){
-                      PestManagement.diseaseselectedcrop='Sugarcane';
+                    if (PestManagement.diseaseselectedcrop!='Sugarcane'.tr){
+                      PestManagement.diseaseselectedcrop='Sugarcane'.tr;
                     }
                     else{
                       PestManagement.diseaseselectedcrop='';
@@ -175,7 +176,7 @@ return Scaffold(
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: PestManagement.diseaseselectedcrop=='Sugarcane'
+                        child: PestManagement.diseaseselectedcrop=='Sugarcane'.tr
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -196,7 +197,7 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Sugarcane',
+                    Text('Sugarcane'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -204,8 +205,8 @@ return Scaffold(
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (PestManagement.diseaseselectedcrop!='Tomato'){
-                      PestManagement.diseaseselectedcrop = 'Tomato';
+                    if (PestManagement.diseaseselectedcrop!='Tomato'.tr){
+                      PestManagement.diseaseselectedcrop = 'Tomato'.tr;
                     }
                     else{
                       PestManagement.diseaseselectedcrop='';
@@ -217,7 +218,7 @@ return Scaffold(
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: PestManagement.diseaseselectedcrop=='Tomato'
+                        child: PestManagement.diseaseselectedcrop=='Tomato'.tr
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -238,7 +239,7 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Tomato',
+                    Text('Tomato'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -257,8 +258,8 @@ return Scaffold(
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (PestManagement.diseaseselectedcrop!='Wheat'){
-                      PestManagement.diseaseselectedcrop='Wheat';
+                    if (PestManagement.diseaseselectedcrop!='Wheat'.tr){
+                      PestManagement.diseaseselectedcrop='Wheat'.tr;
                     }
                     else{
                       PestManagement.diseaseselectedcrop='';
@@ -270,7 +271,7 @@ return Scaffold(
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: PestManagement.diseaseselectedcrop=='Wheat'!
+                        child: PestManagement.diseaseselectedcrop=='Wheat'.tr
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -291,7 +292,7 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Wheat',
+                    Text('Wheat'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -299,8 +300,8 @@ return Scaffold(
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (PestManagement.diseaseselectedcrop!='Potato'){
-                      PestManagement.diseaseselectedcrop= 'Potato';
+                    if (PestManagement.diseaseselectedcrop!='Potato'.tr){
+                      PestManagement.diseaseselectedcrop= 'Potato'.tr;
                     }
                     else{
                       PestManagement.diseaseselectedcrop = '';
@@ -312,7 +313,7 @@ return Scaffold(
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: PestManagement.diseaseselectedcrop=='Potato'
+                        child: PestManagement.diseaseselectedcrop=='Potato'.tr
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -333,7 +334,7 @@ return Scaffold(
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Potato',
+                    Text('Potato'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -356,14 +357,14 @@ return Scaffold(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text(
+                    title: Text(
                       // show like this selected these many number of crops
-                      'Selected crops' ,
+                      'Selected crops'.tr ,
                       textAlign: TextAlign.center,
                     ),
                     content: // show the selected crop
                         Text(
-                      PestManagement.diseaseselectedcrop,
+                      PestManagement.diseaseselectedcrop.tr,
                       textAlign: TextAlign.center,
                     ),
 
@@ -375,8 +376,8 @@ return Scaffold(
                           Navigator.pushNamedAndRemoveUntil(context, MyRoutes.pesthomeRoute, (route) => false);
                           Navigator.pushNamed(context, MyRoutes.detectdiseaseRoute);
                         },
-                        child: const Text(
-                          'Ok',
+                        child: Text(
+                          'Ok'.tr,
                           style: TextStyle(color: Colors.blue),
                         ),
                       )
@@ -390,8 +391,8 @@ return Scaffold(
               backgroundColor: Colors.green,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20)))),
-          child: const Text(
-            'Confirm',
+          child: Text(
+            'Confirm'.tr,
             style: TextStyle(color: Colors.white),
           ),
         )

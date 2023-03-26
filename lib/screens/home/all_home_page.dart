@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AllHomePage extends StatefulWidget {
   const AllHomePage({Key? key}) : super(key: key);
@@ -19,19 +20,19 @@ class _AllHomePageState extends State<AllHomePage> {
           centerTitle: true,
           // caption below title
 
-          title: Column(children: const [
-            SizedBox(
+          title: Column(children:  [
+            const SizedBox(
               height: 10,
             ),
             Text(
-              'Kisan Suvidha ',
+              'Kisan Suvidha'.tr,
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              'A Smart App',
+              'A Smart App'.tr,
               style: TextStyle(color: Colors.black38, fontSize: 12),
             ),
           ]),
@@ -64,8 +65,8 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text(
-                            'Crop Choice',
+                          Text(
+                            'Crop Choice'.tr,
                             style: TextStyle(color: Colors.black),
                           )
                         ],
@@ -88,7 +89,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Your Dashboard',
+                          Text('Your Dashboard'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -117,7 +118,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Crop Health',
+                          Text('Crop Health'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -136,7 +137,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Weed Management',
+                          Text('Weed Management'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -165,7 +166,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Market Choice',
+                          Text('Market Choice'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -185,7 +186,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Text('Pest Management',
+                          Text('Pest Management'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),

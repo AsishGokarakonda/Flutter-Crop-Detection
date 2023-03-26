@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:crop_recommend/utils/api.dart';
 import '../../../utils/api.dart';
+import 'package:get/get.dart';
 
 class DetectDisease extends StatefulWidget {
   const DetectDisease({Key? key}) : super(key: key);
@@ -82,14 +83,14 @@ class _DetectDiseaseState extends State<DetectDisease> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: const Text('Disease'),
+              title: Text('Disease'.tr),
               content: Text(disease!),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('OK'),
+                  child: Text('OK'.tr),
                 ),
               ],
             );
@@ -111,8 +112,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'Disease Detector',
+        title:  Text(
+          'Disease Detector'.tr,
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -126,7 +127,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                 children: [
 // show the selected crop from pestmanagement in api.dart file here
                   Text(
-                    'Selected Crop: ${PestManagement.diseaseselectedcrop}',
+                    '${'Selected Crop'.tr} : ${PestManagement.diseaseselectedcrop}',
                     style: const TextStyle(
                       color: Colors.lightBlue,
                       fontSize: 20,
@@ -151,7 +152,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
 
 
                     decoration: InputDecoration(
-                      hintText: 'Enter day after sowing',
+                      hintText: 'Enter day after sowing'.tr,
                       hintStyle: TextStyle(
                         color: Colors.grey,
                       ),
@@ -171,8 +172,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
                     height: 10,
                   ),
 
-                  const Text(
-                    'Tap on the below icon to take a picture',
+                  Text(
+                    'Tap on the below icon to take a picture'.tr,
                     style: TextStyle(
                       fontSize: 15,
                     ),
@@ -216,8 +217,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(10))),
                                 
-                                child: const Text(
-                                  'Tap To Upload',
+                                child: Text(
+                                  'Tap To Upload'.tr,
                                   style: TextStyle(
                                     // padding to the text
                                     
@@ -252,15 +253,15 @@ class _DetectDiseaseState extends State<DetectDisease> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text('Error'),
-                              content: const Text(
-                                  'Please enter day after sowing before uploading image'),
+                              title: Text('Error'.tr),
+                              content: Text(
+                                  'Please enter day after sowing before uploading image'.tr),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: const Text('OK'),
+                                  child:  Text('OK'.tr),
                                 ),
                               ],
                             );
@@ -281,8 +282,8 @@ class _DetectDiseaseState extends State<DetectDisease> {
                             ),
                             width: MediaQuery.of(context).size.width - 100,
                             alignment: Alignment.center,
-                            child: const Text(
-                              'Upload Image',
+                            child:  Text(
+                              'Upload Image'.tr,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),

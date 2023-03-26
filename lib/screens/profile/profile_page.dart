@@ -6,6 +6,7 @@ import 'package:crop_recommend/models/user.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:crop_recommend/utils/api.dart';
+import 'package:get/get.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -89,30 +90,30 @@ Widget build(BuildContext context) {
               
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children:  [
                   ProfileWidget(
                     icon: Icons.person,
-                    title: 'My Profile',
+                    title: 'My Profile'.tr,
                   ),
                   ProfileWidget(
                     icon: Icons.add,
-                    title: 'Add Field',
+                    title: 'Add Field'.tr,
                   ),
                   ProfileWidget(
                     icon: Icons.settings,
-                    title: 'Settings',
+                    title: 'Settings'.tr,
                   ),
                   ProfileWidget(
                     icon: Icons.settings,
-                    title: 'FAQs',
+                    title: 'FAQs'.tr,
                   ),
                   ProfileWidget(
                     icon: Icons.settings,
-                    title: 'About Us',
+                    title: 'About Us'.tr,
                   ),
                   ProfileWidget(
                     icon: Icons.logout,
-                    title: 'Log Out',
+                    title: 'Log Out'.tr,
                   ),
                 ],
               ),
@@ -144,18 +145,18 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       // if title is Log Out then navigate to login page
-      onTap: title =='Add Field'
+      onTap: title =='Add Field'.tr
           ? () async {
             Navigator.pushNamed(context, '/addfield');
             }
-      : title == 'Log Out'
+      : title == 'Log Out'.tr
           ? () async {
             // remove jwt from secure storage
                 const storage = FlutterSecureStorage();
                 await storage.delete(key: 'jwt');
                 Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
             }
-      : title == 'Settings'
+      : title == 'Settings'.tr
       ? () {
         Navigator.pushNamed(context, '/settings');
       }
