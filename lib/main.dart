@@ -1,3 +1,5 @@
+import 'package:crop_recommend/utils/notification_api.dart';
+
 import '../../../screens/home/adminhome/admin_home.dart';
 import '../../../screens/home/adminhome/all_users.dart';
 import '../../../screens/home/adminhome/user_maps.dart';
@@ -30,8 +32,12 @@ import '../../utils/app_translation.dart';
 
 
 
+
 int initScreen=0;
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initializeNotification();
+
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = (prefs.getInt("initScreen")) ?? 0;
@@ -42,6 +48,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {

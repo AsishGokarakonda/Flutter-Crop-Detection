@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../../../utils/notification_api.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 class CottonCropHome extends StatefulWidget {
   const CottonCropHome({super.key});
 
@@ -14,8 +15,13 @@ class _CottonCropHomeState extends State<CottonCropHome> {
       appBar: AppBar(
         title: const Text('Cotton'),
       ),
-      body: const Center(
-        child: Text('Cotton'),
+      body: Center(
+        child: TextButton(onPressed: () async {
+           await NotificationService.showNotification(
+                  title: "Title of the notification",
+                  body: "Body of the notification",
+                );
+        }, child: Text('Cotton')),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:crop_recommend/utils/api.dart';
 
 import '../../utils/routes.dart'; 
-
+import 'package:get/get.dart';
 class CropChoiceHome extends StatefulWidget {
   const CropChoiceHome({super.key});
 
@@ -32,19 +32,19 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
       centerTitle: true,
       // caption below title
 
-      title: Column(children: const [
+      title: Column(children:  [
         SizedBox(
           height: 10,
         ),
         Text(
-          'Select Your Crop',
+          'Select Your Crop'.tr,
           style: TextStyle(color: Colors.green, fontSize: 20),
         ),
         SizedBox(
           height: 7,
         ),
         Text(
-          'Select a crop so that we can help you',
+          'Select a crop so that we can help you'.tr,
           style: TextStyle(color: Colors.black54, fontSize: 13),
         ),
       ]),
@@ -105,8 +105,8 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Cotton',
+                    Text(
+                      'Cotton'.tr,
                       style: TextStyle(color: Colors.black),
                     )
                   ],
@@ -150,7 +150,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Banana',
+                    Text('Banana'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -203,7 +203,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Sugarcane',
+                    Text('Sugarcane'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -246,7 +246,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Tomato',
+                    Text('Tomato'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -300,7 +300,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Wheat',
+                    Text('Wheat'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -343,7 +343,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Potato',
+                    Text('Potato'.tr,
                         style: TextStyle(color: Colors.black))
                   ],
                 ),
@@ -363,14 +363,18 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: const Text(
+                    title: Text(
                       // show like this selected these many number of crops
-                      'Selected crops' ,
+                      'Selected Crops'.tr ,
                       textAlign: TextAlign.center,
                     ),
                     content: // show all these crops with comma separated
 
-                    Text(Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', '),textAlign: TextAlign.center,style: const TextStyle(color: Colors.black54,),
+                    Text(
+                      // change the language of the selected crops using .tr
+                      Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', ')
+                      // Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', ')
+                      ,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black54,),
                     ),
 
                     actions: [
@@ -384,8 +388,8 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                           // // now navigate to the next page
                           Navigator.pushNamed(context, MyRoutes.cropchoice);
                         },
-                        child: const Text(
-                          'Ok',
+                        child: Text(
+                          'Ok'.tr,
                           style: TextStyle(color: Colors.blue),
                         ),
                       )
@@ -393,8 +397,8 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                   );
                 });
           },
-          child: const Text(
-            'Confirm',
+          child: Text(
+            'Confirm'.tr,
             style: TextStyle(color: Colors.white),
           ),
           style: TextButton.styleFrom(

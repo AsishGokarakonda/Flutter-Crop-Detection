@@ -3,7 +3,8 @@ import 'package:crop_recommend/utils/api.dart';
 import 'package:crop_recommend/screens/cropchoice/cropchoice_home.dart';
 
 import '../../utils/routes.dart';
-
+import 'package:get/get.dart';
+import '../../utils/notification_api.dart';
 class SelectedCropsHome extends StatefulWidget {
   const SelectedCropsHome({super.key});
 
@@ -39,7 +40,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
               height: 10,
             ),
             Text(
-              'Selected Crops',
+              'Selected Crops'.tr,
               style: TextStyle(color: Colors.yellow[800], fontSize: 20),
             ),
             SizedBox(
