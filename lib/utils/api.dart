@@ -1,10 +1,12 @@
+import 'dart:ffi';
+
 class APILoad{
   static String api = 'http://10.196.10.102:8000';
   // this should be the ip address of the machine where the server is running. 
   // for simplicity connect phone and laptop to same wifi and use the ip address of the laptop
 }
 
-class Cropchoiceselection{
+class CropHealthselection{
   static List selectedcrops = [];
   static  Map<String, bool> cropsbool = {
     'Cotton': false,
@@ -13,6 +15,15 @@ class Cropchoiceselection{
     'Sugarcane': false,
     'Wheat': false,
     'Potato': false,
+  };
+  // Map for day after sowing for each crop
+  static Map<String, int> dayaftersowing = {
+    'Cotton': 0,
+    'Banana': 0,
+    'Tomato': 0,
+    'Sugarcane': 0,
+    'Wheat': 0,
+    'Potato': 0,
   };
 }
 

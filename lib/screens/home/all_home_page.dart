@@ -49,8 +49,6 @@ class _AllHomePageState extends State<AllHomePage> {
                   // create a rounded button and keep a image inside it and on press of that
                   TextButton(
                       onPressed: () {
-                        // go to Crop Choice page
-                        Navigator.pushNamed(context, '/cropchoice');
                       },
                       child: Column(
                         children: [
@@ -104,7 +102,11 @@ class _AllHomePageState extends State<AllHomePage> {
                   // create a rounded button and keep a image inside it and on press of that
         
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        
+                        // go to Crop Choice page
+                        Navigator.pushNamed(context, '/crophealth');
+                      },
                       child: Column(
                         children: [
                           SizedBox(

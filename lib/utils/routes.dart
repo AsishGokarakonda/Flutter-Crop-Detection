@@ -14,9 +14,10 @@ class MyRoutes {
   static String allusersRoute = '/allusers';
   static String usermapsRoute = '/usermaps';
   static String addFieldRoute = '/addfield';
-  static String cropchoice = '/cropchoice';
+  static String crophealth = '/crophealth';
   static String selectavailablecrops = '/selectavailablecrops';
-  static String cottonchoicehome = '/cottonchoicehome';
+  static String cottonhealthhome = '/cottonhealthhome';
+  static String bananahealthhome = '/bananahealthhome';
   static String diseasecheckcrop = '/diseasecheckcrop';
   static String settingsRoute = '/settings';
 }

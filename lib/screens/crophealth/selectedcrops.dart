@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:crop_recommend/utils/api.dart';
-import 'package:crop_recommend/screens/cropchoice/cropchoice_home.dart';
+import 'package:crop_recommend/screens/crophealth/crophealth_home.dart';
 
 import '../../utils/routes.dart';
 import 'package:get/get.dart';
 import '../../utils/notification_api.dart';
+
 class SelectedCropsHome extends StatefulWidget {
   const SelectedCropsHome({super.key});
 
@@ -13,11 +14,11 @@ class SelectedCropsHome extends StatefulWidget {
 }
 
 class _SelectedCropsHomeState extends State<SelectedCropsHome> {
-  int length = Cropchoiceselection.selectedcrops.length;
+  int length = CropHealthselection.selectedcrops.length;
 
   @override
   Widget build(BuildContext context) {
-    return length != 0 ? SelectedCropsHome(context) : const CropChoiceHome();
+    return length != 0 ? SelectedCropsHome(context) : const CropHealthHome();
   }
 
   // ignore: non_constant_identifier_names
@@ -50,80 +51,99 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
         ),
         // show all the selected crops with vertically scrollable list
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-               ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: length,
-            itemBuilder: (BuildContext context, int index) {
-              return TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, MyRoutes.cottonchoicehome);
-                },
-                child: Container(
-                  // align 
-                  decoration: BoxDecoration(
-                    color: Colors.black45.withOpacity(.1),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 19, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                  SizedBox(
-                    width: 100,
-                    height: 100,
-                    child: Image.asset(
-                      'assets/cropchoice/${Cropchoiceselection.selectedcrops[index]}.png',
-                      height: 100,
+          child: Column(children: [
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: length,
+              itemBuilder: (BuildContext context, int index) {
+                return TextButton(
+                  onPressed: () {
+                    if (CropHealthselection.selectedcrops[index] == 'Cotton') {
+                      Navigator.pushNamed(context, MyRoutes.cottonhealthhome);
+                    }
+                    else if (CropHealthselection.selectedcrops[index] == 'Banana') {
+                      Navigator.pushNamed(context, MyRoutes.bananahealthhome);
+                    }
+                  },
+                  child: Container(
+                    // align
+                    decoration: BoxDecoration(
+                      color: Colors.black45.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 19, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 90,
+                          height: 90,
+                          child: Image.asset(
+                            'assets/crophealth/${CropHealthselection.selectedcrops[index]}.png',
+                            height: 90,
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(right: 40),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(CropHealthselection.selectedcrops[index],
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 20)),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                // display day after sowing from dayaftersowing in api.dart
+                                Text(
+                                  // u should show day if day after sowing is 0 or 1. if it is 2 or 3 then show days
+                                  'Day after sowing: ${CropHealthselection.dayaftersowing[CropHealthselection.selectedcrops[index]]} days',
+                                  style: const TextStyle(
+                                      color: Colors.black54, fontSize: 13),
+                                ),
+                              ]),
+                        ),
+                      ],
                     ),
                   ),
-                   Text(Cropchoiceselection.selectedcrops[index],
-                      style: const TextStyle(color: Colors.black, fontSize: 20)
-                      ),
-                      const SizedBox(
-                        width: 1,
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-
-          const SizedBox(
-                height: 10,
-              ),
-          TextButton(
-                          style: TextButton.styleFrom(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-              backgroundColor: Colors.green[500],
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)))),
-                onPressed: (){
-                Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
-                // remove /selectavailablecrops from the stack
-                // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
-                // // now navigate to the next page
-                Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
-              } , child: Text('Add Crops',style: TextStyle(color: Colors.white, fontSize: 20),)),
-              SizedBox(
-                height: 10,
-              ),
-        ]
-        ),
-        )
-
-        );
+                );
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextButton(
+                style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
+                    backgroundColor: Colors.green[500],
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, MyRoutes.newrootRoute, (route) => false);
+                  // remove /selectavailablecrops from the stack
+                  // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.CropHealth));
+                  // // now navigate to the next page
+                  Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
+                },
+                child: Text(
+                  'Add Crops',
+                  style: TextStyle(color: Colors.white,fontSize: 15),
+                )),
+            SizedBox(
+              height: 10,
+            ),
+          ]),
+        ));
 
     // TextButton(onPressed: () {
     //                             Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
     //                     // remove /selectavailablecrops from the stack
-    //                     // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
+    //                     // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.CropHealth));
     //                     // // now navigate to the next page
     //                     Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
     // } , child: Text('Add Crops')
@@ -163,8 +183,8 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //         ]),
 //       ),
 //       // if the user has not selected any crop then show the below body. Else show the selected crops
-//       // body: Cropchoiceselection.selectedcrops.length == 0
-//       //     ? const CropChoiceBody()
+//       // body: CropHealthselection.selectedcrops.length == 0
+//       //     ? const CropHealthBody()
 //       //     : const SelectedCropBody());
 
 //       body: SingleChildScrollView(
@@ -179,12 +199,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Cotton'] == false) {
-//                         Cropchoiceselection.cropsbool['Cotton'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Cotton');
+//                       if (CropHealthselection.cropsbool['Cotton'] == false) {
+//                         CropHealthselection.cropsbool['Cotton'] = true;
+//                         CropHealthselection.selectedcrops.add('Cotton');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Cotton'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Cotton');
+//                         CropHealthselection.cropsbool['Cotton'] = false;
+//                         CropHealthselection.selectedcrops.remove('Cotton');
 //                       }
 //                     });
 //                   },
@@ -192,11 +212,11 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                     children: [
 //                       // show checkbox icon if the crops bool value is true
 
-//                       // ( Cropchoiceselection.cropsbool['Cotton']! ? Icon(Icons.check_circle, color: Colors.green,  ) : Container( height:  , )),
+//                       // ( CropHealthselection.cropsbool['Cotton']! ? Icon(Icons.check_circle, color: Colors.green,  ) : Container( height:  , )),
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Cotton']!
+//                           child: CropHealthselection.cropsbool['Cotton']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -210,7 +230,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/cottoncrop.png',
+//                           'assets/crophealth/cottoncrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -227,12 +247,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Banana'] == false) {
-//                         Cropchoiceselection.cropsbool['Banana'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Banana');
+//                       if (CropHealthselection.cropsbool['Banana'] == false) {
+//                         CropHealthselection.cropsbool['Banana'] = true;
+//                         CropHealthselection.selectedcrops.add('Banana');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Banana'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Banana');
+//                         CropHealthselection.cropsbool['Banana'] = false;
+//                         CropHealthselection.selectedcrops.remove('Banana');
 //                       }
 //                     });
 //                   },
@@ -241,7 +261,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Banana']!
+//                           child: CropHealthselection.cropsbool['Banana']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -255,7 +275,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/bananacrop.png',
+//                           'assets/crophealth/bananacrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -280,12 +300,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Sugarcane'] == false) {
-//                         Cropchoiceselection.cropsbool['Sugarcane'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Sugarcane');
+//                       if (CropHealthselection.cropsbool['Sugarcane'] == false) {
+//                         CropHealthselection.cropsbool['Sugarcane'] = true;
+//                         CropHealthselection.selectedcrops.add('Sugarcane');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Sugarcane'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Sugarcane');
+//                         CropHealthselection.cropsbool['Sugarcane'] = false;
+//                         CropHealthselection.selectedcrops.remove('Sugarcane');
 //                       }
 //                     });
 //                   },
@@ -294,7 +314,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Sugarcane']!
+//                           child: CropHealthselection.cropsbool['Sugarcane']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -308,7 +328,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/sugarcanecrop.png',
+//                           'assets/crophealth/sugarcanecrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -323,12 +343,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Tomato'] == false) {
-//                         Cropchoiceselection.cropsbool['Tomato'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Tomato');
+//                       if (CropHealthselection.cropsbool['Tomato'] == false) {
+//                         CropHealthselection.cropsbool['Tomato'] = true;
+//                         CropHealthselection.selectedcrops.add('Tomato');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Tomato'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Tomato');
+//                         CropHealthselection.cropsbool['Tomato'] = false;
+//                         CropHealthselection.selectedcrops.remove('Tomato');
 //                       }
 //                     });
 //                   },
@@ -337,7 +357,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Tomato']!
+//                           child: CropHealthselection.cropsbool['Tomato']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -351,7 +371,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/tomatocrop.png',
+//                           'assets/crophealth/tomatocrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -377,12 +397,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Wheat'] == false) {
-//                         Cropchoiceselection.cropsbool['Wheat'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Wheat');
+//                       if (CropHealthselection.cropsbool['Wheat'] == false) {
+//                         CropHealthselection.cropsbool['Wheat'] = true;
+//                         CropHealthselection.selectedcrops.add('Wheat');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Wheat'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Wheat');
+//                         CropHealthselection.cropsbool['Wheat'] = false;
+//                         CropHealthselection.selectedcrops.remove('Wheat');
 //                       }
 //                     });
 //                   },
@@ -391,7 +411,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Wheat']!
+//                           child: CropHealthselection.cropsbool['Wheat']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -405,7 +425,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/wheatcrop.png',
+//                           'assets/crophealth/wheatcrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -420,12 +440,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                 GestureDetector(
 //                   onTap: () {
 //                     setState(() {
-//                       if (Cropchoiceselection.cropsbool['Potato'] == false) {
-//                         Cropchoiceselection.cropsbool['Potato'] = true;
-//                         Cropchoiceselection.selectedcrops.add('Potato');
+//                       if (CropHealthselection.cropsbool['Potato'] == false) {
+//                         CropHealthselection.cropsbool['Potato'] = true;
+//                         CropHealthselection.selectedcrops.add('Potato');
 //                       } else {
-//                         Cropchoiceselection.cropsbool['Potato'] = false;
-//                         Cropchoiceselection.selectedcrops.remove('Potato');
+//                         CropHealthselection.cropsbool['Potato'] = false;
+//                         CropHealthselection.selectedcrops.remove('Potato');
 //                       }
 //                     });
 //                   },
@@ -434,7 +454,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       SizedBox(
 //                           width: 100,
 //                           height: 10,
-//                           child: Cropchoiceselection.cropsbool['Potato']!
+//                           child: CropHealthselection.cropsbool['Potato']!
 //                               ? Container(
 //                                   // align the icon to the right of the container
 //                                   alignment: Alignment.centerRight,
@@ -448,7 +468,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                         width: 100,
 //                         height: 100,
 //                         child: Image.asset(
-//                           'assets/cropchoice/potatocrop.png',
+//                           'assets/crophealth/potatocrop.png',
 //                           height: 100,
 //                         ),
 //                       ),
@@ -482,7 +502,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
 //                       ),
 //                       content: // show all these crops with comma separated
 
-//                       Text(Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', '),textAlign: TextAlign.center,style: const TextStyle(color: Colors.black54,),
+//                       Text(CropHealthselection.cropsbool.keys.where((k) => CropHealthselection.cropsbool[k] == true).toList().join(', '),textAlign: TextAlign.center,style: const TextStyle(color: Colors.black54,),
 //                       ),
 
 //                       actions: [

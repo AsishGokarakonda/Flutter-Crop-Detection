@@ -74,7 +74,7 @@ flutter:
     - assets/home/
     - images/crops/
     - assets/profile/
-    - assets/cropchoice/
+    - assets/crophealth/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

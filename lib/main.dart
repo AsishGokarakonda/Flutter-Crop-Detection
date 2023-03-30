@@ -14,9 +14,10 @@ import '../../../screens/signing/before_login.dart';
 import '../../../screens/signing/login_page.dart';
 import '../../../utils/routes.dart';
 import '../../../screens/profile/add_field.dart';
-import '../../../screens/cropchoice/selectedcrops.dart';
-import '../../../screens/cropchoice/cottonchoice/cotton_home.dart';
-import '../../../screens/cropchoice/cropchoice_home.dart';
+import '../../../screens/crophealth/selectedcrops.dart';
+import '../../../screens/crophealth/cottonhealth/cotton_home.dart';
+import '../../../screens/crophealth/cottonhealth/banana_home.dart';
+import '../../../screens/crophealth/crophealth_home.dart';
 import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
@@ -29,6 +30,7 @@ import 'package:get/get.dart';
 // import 'utils/app_translation.dart';
 
 import '../../utils/app_translation.dart';
+
 
 
 
@@ -78,9 +80,10 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.allusersRoute:(context) => const AllUsers(),
           MyRoutes.usermapsRoute:(context) => const UserMaps(),
           MyRoutes.addFieldRoute:(context) => const AddField(),
-          MyRoutes.cropchoice:(context) => const SelectedCropsHome(),
-          MyRoutes.selectavailablecrops:(context) => const CropChoiceHome(),
-          MyRoutes.cottonchoicehome:(context) => const CottonCropHome(),
+          MyRoutes.crophealth:(context) => const SelectedCropsHome(),
+          MyRoutes.selectavailablecrops:(context) => const CropHealthHome(),
+          MyRoutes.cottonhealthhome:(context) => const CottonCropHome(),
+          MyRoutes.bananahealthhome:(context) => const BananaCropHome(),
           MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
         });

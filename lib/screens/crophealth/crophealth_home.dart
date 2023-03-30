@@ -3,14 +3,14 @@ import 'package:crop_recommend/utils/api.dart';
 
 import '../../utils/routes.dart'; 
 import 'package:get/get.dart';
-class CropChoiceHome extends StatefulWidget {
-  const CropChoiceHome({super.key});
+class CropHealthHome extends StatefulWidget {
+  const CropHealthHome({super.key});
 
   @override
-  State<CropChoiceHome> createState() => _CropChoiceHomeState();
+  State<CropHealthHome> createState() => _CropHealthHomeState();
 }
 
-class _CropChoiceHomeState extends State<CropChoiceHome> {
+class _CropHealthHomeState extends State<CropHealthHome> {
   @override
   Widget build(BuildContext context) {
     return ChoosingCrops(context);
@@ -50,8 +50,8 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
       ]),
     ),
     // if the user has not selected any crop then show the below body. Else show the selected crops
-    // body: Cropchoiceselection.selectedcrops.length == 0
-    //     ? const CropChoiceBody()
+    // body: CropHealthselection.selectedcrops.length == 0
+    //     ? const CropHealthBody()
     //     : const SelectedCropBody());
 
 
@@ -67,12 +67,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Cotton'] == false) {
-                      Cropchoiceselection.cropsbool['Cotton'] = true;
-                      Cropchoiceselection.selectedcrops.add('Cotton');
+                    if (CropHealthselection.cropsbool['Cotton'] == false) {
+                      CropHealthselection.cropsbool['Cotton'] = true;
+                      CropHealthselection.selectedcrops.add('Cotton');
                     } else {
-                      Cropchoiceselection.cropsbool['Cotton'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Cotton');
+                      CropHealthselection.cropsbool['Cotton'] = false;
+                      CropHealthselection.selectedcrops.remove('Cotton');
                     }
                   });
                 },
@@ -80,11 +80,11 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                   children: [
                     // show checkbox icon if the crops bool value is true
 
-                    // ( Cropchoiceselection.cropsbool['Cotton']! ? Icon(Icons.check_circle, color: Colors.green,  ) : Container( height:  , )),
+                    // ( CropHealthselection.cropsbool['Cotton']! ? Icon(Icons.check_circle, color: Colors.green,  ) : Container( height:  , )),
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Cotton']!
+                        child: CropHealthselection.cropsbool['Cotton']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -98,7 +98,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Cotton.png',
+                        'assets/crophealth/Cotton.png',
                         height: 100,
                       ),
                     ),
@@ -115,12 +115,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Banana'] == false) {
-                      Cropchoiceselection.cropsbool['Banana'] = true;
-                      Cropchoiceselection.selectedcrops.add('Banana');
+                    if (CropHealthselection.cropsbool['Banana'] == false) {
+                      CropHealthselection.cropsbool['Banana'] = true;
+                      CropHealthselection.selectedcrops.add('Banana');
                     } else {
-                      Cropchoiceselection.cropsbool['Banana'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Banana');
+                      CropHealthselection.cropsbool['Banana'] = false;
+                      CropHealthselection.selectedcrops.remove('Banana');
                     }
                   });
                 },
@@ -129,7 +129,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Banana']!
+                        child: CropHealthselection.cropsbool['Banana']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -143,7 +143,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Banana.png',
+                        'assets/crophealth/Banana.png',
                         height: 100,
                       ),
                     ),
@@ -168,12 +168,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Sugarcane'] == false) {
-                      Cropchoiceselection.cropsbool['Sugarcane'] = true;
-                      Cropchoiceselection.selectedcrops.add('Sugarcane');
+                    if (CropHealthselection.cropsbool['Sugarcane'] == false) {
+                      CropHealthselection.cropsbool['Sugarcane'] = true;
+                      CropHealthselection.selectedcrops.add('Sugarcane');
                     } else {
-                      Cropchoiceselection.cropsbool['Sugarcane'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Sugarcane');
+                      CropHealthselection.cropsbool['Sugarcane'] = false;
+                      CropHealthselection.selectedcrops.remove('Sugarcane');
                     }
                   });
                 },
@@ -182,7 +182,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Sugarcane']!
+                        child: CropHealthselection.cropsbool['Sugarcane']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -196,7 +196,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Sugarcane.png',
+                        'assets/crophealth/Sugarcane.png',
                         height: 100,
                       ),
                     ),
@@ -211,12 +211,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Tomato'] == false) {
-                      Cropchoiceselection.cropsbool['Tomato'] = true;
-                      Cropchoiceselection.selectedcrops.add('Tomato');
+                    if (CropHealthselection.cropsbool['Tomato'] == false) {
+                      CropHealthselection.cropsbool['Tomato'] = true;
+                      CropHealthselection.selectedcrops.add('Tomato');
                     } else {
-                      Cropchoiceselection.cropsbool['Tomato'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Tomato');
+                      CropHealthselection.cropsbool['Tomato'] = false;
+                      CropHealthselection.selectedcrops.remove('Tomato');
                     }
                   });
                 },
@@ -225,7 +225,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Tomato']!
+                        child: CropHealthselection.cropsbool['Tomato']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -239,7 +239,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Tomato.png',
+                        'assets/crophealth/Tomato.png',
                         height: 100,
                       ),
                     ),
@@ -265,12 +265,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Wheat'] == false) {
-                      Cropchoiceselection.cropsbool['Wheat'] = true;
-                      Cropchoiceselection.selectedcrops.add('Wheat');
+                    if (CropHealthselection.cropsbool['Wheat'] == false) {
+                      CropHealthselection.cropsbool['Wheat'] = true;
+                      CropHealthselection.selectedcrops.add('Wheat');
                     } else {
-                      Cropchoiceselection.cropsbool['Wheat'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Wheat');
+                      CropHealthselection.cropsbool['Wheat'] = false;
+                      CropHealthselection.selectedcrops.remove('Wheat');
                     }
                   });
                 },
@@ -279,7 +279,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Wheat']!
+                        child: CropHealthselection.cropsbool['Wheat']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -293,7 +293,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Wheat.png',
+                        'assets/crophealth/Wheat.png',
                         height: 100,
                       ),
                     ),
@@ -308,12 +308,12 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (Cropchoiceselection.cropsbool['Potato'] == false) {
-                      Cropchoiceselection.cropsbool['Potato'] = true;
-                      Cropchoiceselection.selectedcrops.add('Potato');
+                    if (CropHealthselection.cropsbool['Potato'] == false) {
+                      CropHealthselection.cropsbool['Potato'] = true;
+                      CropHealthselection.selectedcrops.add('Potato');
                     } else {
-                      Cropchoiceselection.cropsbool['Potato'] = false;
-                      Cropchoiceselection.selectedcrops.remove('Potato');
+                      CropHealthselection.cropsbool['Potato'] = false;
+                      CropHealthselection.selectedcrops.remove('Potato');
                     }
                   });
                 },
@@ -322,7 +322,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                     SizedBox(
                         width: 100,
                         height: 10,
-                        child: Cropchoiceselection.cropsbool['Potato']!
+                        child: CropHealthselection.cropsbool['Potato']!
                             ? Container(
                                 // align the icon to the right of the container
                                 alignment: Alignment.centerRight,
@@ -336,7 +336,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Potato.png',
+                        'assets/crophealth/Potato.png',
                         height: 100,
                       ),
                     ),
@@ -372,21 +372,21 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
 
                     Text(
                       // change the language of the selected crops using .tr
-                      Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', ')
-                      // Cropchoiceselection.cropsbool.keys.where((k) => Cropchoiceselection.cropsbool[k] == true).toList().join(', ')
+                      CropHealthselection.cropsbool.keys.where((k) => CropHealthselection.cropsbool[k] == true).toList().join(', ')
+                      // CropHealthselection.cropsbool.keys.where((k) => CropHealthselection.cropsbool[k] == true).toList().join(', ')
                       ,textAlign: TextAlign.center,style: const TextStyle(color: Colors.black54,),
                     ),
 
                     actions: [
                       TextButton(
                         onPressed: () {
-                          //  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.cropchoice, (route) => false);
+                          //  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.CropHealth, (route) => false);
                           // remove all the routes from the stack and add /home to the stack
                           Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
                           // remove /selectavailablecrops from the stack
-                          // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.cropchoice));
+                          // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.CropHealth));
                           // // now navigate to the next page
-                          Navigator.pushNamed(context, MyRoutes.cropchoice);
+                          Navigator.pushNamed(context, MyRoutes.crophealth);
                         },
                         child: Text(
                           'Ok'.tr,
@@ -413,7 +413,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
     );
   }
 
-  // Scaffold CropChoiceHome(BuildContext context) {
+  // Scaffold CropHealthHome(BuildContext context) {
   //   return Scaffold(
   //   appBar: AppBar(
   //     title: const Text('Selected Crops'),
@@ -428,7 +428,7 @@ class _CropChoiceHomeState extends State<CropChoiceHome> {
   //         const SizedBox(height: 20),
   //         ElevatedButton(
   //           onPressed: () {
-  //             Navigator.pushNamed(context, '/cropchoice');
+  //             Navigator.pushNamed(context, '/CropHealth');
   //           },
   //           child: const Text('Select Crops'),
   //         ),
