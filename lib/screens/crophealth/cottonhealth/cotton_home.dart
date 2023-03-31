@@ -1,3 +1,4 @@
+import 'package:crop_recommend/screens/crophealth/EachAdvisory.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/notification_api.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -16,101 +17,124 @@ class _CottonCropHomeState extends State<CottonCropHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // back button color
-        iconTheme: const IconThemeData(color: Colors.black),
-        //increase the height of the appbar
-        toolbarHeight: 110,
-        // give border color to the appbar
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        // center title
-        centerTitle: true,
-        // caption below title
+      // appBar: AppBar(
+      //   // back button color
+      //   iconTheme: const IconThemeData(color: Colors.black),
+      //   //increase the height of the appbar
+      //   toolbarHeight: 110,
+      //   // give border color to the appbar
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   // center title
+      //   centerTitle: true,
+      //   // caption below title
 
-        title: Column(children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Cotton',
-            style: TextStyle(color: Colors.yellow[800], fontSize: 20),
-          ),
-        ]),
-      ),
+      //   title: Column(children: [
+      //     const SizedBox(
+      //       height: 10,
+      //     ),
+      //     Text(
+      //       'Cotton',
+      //       style: TextStyle(color: Colors.yellow[800], fontSize: 20),
+      //     ),
+      //   ]),
+      // ),
+      
       body:
-          Column(children: [
-        Container(
-          // center the container
-          alignment: Alignment.center,
-          child: Column(children: [
-            Text(
-              '${CropHealthselection.dayaftersowing['Cotton']} Days after sowing',
-              style: TextStyle(color: Colors.black, fontSize: 19),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            TextButton(
-                style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 15),
-                    backgroundColor: Colors.green[500],
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)))),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Enter the days after sowing'),
-                          content: TextField(
-                            keyboardType: TextInputType.number,
-                            // show input cant be empty if user presses ok without entering anything
-
-                            onChanged: (value) {
-                              // change the day after sowing
-                              if (value != null) {
-                                setState(() {
-                                  CropHealthselection.dayaftersowing['Cotton'] =
-                                      int.parse(value);
-                                });
-                              }
-                              //  show input cant be empty if user presses ok without entering anything
-                            },
-                          ),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
+          NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  backgroundColor: Colors.black54 ,
+                  elevation: 0,
+                  expandedHeight: 300.0,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: true,
+                      // keep title at top 
+                      title: const Text("Cotton",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          )),
+                      background: Image.asset(
+                        'assets/crophealth/CottonHome.png',
+                        colorBlendMode: BlendMode.darken ,
+                        color: Colors.black.withOpacity(0.25) ,
+                        fit: BoxFit.cover,
+                      )),
+                ),
+              ];
+            },
+            body: SingleChildScrollView(
+               physics: const BouncingScrollPhysics(),
+              child: Column(children: [
+                    Container(
+              // center the container
+              alignment: Alignment.center,
+              child: Column(children: [
+                const SizedBox(
+                  height: 25,
+                ),
+                Text(
+                  '${CropHealthselection.dayaftersowing['Cotton']} Days after sowing',
+                  style: TextStyle(color: Colors.black, fontSize: 19),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                TextButton(
+                    style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 25, vertical: 15),
+                        backgroundColor: Colors.green[500],
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20)))),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Enter the days after sowing'),
+                              content: TextField(
+                                keyboardType: TextInputType.number,
+                                // show input cant be empty if user presses ok without entering anything
+            
+                                onChanged: (value) {
+                                  // change the day after sowing
+                                  if (value != null) {
+                                    setState(() {
+                                      CropHealthselection.dayaftersowing['Cotton'] =
+                                          int.parse(value);
+                                    });
+                                  }
+                                  //  show input cant be empty if user presses ok without entering anything
                                 },
-                                child: const Text('OK'))
-                          ],
-                        );
-                      });
-                },
-                child: const Text(
-                  'Change days after sowing',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                )),
-            const SizedBox(
-              height: 20,
-            ),
-          ]),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Container(
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'))
+                              ],
+                            );
+                          });
+                    },
+                    child: const Text(
+                      'Change days after sowing',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    )),
+              ]),
+                    ),
+                    Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              // nmake background color to g
-              // color: Colors.grey[200],
-              // keep circular border to the container
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
               ),
-
+            
               child: Column(children: [
                 ListView.builder(
                   shrinkWrap: true,
@@ -119,8 +143,9 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        // show notification
-                        print("Hi");
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => EachAdvisory(cropName: 'Cotton', dasInAdvisory: '${CottonAdvisory.advisory[index][0]}' ) )
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.only(bottom: 20 ),
@@ -173,9 +198,15 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                                   fontSize: 15,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               // button for show more 
-                              TextButton(onPressed: (){}, child: 
-                              Text('Show more',style: TextStyle(color: Colors.white),))
+                              Text('Show more',style: TextStyle(color: Colors.white),),
+
+                              const SizedBox(
+                                height: 10,
+                              ),
                               ],
                             ),
                           ),
@@ -188,10 +219,10 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                   height: 10,
                 ),
               ]),
+                    )
+                  ]),
             ),
           ),
-        )
-      ]),
 
       // TextButton(onPressed: () async {
       //    await NotificationService.showNotification(

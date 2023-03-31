@@ -22,7 +22,7 @@ import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
 import '../../../screens/profile/settings.dart';
-
+// import '../../..';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -30,6 +30,7 @@ import 'package:get/get.dart';
 // import 'utils/app_translation.dart';
 
 import '../../utils/app_translation.dart';
+import 'screens/crophealth/EachAdvisory.dart';
 
 
 
@@ -86,6 +87,8 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.bananahealthhome:(context) => const BananaCropHome(),
           MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
+          // MyRoutes.EachAdvisoryRoute:(context) => const EachAdvisory( dasInAdvisory:  , ),
+
         });
   }
 }
