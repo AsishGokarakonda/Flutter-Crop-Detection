@@ -36,75 +36,162 @@ class _CottonCropHomeState extends State<CottonCropHome> {
             'Cotton',
             style: TextStyle(color: Colors.yellow[800], fontSize: 20),
           ),
-          SizedBox(
-            height: 7,
-          ),
         ]),
       ),
       body:
-          // show day after sowing from api.dart
+          Column(children: [
+        Container(
+          // center the container
+          alignment: Alignment.center,
+          child: Column(children: [
+            Text(
+              '${CropHealthselection.dayaftersowing['Cotton']} Days after sowing',
+              style: TextStyle(color: Colors.black, fontSize: 19),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextButton(
+                style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
+                    backgroundColor: Colors.green[500],
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)))),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Enter the days after sowing'),
+                          content: TextField(
+                            keyboardType: TextInputType.number,
+                            // show input cant be empty if user presses ok without entering anything
 
-          // Text( 'Day after sowing: 10 days', style: TextStyle(color: Colors.black, fontSize: 20),),
+                            onChanged: (value) {
+                              // change the day after sowing
+                              if (value != null) {
+                                setState(() {
+                                  CropHealthselection.dayaftersowing['Cotton'] =
+                                      int.parse(value);
+                                });
+                              }
+                              //  show input cant be empty if user presses ok without entering anything
+                            },
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'))
+                          ],
+                        );
+                      });
+                },
+                child: const Text(
+                  'Change days after sowing',
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+          ]),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              // nmake background color to g
+              // color: Colors.grey[200],
+              // keep circular border to the container
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
 
-          // give an option to change day after sowing
-
-          Container(
-        // center the container
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(6),
-        child: Column(children: [
-          Text(
-            '${CropHealthselection.dayaftersowing['Cotton']} Days after sowing',
-            style: TextStyle(color: Colors.black, fontSize: 19),
+              child: Column(children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: CottonAdvisory.advisory.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // show notification
+                        print("Hi");
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.only(bottom: 20 ),
+                        child: Column(children: [
+                          Container(
+                            height: 200.0,
+                            // width: MediaQuery.of(context).size.width - 100.0,
+                            decoration: BoxDecoration(
+                              // top left, top right border radius should be set
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15)),
+                                // color: Colors.blue,
+                                image: DecorationImage(
+                                    // decrease the brightness of the image
+                                    colorFilter: ColorFilter.mode(
+                                        Colors.black.withOpacity(0.3),
+                                        BlendMode.darken),
+                                    image: const AssetImage('assets/home/demo.jpg'),
+                                    fit: BoxFit.fill)),
+                            child: // keep text at bottom of the image
+                                Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                child: Text(
+                                  '${CottonAdvisory.advisory[index][0]} Days after sowing',
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 10, right: 10,top:20,bottom: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
+                                  ),
+                                color: Color.fromARGB(230, 23, 19, 19)),
+                            child: Column(
+                              children: [
+                                Text(
+                                '${CottonAdvisory.advisory[index][1]}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              // button for show more 
+                              TextButton(onPressed: (){}, child: 
+                              Text('Show more',style: TextStyle(color: Colors.white),))
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ]),
+            ),
           ),
-          SizedBox(
-            height: 15,
-          ),
-          TextButton(
-              style: TextButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  backgroundColor: Colors.green[500],
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)))),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Enter the days after sowing'),
-                        content: TextField(
-                          keyboardType: TextInputType.number,
-                          // show input cant be empty if user presses ok without entering anything
-                          
-                          onChanged: (value) {
-                            // change the day after sowing
-                            if (value != null) {
-                              setState(() {
-                                CropHealthselection.dayaftersowing['Cotton'] =
-                                    int.parse(value);
-                              });
-                            }
-                            //  show input cant be empty if user presses ok without entering anything
-                          },
-                        ),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              
-                              child: const Text('OK'))
-                        ],
-                      );
-                    });
-              },
-              child: const Text(
-                'Change days after sowing',
-                style: TextStyle(color: Colors.white, fontSize: 15),
-              )),
-        ]),
-      ),
+        )
+      ]),
 
       // TextButton(onPressed: () async {
       //    await NotificationService.showNotification(
