@@ -39,8 +39,8 @@ class Settings {
 class CottonAdvisory {
   static List advisory = [
     ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
-    ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
-    ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
+    ['15','Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.'],
+    ['20','Adopt Alternatively Alternate Furrow Irrigation (AAFI) in heavy soils (Vertisols), which saves time, labour, irrigation water (to the extent of 30%) and minimizes the long term ill effects of irrigation on soil properties. Drip irrigation can be a viable option under constraints of irrigation water in zone 3 and 8 for hybrid cotton cultivation. Scheduled irrigation at 6 cm depth in black soils.'],
     ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
     ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
     ['10','Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.'],
@@ -55,6 +55,11 @@ class CottonAdvisory {
   static Map<String, List> fulladvisory = {
     '10': [
       'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
       'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.'
     ]
   };

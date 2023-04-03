@@ -87,7 +87,6 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.bananahealthhome:(context) => const BananaCropHome(),
           MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
-          // MyRoutes.EachAdvisoryRoute:(context) => const EachAdvisory( dasInAdvisory:  , ),
 
         });
   }
