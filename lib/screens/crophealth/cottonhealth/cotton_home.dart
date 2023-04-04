@@ -164,7 +164,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                                     colorFilter: ColorFilter.mode(
                                         Colors.black.withOpacity(0.3),
                                         BlendMode.darken),
-                                    image: const AssetImage('assets/home/demo.jpg'),
+                                    image:  AssetImage('assets/crophealth/cotton/cottonDay${CottonAdvisory.advisory[index][0]}.jpg'),
                                     fit: BoxFit.fill)),
                             child: // keep text at bottom of the image
                                 Align(
@@ -192,7 +192,8 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                             child: Column(
                               children: [
                                 Text(
-                                '${CottonAdvisory.advisory[index][1]}',
+                                  // show upto 100 characters if the string is more than 100 characters otherwise show the whole string
+                                  '${CottonAdvisory.advisory[index][1].length > 110 ? CottonAdvisory.advisory[index][1].substring(0, 110) + '...' : CottonAdvisory.advisory[index][1]}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
