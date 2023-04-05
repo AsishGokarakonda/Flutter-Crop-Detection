@@ -1,4 +1,6 @@
-import 'dart:ffi';
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class APILoad {
   static String api = 'http://10.196.10.102:8000';
@@ -7,7 +9,7 @@ class APILoad {
 }
 
 class CropHealthselection {
-  static List selectedcrops = [];
+  static List<String>  selectedcrops = [];
   static Map<String, bool> cropsbool = {
     'Cotton': false,
     'Banana': false,
@@ -16,7 +18,6 @@ class CropHealthselection {
     'Wheat': false,
     'Potato': false,
   };
-  // Map for day after sowing for each crop
   static Map<String, int> dayaftersowing = {
     'Cotton': 0,
     'Banana': 0,
@@ -25,6 +26,41 @@ class CropHealthselection {
     'Wheat': 0,
     'Potato': 0,
   };
+
+  static void intialisevars() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, bool> spCropsbool = {
+      'Cotton': false,
+      'Banana': false,
+      'Tomato': false,
+      'Sugarcane': false,
+      'Wheat': false,
+      'Potato': false,
+    };
+    Map<String, int> spDayaftersowing = {
+      'Cotton': 0,
+      'Banana': 0,
+      'Tomato': 0,
+      'Sugarcane': 0,
+      'Wheat': 0,
+      'Potato': 0,
+    };
+
+    prefs.setStringList('spSelectedcrops', []);
+
+    String encodedMap = json.encode(spCropsbool);
+    prefs.setString('spCropsbool', encodedMap);
+
+    encodedMap = json.encode(spDayaftersowing);
+    prefs.setString('spDayaftersowing', encodedMap);
+  }
+
+  // static void getvars() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? encodedMap = prefs.getString('timeData');
+  //   Map<String, dynamic> decodedMap = json.decode(encodedMap!);
+  //   print(decodedMap);
+  // }
 }
 
 class PestManagement {

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:crop_recommend/utils/api.dart';
 
 import '../../utils/routes.dart'; 
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class CropHealthHome extends StatefulWidget {
   const CropHealthHome({super.key});
 
@@ -11,8 +14,31 @@ class CropHealthHome extends StatefulWidget {
 }
 
 class _CropHealthHomeState extends State<CropHealthHome> {
+  void getvarshere() async {
+    print("getting all vars home");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> temp= prefs.getStringList("spSelectedcrops") ?? CropHealthselection.selectedcrops;
+    CropHealthselection.selectedcrops=temp;
+
+    String? encodedMap = prefs.getString('spCropsbool');
+    Map<String, dynamic> decodedMap = json.decode(encodedMap!);
+    print(decodedMap);
+
+    CropHealthselection.cropsbool= decodedMap.map((key, value) => MapEntry(key,value));
+
+    // String? encodedMap2 = prefs.getString('spDayaftersowing');
+    // Map<String, int> decodedMap2 = json.decode(encodedMap2!);
+    // CropHealthselection.dayaftersowing=decodedMap2;
+  }
+  @override
+  void initState() {
+    print("crophome");
+    getvarshere();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    print("sajdlfk");
     return ChoosingCrops(context);
   }
 
@@ -311,6 +337,8 @@ class _CropHealthHomeState extends State<CropHealthHome> {
                     if (CropHealthselection.cropsbool['Potato'] == false) {
                       CropHealthselection.cropsbool['Potato'] = true;
                       CropHealthselection.selectedcrops.add('Potato');
+                      print(CropHealthselection.selectedcrops);
+                      // how to add the selected crops to the list of type List
                     } else {
                       CropHealthselection.cropsbool['Potato'] = false;
                       CropHealthselection.selectedcrops.remove('Potato');
@@ -357,7 +385,17 @@ class _CropHealthHomeState extends State<CropHealthHome> {
         // create a rounded button for selecting the crops
 
         TextButton(
-          onPressed: () {
+          onPressed: () async {
+            // set shared preferences for the selected crops
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            print(CropHealthselection.selectedcrops);
+            prefs.setStringList('spSelectedcrops', CropHealthselection.selectedcrops);
+            String encodedMap = json.encode(CropHealthselection.cropsbool);
+            prefs.setString('spCropsbool', encodedMap);
+            print("sp");
+            print(prefs.getStringList('spSelectedcrops'));
+            print(prefs.getString('spCropsbool'));
+            print("spend");
             // show a dialog box which will show the selected crops
             showDialog(
                 context: context,
@@ -386,7 +424,7 @@ class _CropHealthHomeState extends State<CropHealthHome> {
                           // remove /selectavailablecrops from the stack
                           // Navigator.popUntil(context, ModalRoute.withName(MyRoutes.CropHealth));
                           // // now navigate to the next page
-                          Navigator.pushNamed(context, MyRoutes.crophealth);
+                         Navigator.pushNamed(context, MyRoutes.crophealth);
                         },
                         child: Text(
                           'Ok'.tr,

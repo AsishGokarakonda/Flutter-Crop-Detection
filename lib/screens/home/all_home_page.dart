@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/api.dart';
 
 class AllHomePage extends StatefulWidget {
   const AllHomePage({Key? key}) : super(key: key);
@@ -9,6 +12,18 @@ class AllHomePage extends StatefulWidget {
 }
 
 class _AllHomePageState extends State<AllHomePage> {
+    void getAllVars() async{
+    print("getting in all home");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> temp= prefs.getStringList("spSelectedcrops") ?? [];
+    CropHealthselection.selectedcrops=temp;
+    
+  }
+  @override
+  void initState() {
+    getAllVars();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

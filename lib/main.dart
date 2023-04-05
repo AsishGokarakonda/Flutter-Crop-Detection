@@ -1,5 +1,4 @@
 import 'package:crop_recommend/utils/notification_api.dart';
-
 import '../../../screens/home/adminhome/admin_home.dart';
 import '../../../screens/home/adminhome/all_users.dart';
 import '../../../screens/home/adminhome/user_maps.dart';
@@ -22,16 +21,12 @@ import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
 import '../../../screens/profile/settings.dart';
-// import '../../..';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
-
-// import 'utils/app_translation.dart';
-
 import '../../utils/app_translation.dart';
 import 'screens/crophealth/EachAdvisory.dart';
-
+import 'utils/api.dart';
 
 
 
@@ -40,11 +35,17 @@ int initScreen=0;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
-
+  CropHealthselection.intialisevars();
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = (prefs.getInt("initScreen")) ?? 0;
-  await prefs.setInt("initScreen", 1);
+  // initscreen will be 0 if it is first time else it will be 1
+  if (initScreen == 0) {
+    // if it is first time, set initscreen to 1
+    print("hellomain");
+    CropHealthselection.intialisevars();
+    await prefs.setInt("initScreen", 1);
+  }
   runApp(const MyApp());
 }
 

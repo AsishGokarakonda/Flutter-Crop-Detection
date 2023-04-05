@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:crop_recommend/utils/api.dart';
 import 'package:crop_recommend/screens/crophealth/crophealth_home.dart';
@@ -5,7 +7,7 @@ import 'package:crop_recommend/screens/crophealth/crophealth_home.dart';
 import '../../utils/routes.dart';
 import 'package:get/get.dart';
 import '../../utils/notification_api.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 class SelectedCropsHome extends StatefulWidget {
   const SelectedCropsHome({super.key});
 
@@ -14,11 +16,24 @@ class SelectedCropsHome extends StatefulWidget {
 }
 
 class _SelectedCropsHomeState extends State<SelectedCropsHome> {
-  int length = CropHealthselection.selectedcrops.length;
+  // void getAllVars() async{
+  //   print("getting all vars");
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   print("heaj");
+  //   List<String> temp= prefs.getStringList("spSelectedcrops") ?? [];
+  //   CropHealthselection.selectedcrops=temp;
+  //   length = CropHealthselection.selectedcrops.length;
+  //   print("length is $length");
+  // }
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return length != 0 ? SelectedCropsHome(context) : const CropHealthHome();
+    print("selected crops");
+     return CropHealthselection.selectedcrops.isNotEmpty ? SelectedCropsHome(context): const CropHealthHome();
   }
 
   // ignore: non_constant_identifier_names
@@ -55,7 +70,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: length,
+              itemCount: CropHealthselection.selectedcrops.length,
               itemBuilder: (BuildContext context, int index) {
                 return TextButton(
                   onPressed: () {
