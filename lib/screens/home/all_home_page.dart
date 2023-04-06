@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +19,12 @@ class _AllHomePageState extends State<AllHomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> temp= prefs.getStringList("spSelectedcrops") ?? [];
     CropHealthselection.selectedcrops=temp;
-    
+
+    String? encodedMap = prefs.getString('spCropsbool');
+    Map<String, dynamic> decodedMap = json.decode(encodedMap!);
+    print(decodedMap);
+
+    CropHealthselection.cropsbool= decodedMap.map((key, value) => MapEntry(key,value));
   }
   @override
   void initState() {

@@ -15,6 +15,7 @@ class AppTranslation extends Translations {
       'FAQs':"FAQs",
       'About Us':"About Us",
       'Log Out':"Log Out",
+      'Selected Crops':'Selected Crops',
       // all_home_page.dart
       'Kisan Suvidha':'Kisan Suvidha',
       'A Smart App':'A Smart App',

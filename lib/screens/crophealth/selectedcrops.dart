@@ -16,15 +16,6 @@ class SelectedCropsHome extends StatefulWidget {
 }
 
 class _SelectedCropsHomeState extends State<SelectedCropsHome> {
-  // void getAllVars() async{
-  //   print("getting all vars");
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   print("heaj");
-  //   List<String> temp= prefs.getStringList("spSelectedcrops") ?? [];
-  //   CropHealthselection.selectedcrops=temp;
-  //   length = CropHealthselection.selectedcrops.length;
-  //   print("length is $length");
-  // }
   @override
   void initState() {
     super.initState();
@@ -43,13 +34,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
           // back button color
           iconTheme: const IconThemeData(color: Colors.black),
           //increase the height of the appbar
-          toolbarHeight: 110,
+          toolbarHeight: 100,
           // give border color to the appbar
           backgroundColor: Colors.transparent,
           elevation: 0,
           // center title
           centerTitle: true,
-          // caption below title
 
           title: Column(children: [
             const SizedBox(
@@ -59,17 +49,18 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
               'Selected Crops'.tr,
               style: TextStyle(color: Colors.yellow[800], fontSize: 20),
             ),
-            SizedBox(
+            const SizedBox(
               height: 7,
             ),
           ]),
         ),
         // show all the selected crops with vertically scrollable list
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(children: [
             ListView.builder(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: CropHealthselection.selectedcrops.length,
               itemBuilder: (BuildContext context, int index) {
                 return TextButton(
