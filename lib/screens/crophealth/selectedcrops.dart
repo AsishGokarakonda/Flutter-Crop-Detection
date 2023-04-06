@@ -46,7 +46,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
               height: 10,
             ),
             Text(
-              'Selected Crops'.tr,
+              'Selected crops'.tr,
               style: TextStyle(color: Colors.yellow[800], fontSize: 20),
             ),
             const SizedBox(
@@ -65,10 +65,10 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
               itemBuilder: (BuildContext context, int index) {
                 return TextButton(
                   onPressed: () {
-                    if (CropHealthselection.selectedcrops[index] == 'Cotton') {
+                    if ('${CropHealthselection.selectedcrops[index]}'.tr == 'Cotton'.tr) {
                       Navigator.pushNamed(context, MyRoutes.cottonhealthhome);
                     }
-                    else if (CropHealthselection.selectedcrops[index] == 'Banana') {
+                    else if ('${CropHealthselection.selectedcrops[index]}'.tr == 'Banana'.tr) {
                       Navigator.pushNamed(context, MyRoutes.bananahealthhome);
                     }
                   },
@@ -93,11 +93,12 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.only(right: 40),
+                          // padding: const EdgeInsets.only(right: 40),
+                          margin: const EdgeInsets.only(right: 50) ,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(CropHealthselection.selectedcrops[index],
+                                Text(CropHealthselection.selectedcrops[index].tr,
                                     style: const TextStyle(
                                         color: Colors.black, fontSize: 20)),
                                 const SizedBox(
@@ -106,7 +107,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
                                 // display day after sowing from dayaftersowing in api.dart
                                 Text(
                                   // u should show day if day after sowing is 0 or 1. if it is 2 or 3 then show days
-                                  'Day after sowing: ${CropHealthselection.dayaftersowing[CropHealthselection.selectedcrops[index]]} days',
+                                  '${'Days after sowing:'.tr}${CropHealthselection.dayaftersowing[CropHealthselection.selectedcrops[index]]} ${'days'.tr}',
                                   style: const TextStyle(
                                       color: Colors.black54, fontSize: 13),
                                 ),
@@ -137,7 +138,7 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
                   Navigator.pushNamed(context, MyRoutes.selectavailablecrops);
                 },
                 child: Text(
-                  'Add Crops',
+                  'Add Crops'.tr,
                   style: TextStyle(color: Colors.white,fontSize: 15),
                 )),
             SizedBox(

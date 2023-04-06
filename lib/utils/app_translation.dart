@@ -28,6 +28,7 @@ class AppTranslation extends Translations {
       // pest management
       'Detect Disease':'Detect Disease',
       'Your Crops':'Your Crops',
+      'Select a crop so that we can help you':'Select a crop so that we can help you',
       // detect disease
       'Select Your Crop':'Select Your Crop',
       'Select a crop to detect disease':'Select a crop to detect disease',
@@ -49,7 +50,20 @@ class AppTranslation extends Translations {
       'Please enter day after sowing before uploading image':'Please enter day after sowing before uploading image',
       'Error':'Error',
       'Disease':'Disease',
-
+      // Advisory
+      'Days after sowing:':'Days after sowing:',
+      'Days after sowing':'Days after sowing',
+      'Add Crops':'Add Crops',
+      'days':'days',
+      'Change days after sowing':'Change days after sowing',
+      'Show more':'Show more',
+       'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.':'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.',
+       'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.':'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.',
+      'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.':'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.',
+       'Adopt Alternatively Alternate Furrow Irrigation (AAFI) in heavy soils (Vertisols), which saves time, labour, irrigation water (to the extent of 30%) and minimizes the long term ill effects of irrigation on soil properties. Drip irrigation can be a viable option under constraints of irrigation water in zone 3 and 8 for hybrid cotton cultivation. Scheduled irrigation at 6 cm depth in black soils.':'Adopt Alternatively Alternate Furrow Irrigation (AAFI) in heavy soils (Vertisols), which saves time, labour, irrigation water (to the extent of 30%) and minimizes the long term ill effects of irrigation on soil properties. Drip irrigation can be a viable option under constraints of irrigation water in zone 3 and 8 for hybrid cotton cultivation. Scheduled irrigation at 6 cm depth in black soils.',
+      'chanceofdisease:Bacterial blight':'chanceofdisease:Bacterial blight',
+      'Water soaked angular leaf spots appear on the leaves, later spread to the veins and vein lets.':'Water soaked angular leaf spots appear on the leaves, later spread to the veins and vein lets.',
+      'Foliar sprays of Streptocycline Sulphate @ 0.5 gm/litre and Copper-Oxychlode @ 3 g / litre of water as and when symptoms seen.':'Foliar sprays of Streptocycline Sulphate @ 0.5 gm/litre and Copper-Oxychlode @ 3 g / litre of water as and when symptoms seen.',
     },
     // kannada translation
     'kn_IN':{
@@ -77,6 +91,7 @@ class AppTranslation extends Translations {
       // pest management
       'Detect Disease':'ರೋಗವನ್ನು ಕಂಡುಬಂದಿರಿ',
       'Your Crops':'ನಿಮ್ಮ ಕ್ರಾಪ್ಸ್',
+      'Select a crop so that we can help you':'ನಿಮ್ಮನ್ನು ಸಹಾಯಿಸಲು ಕ್ರಾಪ್ನನ್ನು ಆಯ್ಕೆಮಾಡಿ',
       // detect disease
       'Select Your Crop':'ನಿಮ್ಮ ಕ್ರಾಪ್ನನ್ನು ಆಯ್ಕೆಮಾಡಿ',
       'Select a crop to detect disease':'ರೋಗವನ್ನು ಕಂಡುಬಂದಿರಿ',
@@ -98,6 +113,22 @@ class AppTranslation extends Translations {
       'Please enter day after sowing before uploading image':'ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಲು ಸೇರಿಸಿದ ದಿನವನ್ನು ನಮೂದಿಸಿ',
       'Error':'ತಪ್ಪಾಗಿದೆ',
       'Disease': 'ರೋಗ',
+      // Advisory
+      'Days after sowing:' : 'ಸೇರಿಸಿದ ದಿನಗಳು:',
+      'Days after sowing' : 'ಸೇರಿಸಿದ ದಿನಗಳು',
+      'Add Crops': 'ಕ್ರಾಪ್ಸ್ ಸೇರಿಸಿ',
+      'days': 'ದಿನಗಳು',
+      'Change days after sowing': 'ಸೇರಿಸಿದ ದಿನಗಳನ್ನು ಬದಲಾಯಿಸಿ',
+      'Show more': 'ಹೆಚ್ಚು ತೋರಿಸಿ',
+      // COTTON Advisory
+       'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.':'ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.':'ರೋಗಿತ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮೇಲೆ ವಾಟರ್ ಮಾಡಿ 2 ಜಿ / ಲಿಟರ್ ತಿರಾಮ್ ಡ್ರೆಂಚ್ ಮಾಡಿ.',
+      'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.':'ಲೈಟ್ / ರೆಡ್ / ಸ್ಯಾಂಡಿ ಲೂಮ್ ಸ್ಥಳಗಳಲ್ಲಿ 5 ಸಿ.ಎಂ. ಗಾಲಿನಲ್ಲಿ ನಿರ್ಧಾರಿತ ಜಾಲನೆ.',
+       'Adopt Alternatively Alternate Furrow Irrigation (AAFI) in heavy soils (Vertisols), which saves time, labour, irrigation water (to the extent of 30%) and minimizes the long term ill effects of irrigation on soil properties. Drip irrigation can be a viable option under constraints of irrigation water in zone 3 and 8 for hybrid cotton cultivation. Scheduled irrigation at 6 cm depth in black soils.':'ಭಾರೀ ಮಣ್ಣಿನಲ್ಲಿ (ವರ್ಟಿಸೋಲ್ಸ್) ಪರ್ಯಾಯವಾಗಿ ಪರ್ಯಾಯ ಫರ್ರೋ ನೀರಾವರಿ (ಎಎಎಫ್‌ಐ) ಅನ್ನು ಅಳವಡಿಸಿಕೊಳ್ಳಿ, ಇದು ಸಮಯ, ಶ್ರಮ, ನೀರಾವರಿ ನೀರನ್ನು (30% ವರೆಗೆ) ಉಳಿಸುತ್ತದೆ ಮತ್ತು ಮಣ್ಣಿನ ಗುಣಲಕ್ಷಣಗಳ ಮೇಲೆ ನೀರಾವರಿಯ ದೀರ್ಘಾವಧಿಯ ದುಷ್ಪರಿಣಾಮಗಳನ್ನು ಕಡಿಮೆ ಮಾಡುತ್ತದೆ. ಹೈಬ್ರಿಡ್ ಹತ್ತಿ ಕೃಷಿಗಾಗಿ 3 ಮತ್ತು 8 ನೇ ವಲಯದಲ್ಲಿ ನೀರಾವರಿ ನೀರಿನ ನಿರ್ಬಂಧಗಳ ಅಡಿಯಲ್ಲಿ ಹನಿ ನೀರಾವರಿಯು ಒಂದು ಕಾರ್ಯಸಾಧ್ಯವಾದ ಆಯ್ಕೆಯಾಗಿದೆ. ಕಪ್ಪು ಮಣ್ಣಿನಲ್ಲಿ 6 ಸೆಂ.ಮೀ ಆಳದಲ್ಲಿ ನಿಗದಿತ ನೀರಾವರಿ.',
+      'chanceofdisease:Bacterial blight':'ಬ್ಯಾಕ್ಟೆರಿಯಲ್ ಬ್ಲೈಟ್',
+      'Water soaked angular leaf spots appear on the leaves, later spread to the veins and vein lets.':'ನೀರಿನಿಂದ ನೆನೆಸಿದ ಕೋನೀಯ ಎಲೆಗಳ ಕಲೆಗಳು ಎಲೆಗಳ ಮೇಲೆ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ, ನಂತರ ರಕ್ತನಾಳಗಳು ಮತ್ತು ರಕ್ತನಾಳಗಳಿಗೆ ಹರಡುತ್ತವೆ.',
+      'Foliar sprays of Streptocycline Sulphate @ 0.5 gm/litre and Copper-Oxychlode @ 3 g / litre of water as and when symptoms seen.':'ಸ್ಟ್ರೆಪ್ಟೋಸೈಕ್ಲಿನ್ ಸಲ್ಫೇಟ್ @ 0.5 ಗ್ರಾಂ/ಲೀಟರ್ ಮತ್ತು ಕಾಪರ್-ಆಕ್ಸಿಕ್ಲೋಡ್ @ 3 ಗ್ರಾಂ/ಲೀಟರ್ ನೀರಿಗೆ ರೋಗಲಕ್ಷಣಗಳು ಕಂಡುಬಂದಾಗ ಎಲೆಗಳ ಮೇಲೆ ಸಿಂಪಡಿಸಿ.'
+
     },
     // hindi translation
     'hi_IN':{
@@ -125,6 +156,7 @@ class AppTranslation extends Translations {
       // pest management
       'Detect Disease':'बीमारी का पता लगाएं',
       'Your Crops':'आपके फसल',
+      'Select a crop so that we can help you':'आपकी मदद करने के लिए एक फसल चुनें',
       // detect disease
       'Select Your Crop':'अपना फसल चुनें',
       'Select a crop to detect disease':'बीमारी का पता लगाने के लिए एक फसल चुनें',
@@ -146,6 +178,21 @@ class AppTranslation extends Translations {
       'Please enter day after sowing before uploading image':'चित्र अपलोड करने से पहले बोटने के बाद दिन दर्ज करें',
       'Error': 'त्रुटि',
       'Disease': 'बीमारी',
+      // Advisory
+      'Days after sowing:':'बोटने के बाद दिन:',
+      'Days after sowing':'बोटने के बाद दिन',
+      'Add Crops':'फसल जोड़ें',
+      'days':'दिन',
+      'Change days after sowing':'बोटने के बाद दिन बदलें',
+      'Show more':'और दिखाएं',
+      // COTTON Advisory
+       'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.':'उत्पन्न होने से पहले बीज की बच्चों की अवस्था की तरह, बीज की बच्चों के रस्सों और जड़ की रोट। कभी-कभी जड़ के जड़ों पर मसाला जैसे बीज दिखाई देते हैं।',
+      'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.':'बीमारी की बीज की बच्चों के चारों ओर थीरम @ 2 ग्राम / लीटर पानी का ड्रेंचिंग।',
+      'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.': 'प्रकाश / लाल / रेती लूम भूमि में 5 सेंटीमीटर गहराई में अनुसूचित जल देना।',
+       'Adopt Alternatively Alternate Furrow Irrigation (AAFI) in heavy soils (Vertisols), which saves time, labour, irrigation water (to the extent of 30%) and minimizes the long term ill effects of irrigation on soil properties. Drip irrigation can be a viable option under constraints of irrigation water in zone 3 and 8 for hybrid cotton cultivation. Scheduled irrigation at 6 cm depth in black soils.':'भारी भूमि (वर्टिसोल्स) में वैकल्पिक फरो जलवायु (AAFI) का लाभ उठाएं, जो समय, कामगार, जलवायु जल (अधिकतम 30%) को बचाता है और जलवायु के लंबवत असाधारण प्रभावों को न्यूनतम करता है। जलवायु की सीमाओं के अनुभव के लिए ज़ोन 3 और 8 के लिए हाइब्रिड कपड़े की उगाने के लिए ड्रिप जलवायु एक वैयक्तिक विकल्प हो सकता है। भूरे भूमि में 6 सेंटीमीटर गहराई में अनुसूचित जल देना।',
+      'chanceofdisease:Bacterial blight':'बीमारी की संभावना: बैक्टीरियल ब्लाइट',
+      'Water soaked angular leaf spots appear on the leaves, later spread to the veins and vein lets.':'पत्ते पर पानी की तरह गोली लगती है, बाद में वैन और वैन लेट्स पर फैलती है।',
+      'Foliar sprays of Streptocycline Sulphate @ 0.5 gm/litre and Copper-Oxychlode @ 3 g / litre of water as and when symptoms seen.':'जब लक्षण दिखाई देते हैं, फोलियर स्प्रे Streptocycline Sulphate @ 0.5 gm / लीटर और Copper-Oxychlode @ 3 g / लीटर पानी के रूप में।',
     }
   };
 }

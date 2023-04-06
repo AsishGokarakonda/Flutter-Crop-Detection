@@ -46,6 +46,7 @@ class CropHealthselection {
       'Potato': 0,
     };
 
+    prefs.setString('language', 'en_US');
     prefs.setStringList('spSelectedcrops', []);
 
     String encodedMap = json.encode(spCropsbool);

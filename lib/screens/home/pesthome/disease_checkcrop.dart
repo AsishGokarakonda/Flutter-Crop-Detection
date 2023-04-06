@@ -94,7 +94,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Cotton.png',
+                        'assets/crophealth/Cotton.png',
                         height: 100,
                       ),
                     ),
@@ -138,7 +138,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Banana.png',
+                        'assets/crophealth/Banana.png',
                         height: 100,
                       ),
                     ),
@@ -190,7 +190,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Sugarcane.png',
+                        'assets/crophealth/Sugarcane.png',
                         height: 100,
                       ),
                     ),
@@ -232,7 +232,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Tomato.png',
+                        'assets/crophealth/Tomato.png',
                         height: 100,
                       ),
                     ),
@@ -285,7 +285,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Wheat.png',
+                        'assets/crophealth/Wheat.png',
                         height: 100,
                       ),
                     ),
@@ -327,7 +327,7 @@ return Scaffold(
                       width: 100,
                       height: 100,
                       child: Image.asset(
-                        'assets/cropchoice/Potato.png',
+                        'assets/crophealth/Potato.png',
                         height: 100,
                       ),
                     ),
@@ -371,9 +371,7 @@ return Scaffold(
                     actions: [
                       TextButton(
                         onPressed: () {
-                          //  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.cropchoice, (route) => false);
-                          // remove all the routes from the stack and add /home to the stack
-                          Navigator.pushNamedAndRemoveUntil(context, MyRoutes.pesthomeRoute, (route) => false);
+                          Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
                           Navigator.pushNamed(context, MyRoutes.detectdiseaseRoute);
                         },
                         child: Text(

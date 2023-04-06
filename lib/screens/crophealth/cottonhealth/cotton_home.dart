@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../utils/notification_api.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:crop_recommend/utils/api.dart';
-
 import '../../../utils/routes.dart';
+import 'dart:convert';
+import 'package:get/get.dart';
 
 class CottonCropHome extends StatefulWidget {
   const CottonCropHome({super.key});
@@ -52,7 +53,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                   flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       // keep title at top 
-                      title: const Text("Cotton",
+                      title:  Text("Cotton".tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -77,7 +78,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                   height: 25,
                 ),
                 Text(
-                  '${CropHealthselection.dayaftersowing['Cotton']} Days after sowing',
+                  '${CropHealthselection.dayaftersowing['Cotton']} ${'Days after sowing'.tr}',
                   style: TextStyle(color: Colors.black, fontSize: 19),
                 ),
                 SizedBox(
@@ -121,8 +122,8 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                             );
                           });
                     },
-                    child: const Text(
-                      'Change days after sowing',
+                    child:  Text(
+                      'Change days after sowing'.tr,
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     )),
               ]),
@@ -172,7 +173,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 child: Text(
-                                  '${CottonAdvisory.advisory[index][0]} Days after sowing',
+                                  '${CottonAdvisory.advisory[index][0]} ${'Days after sowing'.tr}',
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -193,7 +194,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                               children: [
                                 Text(
                                   // show upto 100 characters if the string is more than 100 characters otherwise show the whole string
-                                  '${CottonAdvisory.advisory[index][1].length > 110 ? CottonAdvisory.advisory[index][1].substring(0, 110) + '...' : CottonAdvisory.advisory[index][1]}',
+                                  CottonAdvisory.advisory[index][1].length > 110 ? '${'${CottonAdvisory.advisory[index][1]}'.tr.substring(0, 110)}...' : '${CottonAdvisory.advisory[index][1]}'.tr,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -203,7 +204,7 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                                 height: 10,
                               ),
                               // button for show more 
-                              Text('Show more',style: TextStyle(color: Colors.white),),
+                              Text('Show more'.tr,style: TextStyle(color: Colors.white),),
 
                               const SizedBox(
                                 height: 10,

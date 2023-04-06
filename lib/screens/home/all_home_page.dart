@@ -25,6 +25,10 @@ class _AllHomePageState extends State<AllHomePage> {
     print(decodedMap);
 
     CropHealthselection.cropsbool= decodedMap.map((key, value) => MapEntry(key,value));
+
+    // Get.updateLocale(const Locale('kn', 'IN'));
+    String lang = prefs.getString("language") ?? "en_US";
+    Get.updateLocale(Locale(lang.split("_")[0], lang.split("_")[1]));
   }
   @override
   void initState() {
