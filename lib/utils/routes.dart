@@ -13,11 +13,13 @@ class MyRoutes {
   static String adminhomeRoute = '/adminhome';
   static String allusersRoute = '/allusers';
   static String usermapsRoute = '/usermaps';
-  static String addFieldRoute = '/addfield';
+  static String allFieldsRoute = '/allfields';
   static String crophealth = '/crophealth';
   static String selectavailablecrops = '/selectavailablecrops';
   static String cottonhealthhome = '/cottonhealthhome';
   static String bananahealthhome = '/bananahealthhome';
   static String diseasecheckcrop = '/diseasecheckcrop';
   static String settingsRoute = '/settings';
+  static String addFieldRoute = '/addfield';
+  static String pricePredictRoute = '/pricepredict';
 }

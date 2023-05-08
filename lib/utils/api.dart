@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class APILoad {
   static String api = 'http://10.196.10.102:8000';
+  // http://10.196.10.102:8000/api/login/
   // this should be the ip address of the machine where the server is running.
   // for simplicity connect phone and laptop to same wifi and use the ip address of the laptop
+  // turn off the firewall of the laptop in firewall and network protection settings
 }
 
 class CropHealthselection {

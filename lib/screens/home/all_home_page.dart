@@ -146,7 +146,7 @@ class _AllHomePageState extends State<AllHomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('Crop Health'.tr,
+                          Text('Crop Advisory'.tr,
                               style: TextStyle(color: Colors.black))
                         ],
                       )),
@@ -180,7 +180,9 @@ class _AllHomePageState extends State<AllHomePage> {
                   // create a rounded button and keep a image inside it and on press of that
         
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/pricepredict');
+                      },
                       child: Column(
                         children: [
                           SizedBox(

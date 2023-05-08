@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
 class AddField extends StatefulWidget {
   const AddField({super.key});
 
@@ -11,11 +14,9 @@ class _AddFieldState extends State<AddField> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Field'),
+        title: Text('Add New Field'),
       ),
-      body: const Center(
-        child: Text('Add Field'),
-      )
+      
     );
   }
 }

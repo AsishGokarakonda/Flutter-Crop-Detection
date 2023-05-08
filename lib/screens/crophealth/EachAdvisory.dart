@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import '../../utils/api.dart';
-
+import 'package:get/get.dart';
 class EachAdvisory extends StatefulWidget {
   // create a variable to store the argument passed from the previous page.
 
@@ -51,7 +51,7 @@ class _EachAdvisoryState extends State<EachAdvisory> {
                   flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
                       // keep title at top
-                      title: Text("${widget.cropName} Advisory",
+                      title: Text('${widget.cropName.tr} ${'Advisory'.tr}',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 17.0,
@@ -61,7 +61,8 @@ class _EachAdvisoryState extends State<EachAdvisory> {
                         colorBlendMode: BlendMode.darken,
                         color: Colors.black.withOpacity(0.25),
                         fit: BoxFit.cover,
-                      )),
+                      )
+                      ),
                 ),
               ];
             },
@@ -72,7 +73,7 @@ class _EachAdvisoryState extends State<EachAdvisory> {
                   margin:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   child: Text(
-                    "${widget.dasInAdvisory} Days after sowing",
+                    '${widget.dasInAdvisory} ${'Days after sowing'.tr}',
                     style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold, color: Colors.blue),
                   ),
                 ),
@@ -107,7 +108,7 @@ class _EachAdvisoryState extends State<EachAdvisory> {
                               ),
                               Flexible(
                                 child: Text(
-                                  Cropadvisory[index],
+                                  Cropadvisory[index].tr,
                                   style: TextStyle(
                                       fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black54),
                                 ),

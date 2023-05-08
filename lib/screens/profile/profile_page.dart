@@ -147,7 +147,7 @@ class ProfileWidget extends StatelessWidget {
       // if title is Log Out then navigate to login page
       onTap: title =='Add Field'.tr
           ? () async {
-            Navigator.pushNamed(context, '/addfield');
+            Navigator.pushNamed(context, '/allfields');
             }
       : title == 'Log Out'.tr
           ? () async {

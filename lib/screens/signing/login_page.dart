@@ -192,13 +192,14 @@ class _LoginPageState extends State<LoginPage> {
                       // if there is no error in the form then send the data to the server
                       if (_formkey.currentState!.validate()) {
                         // if there is no error in the form then send the data to the server
-                        var url = "${APILoad.api}/api/login/";
+                        var url = '${APILoad.api}/api/login/';
                         // if server is not running then show error message
-
+                        print("Hi");
                         http.post(Uri.parse(url), body: {
                           "username": username,
                           "password": password,
                         }).then((response) async {
+                          print("Hwhejkf");
                           if (response.statusCode == 200) {
                             var data = json.decode(response.body);
                             if (data['status'] == "success") {

@@ -221,19 +221,20 @@ class _CottonCropHomeState extends State<CottonCropHome> {
                   height: 10,
                 ),
               ]),
-                    )
-                  ]),
-            ),
-          ),
-
-      // TextButton(onPressed: () async {
+                    ),
+      //                     TextButton(onPressed: () async {
       //    await NotificationService.showNotification(
-      //           title: "Title of the notification",
-      //           body: "Body of the notification",
+      //           title: "High time!! Cotton needs your attention.",
+      //           body: "Its been 10 days after sowing. Click here to see what actions you need to take.",
       //           scheduled: true,
       //           interval: 5
       //         );
       // }, child: Text('Cotton')),
+                  ]),
+            ),
+          ),
+
+
     );
   }
 }

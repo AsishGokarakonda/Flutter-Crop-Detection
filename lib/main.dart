@@ -1,3 +1,4 @@
+import 'package:crop_recommend/screens/marketchoice/price_prediction.dart';
 import 'package:crop_recommend/utils/notification_api.dart';
 import '../../../screens/home/adminhome/admin_home.dart';
 import '../../../screens/home/adminhome/all_users.dart';
@@ -12,7 +13,7 @@ import '../../../screens/signing/admin_login.dart';
 import '../../../screens/signing/before_login.dart';
 import '../../../screens/signing/login_page.dart';
 import '../../../utils/routes.dart';
-import '../../../screens/profile/add_field.dart';
+import 'screens/profile/all_fields.dart';
 import '../../../screens/crophealth/selectedcrops.dart';
 import '../../../screens/crophealth/cottonhealth/cotton_home.dart';
 import '../../../screens/crophealth/cottonhealth/banana_home.dart';
@@ -21,6 +22,8 @@ import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
 import '../../../screens/profile/settings.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
@@ -81,14 +84,14 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.adminhomeRoute:(context) => const AdminHome(),
           MyRoutes.allusersRoute:(context) => const AllUsers(),
           MyRoutes.usermapsRoute:(context) => const UserMaps(),
-          MyRoutes.addFieldRoute:(context) => const AddField(),
+          MyRoutes.allFieldsRoute:(context) => const AllFields(),
           MyRoutes.crophealth:(context) => const SelectedCropsHome(),
           MyRoutes.selectavailablecrops:(context) => const CropHealthHome(),
           MyRoutes.cottonhealthhome:(context) => const CottonCropHome(),
           MyRoutes.bananahealthhome:(context) => const BananaCropHome(),
           MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
-
+          MyRoutes.pricePredictRoute:(context) => const PricePredict(),
         });
   }
 }

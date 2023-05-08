@@ -65,8 +65,9 @@ class _DetectDiseaseState extends State<DetectDisease> {
     request.headers.addAll(headers);
     request.fields.addAll({
       'crop_name': PestManagement.diseaseselectedcrop,
-      'dayaftersowing':das
+      'dayaftersowing': das.toString(),
     });
+    print("done");
     var response = await request.send();
     // save the image in images folder using imagepicker
     // get image path and keep it in a variable
