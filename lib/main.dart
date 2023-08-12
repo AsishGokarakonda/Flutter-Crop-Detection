@@ -1,4 +1,5 @@
 import 'package:crop_recommend/screens/marketchoice/price_prediction.dart';
+import 'package:crop_recommend/screens/profile/add_newfield.dart';
 import 'package:crop_recommend/utils/notification_api.dart';
 import '../../../screens/home/adminhome/admin_home.dart';
 import '../../../screens/home/adminhome/all_users.dart';
@@ -64,7 +65,10 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
         translations: AppTranslation() ,
         locale: const Locale('en', 'US'),
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // primarySwatch: Colors.blue,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
         ),
         // if it is first time, go to onboarding page else go to login page if jwt is null else go to home page
 
@@ -92,6 +96,7 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.diseasecheckcrop:(context) => const DiseaseCheckCrop(),
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
           MyRoutes.pricePredictRoute:(context) => const PricePredict(),
+          MyRoutes.addFieldRoute:(context) => const AddField(),
         });
   }
 }

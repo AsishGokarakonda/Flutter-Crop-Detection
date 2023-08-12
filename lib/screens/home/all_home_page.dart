@@ -51,7 +51,7 @@ class _AllHomePageState extends State<AllHomePage> {
               height: 10,
             ),
             Text(
-              'Kisan Suvidha'.tr,
+              'Kisaan Margadarshak'.tr,
               style: TextStyle(color: Colors.black),
             ),
             SizedBox(
@@ -96,6 +96,9 @@ class _AllHomePageState extends State<AllHomePage> {
                         ],
                       )),
                   TextButton(
+                    style: TextButton.styleFrom(
+                      shadowColor: Colors.transparent,
+                    ),
                       onPressed: () {
                         // go to Profile page
                         Navigator.pushNamed(context, '/profile');

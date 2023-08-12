@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Settings.language = 'en_US';
                             },
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.28,
+                              width: MediaQuery.of(context).size.width * 0.25,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -97,7 +97,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               Settings.language = 'hi_IN';
                             },
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.28,
+                              width: MediaQuery.of(context).size.width * 0.25,
                               height: MediaQuery.of(context).size.height * 0.06,
                               decoration: BoxDecoration(
                                 color: Colors.grey[200],
@@ -112,35 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                             ),
                           ),
-                          TextButton(
-                            // remove the blue color from the button
-                            onPressed: () async {
-                              // change the language to kannada
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.setString('language', 'kn_IN');
-                              Get.updateLocale(const Locale('kn', 'IN'));
-                              Settings.language = 'kn_IN';
-                            },
-                            child: Container(
-                              // add on click function to change the language
-                              width: MediaQuery.of(context).size.width * 0.28,
-                              height: MediaQuery.of(context).size.height * 0.06,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Kannada'.tr,
-                                  style: TextStyle(
-                                      color: Settings.language == 'kn_IN'
-                                          ? Colors.green
-                                          : Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
+                          LanguageButton(),
                         ],
                       ),
                     ],
@@ -148,5 +120,44 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             )));
+  }
+}
+
+class LanguageButton extends StatelessWidget {
+  const LanguageButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      // remove the blue color from the button
+      onPressed: () async {
+        // change the language to kannada
+        SharedPreferences prefs =
+            await SharedPreferences.getInstance();
+        prefs.setString('language', 'kn_IN');
+        Get.updateLocale(const Locale('kn', 'IN'));
+        Settings.language = 'kn_IN';
+      },
+      child: Container(
+        // add on click function to change the language
+        width: MediaQuery.of(context).size.width * 0.25,
+        height: MediaQuery.of(context).size.height * 0.06,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Text(
+            'Kannada'.tr,
+            style: TextStyle(
+                color: Settings.language == 'kn_IN'
+                    ? Colors.green
+                    : Colors.black),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -17,7 +17,7 @@ class AppTranslation extends Translations {
       'Log Out':"Log Out",
       'Selected Crops':'Selected Crops',
       // all_home_page.dart
-      'Kisan Suvidha':'Kisan Suvidha',
+      'Kisaan Margadarshak':'Kisaan Margadarshak',
       'A Smart App':'A Smart App',
       'Crop Choice':'Crop Choice',
       'Your Dashboard':'Your Dashboard',
@@ -82,7 +82,7 @@ class AppTranslation extends Translations {
       'About Us':"ನಮ್ಮ ಬಗ್ಗೆ",
       'Log Out':"ಲಾಗ್ ಔಟ್",
       // all_home_page.dart
-      'Kisan Suvidha':'ಕಿಸನ್ ಸುವಿಧಾ',
+      'Kisaan Margadarshak':'ಕಿಸಾನ್ ಮಾರ್ಗದರ್ಶಕ್',
       'A Smart App':'ಒಂದು ಸ್ಮಾರ್ಟ್ ಅಪ್ಲಿಕೇಶನ್',
       'Crop Choice':'ಕ್ರಾಪ್ ಆಯ್ಕೆ',
       'Your Dashboard':'ನಿಮ್ಮ ಡ್ಯಾಶ್ಬೋರ್ಡ್',
@@ -150,7 +150,7 @@ class AppTranslation extends Translations {
       'About Us':"हमारे बारे में",
       'Log Out':"लॉग आउट",
       // all_home_page.dart
-      'Kisan Suvidha':'किसान सुविधा',
+      'Kisaan Margadarshak':'किसान मार्गदर्शक',
       'A Smart App':'एक स्मार्ट ऐप',
       'Crop Choice':'फसल विकल्प',
       'Your Dashboard':'आपका डैशबोर्ड',
