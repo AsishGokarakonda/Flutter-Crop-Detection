@@ -22,4 +22,5 @@ class MyRoutes {
   static String settingsRoute = '/settings';
   static String addFieldRoute = '/addfield';
   static String pricePredictRoute = '/pricepredict';
+  static String searchweather = '/searchweather';
 }

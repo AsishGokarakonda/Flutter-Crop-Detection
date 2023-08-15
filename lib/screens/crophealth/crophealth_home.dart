@@ -55,7 +55,7 @@ class _CropHealthHomeState extends State<CropHealthHome> {
           // back button color
           iconTheme: const IconThemeData(color: Colors.black),
           //increase the height of the appbar
-          toolbarHeight: 110,
+          toolbarHeight: 100,
           // give border color to the appbar
           backgroundColor: Colors.transparent,
           elevation: 0,

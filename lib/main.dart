@@ -30,6 +30,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import '../../utils/app_translation.dart';
 import 'screens/crophealth/EachAdvisory.dart';
+import 'screens/weather/search_page.dart';
 import 'utils/api.dart';
 
 
@@ -97,6 +98,7 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.settingsRoute:(context) => const SettingsPage(),
           MyRoutes.pricePredictRoute:(context) => const PricePredict(),
           MyRoutes.addFieldRoute:(context) => const AddField(),
+          MyRoutes.searchweather: (context) => const WeatherSearchPage(),
         });
   }
 }
