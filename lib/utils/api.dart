@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:crop_recommend/models/weather.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class APILoad {
   static String api = 'http://10.196.10.102:8000';
@@ -8,6 +10,19 @@ class APILoad {
   // this should be the ip address of the machine where the server is running.
   // for simplicity connect phone and laptop to same wifi and use the ip address of the laptop
   // turn off the firewall of the laptop in firewall and network protection settings
+}
+
+class WeatherData{
+  Future<Weather> getCurrentWeatherData(var latitude, var longitude) async {
+    var uri = Uri.parse(
+      'https://api.weatherapi.com/v1/current.json?key=&q=$latitude,$longitude&aqi=no'
+    );
+    var response = await http.get(uri);
+    var jsonData = jsonDecode(response.body);
+    print(Weather.fromJson(jsonData));
+
+    return Weather.fromJson(jsonData);
+  }
 }
 
 class CropHealthselection {

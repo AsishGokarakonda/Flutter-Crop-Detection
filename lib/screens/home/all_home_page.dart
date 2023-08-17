@@ -256,7 +256,7 @@ class _AllHomePageState extends State<AllHomePage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Text('Market Choice'.tr,
+                            Text('Weather Info'.tr,
                                 style: TextStyle(color: Colors.black))
                           ],
                         )),
