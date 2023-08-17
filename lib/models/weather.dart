@@ -11,6 +11,7 @@ class Weather {
   var uv;
   var last_update;
   var pricipe;
+  var date;
 
   
 Weather(
@@ -27,6 +28,7 @@ Weather(
     required this.uv,
     required this.last_update,
     required this.pricipe,
+    required this.date,
   }
 );
 
@@ -43,5 +45,6 @@ Weather.fromJson( Map<String, dynamic> json){
   uv=json['current']['uv'];
   last_update=json['current']['last_updated'];
   pricipe=json['current']['precip_mm'];
+  date=json['location']['localtime'];
 }
 }

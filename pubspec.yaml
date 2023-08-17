@@ -42,6 +42,7 @@ dependencies:
   google_maps_flutter: ^2.2.1
   flutter_local_notifications: ^15.1.0+1
   awesome_notifications: ^0.7.4+1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - .env
     - assets/onboard/
     - assets/signup/
     - assets/home/
@@ -77,6 +79,9 @@ flutter:
     - assets/crophealth/
     - assets/crophealth/cotton/
     - assets/marketchoice/
+    - assets/weather/day/
+    - assets/weather/night/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

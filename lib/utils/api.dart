@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:crop_recommend/models/weather.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class APILoad {
   static String api = 'http://10.196.10.102:8000';
@@ -14,13 +16,14 @@ class APILoad {
 
 class WeatherData{
   Future<Weather> getCurrentWeatherData(var latitude, var longitude) async {
+    
+    await dotenv.load();
+    print('API URL: ${dotenv.env['WEATHER_API']}');
     var uri = Uri.parse(
-      'https://api.weatherapi.com/v1/current.json?key=&q=$latitude,$longitude&aqi=no'
+      'https://api.weatherapi.com/v1/current.json?key=${dotenv.env['WEATHER_API']}&q=$latitude,$longitude&aqi=no'
     );
     var response = await http.get(uri);
     var jsonData = jsonDecode(response.body);
-    print(Weather.fromJson(jsonData));
-
     return Weather.fromJson(jsonData);
   }
 }
