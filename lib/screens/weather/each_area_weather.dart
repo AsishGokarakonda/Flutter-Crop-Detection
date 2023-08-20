@@ -2,6 +2,10 @@ import 'package:crop_recommend/utils/useful_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../models/weather.dart';
+import '../../utils/api.dart';
+import 'full_weather_report.dart';
+
 class EachAreaWeatherData extends StatefulWidget {
   final areaWeatherInfo;
   const EachAreaWeatherData({super.key, this.areaWeatherInfo});
@@ -15,6 +19,11 @@ class _EachAreaWeatherDataState extends State<EachAreaWeatherData> {
   void initState() {
     super.initState();
     print(widget.areaWeatherInfo.temp);
+    fetchTodayData( widget.areaWeatherInfo.latitude, widget.areaWeatherInfo.longitude );
+  }
+
+  Future<void> fetchTodayData(var latitude, var longitude) async {
+    await WeatherData().getTodayWeatherData(latitude, longitude);
   }
 
   @override
@@ -65,8 +74,27 @@ class _EachAreaWeatherDataState extends State<EachAreaWeatherData> {
                           fontSize: 25,
                           color: Colors.white,
                         ),
-                        textAlign: TextAlign.center
-                        ),
+                        textAlign: TextAlign.center),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => FullWeatherReport(
+                                areaWeatherInfo: widget.areaWeatherInfo
+                                )),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text('View full report',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.blue,
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
                   ),
                   const SizedBox(
                     height: 40,

@@ -1,5 +1,7 @@
 class Weather {
   var cityName;
+  var latitude;
+  var longitude;
   var icon;
   var condition;
   var temp;
@@ -13,10 +15,10 @@ class Weather {
   var pricipe;
   var date;
 
-  
-Weather(
-  {
-    required this.cityName, 
+  Weather({
+    this.cityName,
+    this.latitude,
+    this.longitude,
     required this.icon,
     required this.condition,
     required this.temp,
@@ -29,22 +31,29 @@ Weather(
     required this.last_update,
     required this.pricipe,
     required this.date,
-  }
-);
+  });
 
-Weather.fromJson( Map<String, dynamic> json){
-  cityName=json['location']['name'];
-  icon=json['current']['condition']['icon'];
-  condition=json['current']['condition']['text'];
-  temp=json['current']['temp_c'];
-  wind=json['current']['wind_kph'];
-  humidity=json['current']['humidity'];
-  gust=json['current']['gust_kph'];
-  wind_dir=json['current']['wind_dir'];
-  pressure=json['current']['pressure_mb'];
-  uv=json['current']['uv'];
-  last_update=json['current']['last_updated'];
-  pricipe=json['current']['precip_mm'];
-  date=json['location']['localtime'];
-}
+  Weather.fromJson(Map<String, dynamic> json) {
+    if (json['location'] != null && json['location'].containsKey('name')) {
+      cityName = json['location']['name'];
+    }
+    if (json['location'] != null && json['location'].containsKey('lat')) {
+      latitude = json['location']['lat'];
+    }
+    if (json['location'] != null && json['location'].containsKey('lon')) {
+      longitude = json['location']['lon'];
+    }
+    icon = json['current']['condition']['icon'];
+    condition = json['current']['condition']['text'];
+    temp = json['current']['temp_c'];
+    wind = json['current']['wind_kph'];
+    humidity = json['current']['humidity'];
+    gust = json['current']['gust_kph'];
+    wind_dir = json['current']['wind_dir'];
+    pressure = json['current']['pressure_mb'];
+    uv = json['current']['uv'];
+    last_update = json['current']['last_updated'];
+    pricipe = json['current']['precip_mm'];
+    date = json['location']['localtime'];
+  }
 }

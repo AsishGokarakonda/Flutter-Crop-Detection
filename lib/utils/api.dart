@@ -26,6 +26,26 @@ class WeatherData{
     var jsonData = jsonDecode(response.body);
     return Weather.fromJson(jsonData);
   }
+
+  Future<List<Weather>> getTodayWeatherData( var latitude, var longitude ) async {
+    await dotenv.load();
+    print('API URL: ${dotenv.env['WEATHER_API']}');
+    var uri = Uri.parse(
+      'https://api.weatherapi.com/v1/forecast.json?key=${dotenv.env['WEATHER_API']}&q=$latitude,$longitude&days=1&aqi=no&alerts=no'
+    );
+    var response = await http.get(uri);
+    var jsonData = jsonDecode(response.body);
+    print('hi');
+    print(jsonData['forecast']['forecastday'][0]['hour'].length);
+    // here in jsonData we have 'hour':[] in hour we have list of 24 hours weather data. So, we should return list of 24 hours weather data by converting each json object to Weather object
+    List <Weather> todayWeatherData = [];
+    for (var i=0; i<jsonData['forecast']['forecastday'][0]['hour'].length ; i++ ){
+      todayWeatherData.add(Weather.fromJson(jsonData['forecast']['forecastday'][0]['hour'][i]));
+      print(jsonData['forecast']['forecastday'][0]['hour'][i]);
+    }
+    print(todayWeatherData);
+    return todayWeatherData;
+  }
 }
 
 class CropHealthselection {
