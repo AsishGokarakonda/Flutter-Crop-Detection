@@ -14,6 +14,7 @@ class Weather {
   var last_update;
   var pricipe;
   var date;
+  var time;
 
   Weather({
     this.cityName,
@@ -30,10 +31,11 @@ class Weather {
     required this.uv,
     required this.last_update,
     required this.pricipe,
-    required this.date,
+    this.date,
+    this.time,
   });
 
-  Weather.fromJson(Map<String, dynamic> json) {
+  Weather.fromJson(Map<String, dynamic> json, String type ) {
     if (json['location'] != null && json['location'].containsKey('name')) {
       cityName = json['location']['name'];
     }
@@ -43,17 +45,25 @@ class Weather {
     if (json['location'] != null && json['location'].containsKey('lon')) {
       longitude = json['location']['lon'];
     }
-    icon = json['current']['condition']['icon'];
-    condition = json['current']['condition']['text'];
-    temp = json['current']['temp_c'];
-    wind = json['current']['wind_kph'];
-    humidity = json['current']['humidity'];
-    gust = json['current']['gust_kph'];
-    wind_dir = json['current']['wind_dir'];
-    pressure = json['current']['pressure_mb'];
-    uv = json['current']['uv'];
-    last_update = json['current']['last_updated'];
-    pricipe = json['current']['precip_mm'];
+    var tempjson;
+    if(type == 'current'){
+      tempjson = json['current'];
     date = json['location']['localtime'];
+    }
+    else{
+      tempjson=json;
+      time=json['time'];
+    }
+    icon = tempjson['condition']['icon'];
+    condition = tempjson['condition']['text'];
+    temp = tempjson['temp_c'];
+    wind = tempjson['wind_kph'];
+    humidity = tempjson['humidity'];
+    gust = tempjson['gust_kph'];
+    wind_dir = tempjson['wind_dir'];
+    pressure = tempjson['pressure_mb'];
+    uv = tempjson['uv'];
+    last_update = tempjson['last_updated'];
+    pricipe = tempjson['precip_mm'];
   }
 }

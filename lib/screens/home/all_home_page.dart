@@ -249,7 +249,7 @@ class _AllHomePageState extends State<AllHomePage> {
                               width: 100,
                               height: 100,
                               child: Image.asset(
-                                'assets/home/market.png',
+                                'assets/home/weather.png',
                                 height: 100,
                               ),
                             ),

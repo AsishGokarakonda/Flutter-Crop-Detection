@@ -24,7 +24,7 @@ class WeatherData{
     );
     var response = await http.get(uri);
     var jsonData = jsonDecode(response.body);
-    return Weather.fromJson(jsonData);
+    return Weather.fromJson(jsonData,'current');
   }
 
   Future<List<Weather>> getTodayWeatherData( var latitude, var longitude ) async {
@@ -35,15 +35,14 @@ class WeatherData{
     );
     var response = await http.get(uri);
     var jsonData = jsonDecode(response.body);
-    print('hi');
-    print(jsonData['forecast']['forecastday'][0]['hour'].length);
     // here in jsonData we have 'hour':[] in hour we have list of 24 hours weather data. So, we should return list of 24 hours weather data by converting each json object to Weather object
     List <Weather> todayWeatherData = [];
     for (var i=0; i<jsonData['forecast']['forecastday'][0]['hour'].length ; i++ ){
-      todayWeatherData.add(Weather.fromJson(jsonData['forecast']['forecastday'][0]['hour'][i]));
-      print(jsonData['forecast']['forecastday'][0]['hour'][i]);
+      todayWeatherData.add(Weather.fromJson(jsonData['forecast']['forecastday'][0]['hour'][i],'forecast'));
     }
     print(todayWeatherData);
+    print(todayWeatherData[0].time);
+    print(todayWeatherData[1].time);
     return todayWeatherData;
   }
 }
