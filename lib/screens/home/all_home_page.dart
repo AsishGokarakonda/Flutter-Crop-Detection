@@ -18,6 +18,8 @@ class _AllHomePageState extends State<AllHomePage> {
     print("getting in all home");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> temp= prefs.getStringList("spSelectedcrops") ?? [];
+    print('hi');
+    print(temp);
     CropHealthselection.selectedcrops=temp;
 
     String? encodedMap = prefs.getString('spCropsbool');
@@ -72,217 +74,92 @@ class _AllHomePageState extends State<AllHomePage> {
           body: SingleChildScrollView(
             child: Column(children: [
               const SizedBox(
-                height: 10,
+                height: 15,
               ),
-              Row(
-                  // space between the two buttons
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // create a rounded button and keep a image inside it and on press of that
-                    TextButton(
-                        onPressed: () {
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/cropchoice.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Crop Choice'.tr,
-                              style: TextStyle(color: Colors.black),
-                            )
-                          ],
-                        )),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        shadowColor: Colors.transparent,
-                      ),
-                        onPressed: () {
-                          // go to Profile page
-                          Navigator.pushNamed(context, '/profile');
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/dashboard.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Your Dashboard'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                  ]),
+
+              RowOfTwoButtons(image1: 'assets/home/cropchoice.png', title1: 'Crop Choice', route1: '/', title2: 'Your Dashboard'.tr, image2: 'assets/home/dashboard.png', route2: '/profile'),
+              
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                  // space between the two buttons
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // create a rounded button and keep a image inside it and on press of that
-          
-                    TextButton(
-                        onPressed: () {
-                          
-                          // go to Crop Choice page
-                          Navigator.pushNamed(context, '/crophealth');
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/crophealth.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Crop Advisory'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                    TextButton(
-                        onPressed: () {},
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/weed.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Weed Management'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                  ]),
+
+              RowOfTwoButtons(image1: 'assets/home/crophealth.png', title1: 'Crop Advisory'.tr, route1: '/crophealth', title2: 'Weed Management'.tr, image2: 'assets/home/weed.png', route2: '/'),
+              
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                  // space between the two buttons
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // create a rounded button and keep a image inside it and on press of that
-          
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pricepredict');
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/market.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Market Choice'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pesthome');},
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 80,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/pest.png',
-                                height: 80,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Pest Management'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                  ]),
-                  const SizedBox(
+
+              RowOfTwoButtons(image1: 'assets/home/market.png', title1: 'Market Choice'.tr, route1: '/pricepredict', title2: 'Pest Management'.tr, image2: 'assets/home/pest.png', route2: '/pesthome'),
+
+              const SizedBox(
                 height: 15,
               ),
-              Row(
-                  // space between the two buttons
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // create a rounded button and keep a image inside it and on press of that
-          
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/searchweather');
-                        },
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/weather.png',
-                                height: 100,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Weather Info'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/pesthome');},
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              width: 80,
-                              height: 100,
-                              child: Image.asset(
-                                'assets/home/pest.png',
-                                height: 80,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text('Pest Management'.tr,
-                                style: TextStyle(color: Colors.black))
-                          ],
-                        )),
-                  ]),
+
+              RowOfTwoButtons( image1: 'assets/home/weather.png', title1: 'Weather Info'.tr, route1: '/searchweather', title2: 'Pest Management'.tr, image2: 'assets/home/pest.png', route2: '/pesthome',),
             ]),
           )),
     );
+  }
+}
+
+class RowOfTwoButtons extends StatelessWidget {
+  final String image1;
+  final String title1;
+  final String route1;
+  final String title2;
+  final String image2;
+  final String route2;
+  const RowOfTwoButtons({
+    super.key, required this.image1, required this.title1, required this.route1, required this.title2, required this.image2, required this.route2
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, route1 );
+              },
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Image.asset(
+                      image1,
+                      height: 100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(title1.tr,
+                      style: TextStyle(color: Colors.black))
+                ],
+              )),
+          TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, route2);},
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 80,
+                    height: 100,
+                    child: Image.asset(
+                      image2,
+                      height: 80,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(title2,
+                      style: TextStyle(color: Colors.black))
+                ],
+              )),
+        ]
+        );
   }
 }

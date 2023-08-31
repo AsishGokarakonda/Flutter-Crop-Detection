@@ -53,149 +53,144 @@ class _AddFieldState extends State<AddField> {
   //   //   openAppSettings();
   //   // }
 
-  Future<void> _validationcheck() async {
-    final validation = _formkey.currentState!.validate();
-    if (validation) {
-      _formkey.currentState!.save();
-      // print(username);
-      // print(name);
-      // print(email);
-      // print(password);
-    }
-  }
+  // Future<void> _validationcheck() async {
+  //   final validation = _formkey.currentState!.validate();
+  //   if (validation) {
+  //     _formkey.currentState!.save();
+  //     // print(username);
+  //     // print(name);
+  //     // print(email);
+  //     // print(password);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Field'),
+        title: const Text('Add New Field'),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          // center the content
-          child: Center(
-              child: Column(
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Form(
-                  key: _formkey,
-                  child: Column(
-                    children: [
-                      const GetTextField(
-                        hint: 'Name of the field',
-                        icon: Icons.agriculture,
-                        inputAction: TextInputAction.next,
-                        inputType: TextInputType.text,
-                      ),
-                      const GetTextField(
-                        hint: 'Area in acres',
-                        icon: Icons.crop,
-                        inputAction: TextInputAction.next,
-                        inputType: TextInputType.text,
-                      ),
-                      const GetTextField(
-                        hint: 'Latitude of the field',
-                        icon: Icons.my_location,
-                        inputAction: TextInputAction.next,
-                        inputType: TextInputType.text,
-                      ),
-                      const GetTextField(
-                        hint: 'Longitude of the field',
-                        icon: Icons.my_location,
-                        inputAction: TextInputAction.next,
-                        inputType: TextInputType.text,
-                      ),
-                      Container(
-                        height: 60.0,
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Colors.green),
-                        child: TextButton(
-                            onPressed: () async {
-                              // 10.196.10.23
-                              final validation =
-                                  _formkey.currentState!.validate();
-                              if (validation) {
-                                _formkey.currentState!.save();
-                                const storage = FlutterSecureStorage();
-                                var jwt = await storage.read(key: 'jwt');
-                                var request = await http.post(
-                                    Uri.parse('${APILoad.api}/api/addfield/'),
-                                    headers: {
-                                      'Content-Type': 'application/json',
-                                      'Accept': 'application/json',
-                                      'jwt': '$jwt',
-                                    },
-                                    body: json.encode({
-                                      'field_name': fieldName,
-                                      'area': '$fieldArea',
-                                      'latitude': '$latitude',
-                                      'longitude': '$longitude',
-                                    })).then(((value) => {
-                                      if (value.statusCode == 200)
-                                        {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title:
-                                                      const Text('Field Added'),
-                                                  content: const Text(
-                                                      'Field is added successfully'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                        Navigator.pop(context);
-                                                        Navigator
-                                                            .popAndPushNamed(
-                                                                context,
-                                                                '/allfields');
-                                                      },
-                                                      child: Text('OK'),
-                                                    )
-                                                  ],
-                                                );
-                                              })
-                                        }
-                                    }));
-                              }
-                            },
-                            child: const Text(
-                              'Signup',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  height: 1.4,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17.0),
-                            )),
-                      ),
-                    ],
-                  )),
+        child: Center(
+            child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    const GetTextField(
+                      hint: 'Name of the field',
+                      icon: Icons.agriculture,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Area in acres',
+                      icon: Icons.crop,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Latitude of the field',
+                      icon: Icons.my_location,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Longitude of the field',
+                      icon: Icons.my_location,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    Container(
+                      height: 60.0,
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.green),
+                      child: TextButton(
+                          onPressed: () async {
+                            // 10.196.10.23
+                            final validation =
+                                _formkey.currentState!.validate();
+                            if (validation) {
+                              _formkey.currentState!.save();
+                              const storage = FlutterSecureStorage();
+                              var jwt = await storage.read(key: 'jwt');
+                              await http.post(
+                                  Uri.parse('${APILoad.api}/api/addfield/'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json',
+                                    'jwt': '$jwt',
+                                  },
+                                  body: json.encode({
+                                    'field_name': fieldName,
+                                    'area': '$fieldArea',
+                                    'latitude': '$latitude',
+                                    'longitude': '$longitude',
+                                  })).then(((value) => {
+                                    if (value.statusCode == 200)
+                                      {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title:
+                                                    const Text('Field Added'),
+                                                content: const Text(
+                                                    'Field is added successfully'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      Navigator.pop(context);
+                                                      Navigator
+                                                          .popAndPushNamed(
+                                                              context,
+                                                              '/allfields');
+                                                    },
+                                                    child: const Text('OK'),
+                                                  )
+                                                ],
+                                              );
+                                            })
+                                      }
+                                  }));
+                            }
+                          },
+                          child: const Text(
+                            'Signup',
+                            style: TextStyle(
+                                color: Colors.white,
+                                height: 1.4,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17.0),
+                          )),
+                    ),
+                  ],
+                )),
 
-              Container(
-                child: Text('GPS TODO'),
+            const Text('GPS TODO'),
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 25, vertical: 15),
+                  backgroundColor: Colors.green,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)))),
+              child: const Text(
+                'Get gps location',
+                style: TextStyle(color: Colors.white),
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Get gps location',
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 15),
-                    backgroundColor: Colors.green,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20)))),
-              ),
+            ),
 
-            ],
-          )),
-        ),
+          ],
+        )),
       ),
     );
   }

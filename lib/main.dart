@@ -39,14 +39,14 @@ int initScreen=0;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
-  CropHealthselection.intialisevars();
-  WidgetsFlutterBinding.ensureInitialized();
+  // CropHealthselection.intialisevars();
+  // WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = (prefs.getInt("initScreen")) ?? 0;
   // initscreen will be 0 if it is first time else it will be 1
   if (initScreen == 0) {
     // if it is first time, set initscreen to 1
-    print("hellomain");
+    print('initscreen');
     CropHealthselection.intialisevars();
     await prefs.setInt("initScreen", 1);
   }

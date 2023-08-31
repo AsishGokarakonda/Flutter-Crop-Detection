@@ -44,6 +44,7 @@ class _CropHealthHomeState extends State<CropHealthHome> {
   @override
   Widget build(BuildContext context) {
     print("sajdlfk");
+    print(CropHealthselection.selectedcrops);
     return ChoosingCrops(context);
   }
 

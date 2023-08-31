@@ -2,7 +2,6 @@ import 'package:crop_recommend/utils/useful_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../models/weather.dart';
 import '../../utils/api.dart';
 import 'full_weather_report.dart';
 
@@ -30,7 +29,7 @@ class _EachAreaWeatherDataState extends State<EachAreaWeatherData> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 14, 15, 42),
+        backgroundColor: const Color.fromARGB(255, 14, 15, 42),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Container(

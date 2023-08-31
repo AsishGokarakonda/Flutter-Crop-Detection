@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:crop_recommend/utils/api.dart';
 import 'package:crop_recommend/screens/crophealth/crophealth_home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/routes.dart';
 import 'package:get/get.dart';
-import '../../utils/notification_api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 class SelectedCropsHome extends StatefulWidget {
   const SelectedCropsHome({super.key});
 
@@ -16,14 +15,24 @@ class SelectedCropsHome extends StatefulWidget {
 }
 
 class _SelectedCropsHomeState extends State<SelectedCropsHome> {
+
+  void getvars() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? encodedMap = prefs.getString('spCropsbool');
+    Map<String, dynamic> decodedMap = json.decode(encodedMap!);
+    
+    // print(decodedMap);
+  }
   @override
   void initState() {
+    getvars();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("selected crops");
+    print("selected crops.dart");
+    print(CropHealthselection.selectedcrops);
      return CropHealthselection.selectedcrops.isNotEmpty ? SelectedCropsHome(context): const CropHealthHome();
   }
 
@@ -65,10 +74,10 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
               itemBuilder: (BuildContext context, int index) {
                 return TextButton(
                   onPressed: () {
-                    if ('${CropHealthselection.selectedcrops[index]}'.tr == 'Cotton'.tr) {
+                    if (CropHealthselection.selectedcrops[index].tr == 'Cotton'.tr) {
                       Navigator.pushNamed(context, MyRoutes.cottonhealthhome);
                     }
-                    else if ('${CropHealthselection.selectedcrops[index]}'.tr == 'Banana'.tr) {
+                    else if (CropHealthselection.selectedcrops[index].tr == 'Banana'.tr) {
                       Navigator.pushNamed(context, MyRoutes.bananahealthhome);
                     }
                   },
@@ -139,9 +148,9 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
                 },
                 child: Text(
                   'Add Crops'.tr,
-                  style: TextStyle(color: Colors.white,fontSize: 15),
+                  style: const TextStyle(color: Colors.white,fontSize: 15),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
           ]),

@@ -125,7 +125,6 @@ class AppTranslation extends Translations {
       'Change days after sowing': 'ಸೇರಿಸಿದ ದಿನಗಳನ್ನು ಬದಲಾಯಿಸಿ',
       'Show more': 'ಹೆಚ್ಚು ತೋರಿಸಿ',
       // COTTON Advisory
-      'Advisory':'ಸಲಹೆ',
        'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.':'ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ್ಯವಾದರೆ ಸೇರಿಸಿದ ಮೊದಲ ದಿನಗಳಲ್ಲಿ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮುಖ',
       'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.':'ರೋಗಿತ ಸೀಡ್ಲಿಂಗ್ಗಳ ಮೇಲೆ ವಾಟರ್ ಮಾಡಿ 2 ಜಿ / ಲಿಟರ್ ತಿರಾಮ್ ಡ್ರೆಂಚ್ ಮಾಡಿ.',
       'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.':'ಲೈಟ್ / ರೆಡ್ / ಸ್ಯಾಂಡಿ ಲೂಮ್ ಸ್ಥಳಗಳಲ್ಲಿ 5 ಸಿ.ಎಂ. ಗಾಲಿನಲ್ಲಿ ನಿರ್ಧಾರಿತ ಜಾಲನೆ.',
@@ -193,7 +192,6 @@ class AppTranslation extends Translations {
       'Change days after sowing':'बोटने के बाद दिन बदलें',
       'Show more':'और दिखाएं',
       // COTTON Advisory
-      'Advisory':'सलाहकार',
        'Decay of the seedlings before emergence, girdling of the seedling stems and root rot.Sometimes mustard like seeds appear on the roots.':'उत्पन्न होने से पहले बीज की बच्चों की अवस्था की तरह, बीज की बच्चों के रस्सों और जड़ की रोट। कभी-कभी जड़ के जड़ों पर मसाला जैसे बीज दिखाई देते हैं।',
       'Drenching of Thiram @ 2 g/litre of water around the diseased seedlings.':'बीमारी की बीज की बच्चों के चारों ओर थीरम @ 2 ग्राम / लीटर पानी का ड्रेंचिंग।',
       'Scheduled irrigation at 5 cm depth in light/red/sandy loam soils.': 'प्रकाश / लाल / रेती लूम भूमि में 5 सेंटीमीटर गहराई में अनुसूचित जल देना।',
