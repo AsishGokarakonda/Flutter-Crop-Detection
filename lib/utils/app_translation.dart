@@ -25,6 +25,7 @@ class AppTranslation extends Translations {
       'Weed Management':'Weed Management',
       'Market Choice':'Market Choice',
       'Pest Management':'Pest Management',
+      'Weather Info': 'Weather Info',
       // pest management
       'Detect Disease':'Detect Disease',
       'Your Crops':'Your Crops',
@@ -70,6 +71,7 @@ class AppTranslation extends Translations {
     // kannada translation
     'kn_IN':{
       'hello':"ಹಲೋ",
+      'Weather Info': "ಹವಾಮಾನ ಮಾಹಿತಿ",
       'Login':"ಲಾಗಿನ್",
       'Select Language':"ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
       'English':"ಇಂಗ್ಲೀಷ್",
@@ -138,6 +140,7 @@ class AppTranslation extends Translations {
     'hi_IN':{
       'hello':"नमस्ते",
       'Login':"लॉग इन करें",
+      'Weather Info':"मौसम की जानकारी",
       'Settings':"सेटिंग्स",
       'Select Language':"भाषा चुनें",
       'English':"अंग्रेज़ी",
