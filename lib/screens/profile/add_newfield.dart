@@ -20,9 +20,11 @@ class AddField extends StatefulWidget {
 
 class _AddFieldState extends State<AddField> {
   static String fieldName = "";
+  static String cropName = "";
   static double fieldArea = 0.0;
   static double latitude = 0.0;
   static double longitude = 0.0;
+  static int days = 0;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   //   var locationmessage = "";
@@ -68,7 +70,10 @@ class _AddFieldState extends State<AddField> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Field'),
+        title: Container(
+            margin: const EdgeInsets.only(top: 5),
+            child: const Text('Add New Field')),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -83,12 +88,18 @@ class _AddFieldState extends State<AddField> {
                   children: [
                     const GetTextField(
                       hint: 'Name of the field',
+                      icon: Icons.person,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Crop grown in the field',
                       icon: Icons.agriculture,
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                     ),
                     const GetTextField(
-                      hint: 'Area in acres',
+                      hint: 'Area of the field in acres',
                       icon: Icons.crop,
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
@@ -102,6 +113,12 @@ class _AddFieldState extends State<AddField> {
                     const GetTextField(
                       hint: 'Longitude of the field',
                       icon: Icons.my_location,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Days of crop growth',
+                      icon: Icons.access_time,
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                     ),
@@ -120,50 +137,55 @@ class _AddFieldState extends State<AddField> {
                               _formkey.currentState!.save();
                               const storage = FlutterSecureStorage();
                               var jwt = await storage.read(key: 'jwt');
-                              await http.post(
-                                  Uri.parse('${APILoad.api}/api/addfield/'),
-                                  headers: {
-                                    'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'jwt': '$jwt',
-                                  },
-                                  body: json.encode({
-                                    'field_name': fieldName,
-                                    'area': '$fieldArea',
-                                    'latitude': '$latitude',
-                                    'longitude': '$longitude',
-                                  })).then(((value) => {
-                                    if (value.statusCode == 200)
-                                      {
-                                        showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title:
-                                                    const Text('Field Added'),
-                                                content: const Text(
-                                                    'Field is added successfully'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                      Navigator.pop(context);
-                                                      Navigator
-                                                          .popAndPushNamed(
-                                                              context,
-                                                              '/allfields');
-                                                    },
-                                                    child: const Text('OK'),
-                                                  )
-                                                ],
-                                              );
-                                            })
-                                      }
-                                  }));
+                              await http
+                                  .post(
+                                      Uri.parse('${APILoad.api}/api/addfield/'),
+                                      headers: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                        'jwt': '$jwt',
+                                      },
+                                      body: json.encode({
+                                        'field_name': fieldName,
+                                        'area': '$fieldArea',
+                                        'latitude': '$latitude',
+                                        'longitude': '$longitude',
+                                      }))
+                                  .then(((value) => {
+                                        if (value.statusCode == 200)
+                                          {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Field Added'),
+                                                    content: const Text(
+                                                        'Field is added successfully'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          Navigator.pop(
+                                                              context);
+                                                          Navigator
+                                                              .popAndPushNamed(
+                                                                  context,
+                                                                  '/allfields');
+                                                        },
+                                                        child: const Text('OK'),
+                                                      )
+                                                    ],
+                                                  );
+                                                })
+                                          }
+                                      }));
                             }
                           },
                           child: const Text(
-                            'Signup',
+                            'Add Field',
                             style: TextStyle(
                                 color: Colors.white,
                                 height: 1.4,
@@ -173,13 +195,12 @@ class _AddFieldState extends State<AddField> {
                     ),
                   ],
                 )),
-
             const Text('GPS TODO'),
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                   backgroundColor: Colors.green,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20)))),
@@ -188,7 +209,6 @@ class _AddFieldState extends State<AddField> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-
           ],
         )),
       ),
@@ -248,7 +268,7 @@ class GetTextField extends StatelessWidget {
                       }
                       return null;
                     }
-                  : hint == 'Area in acres'
+                  : hint == 'Area of the field in acres'
                       ? (value) {
                           // check if value is a double or not
                           if (value!.isEmpty ||
@@ -266,23 +286,54 @@ class GetTextField extends StatelessWidget {
                               }
                               return null;
                             }
-                          : (value) {
-                              if (value!.isEmpty ||
-                                  double.tryParse(value) == null) {
-                                return 'Longitude must be a number';
-                              }
-                              return null;
-                            },
+                          : hint == 'Longitude of the field'
+                              ? (value) {
+                                  // check if value is a double or not
+                                  if (value!.isEmpty ||
+                                      double.tryParse(value) == null) {
+                                    return 'Longitude must be a number';
+                                  }
+                                  return null;
+                                }
+                              : hint == 'Days of crop growth'
+                                  // check if value is a integer or not
+                                  ? (value) {
+                                      if (value!.isEmpty ||
+                                          int.tryParse(value) == null) {
+                                        return 'Days must be a number';
+                                      }
+                                      return null;
+                                    }
+                                  : hint == 'Crop grown in the field'
+                                      ? (value) {
+                                          if (value!.isEmpty ||
+                                              value.length < 3) {
+                                            return 'Crop name must be atleast 3 characters';
+                                          }
+                                          return null;
+                                        }
+                                      : (value) {
+                                          if (value!.isEmpty ||
+                                              double.tryParse(value) == null) {
+                                            return 'Longitude must be a number';
+                                          }
+                                          return null;
+                                        },
               onSaved: (value) {
                 if (hint == 'Name of the field') {
                   _AddFieldState.fieldName = value!;
-                } else if (hint == 'Area in acres') {
+                } else if (hint == 'Area of the field in acres') {
                   _AddFieldState.fieldArea = double.parse(value!);
                 } else if (hint == 'Latitude of the field') {
                   _AddFieldState.latitude = double.parse(value!);
                 } else if (hint == 'Longitude of the field') {
                   _AddFieldState.longitude = double.parse(value!);
+                } else if (hint == 'Days of crop growth') {
+                  _AddFieldState.days = int.parse(value!);
+                } else if (hint == 'Crop grown in the field') {
+                  _AddFieldState.cropName = value!;
                 }
+
               },
             ),
           ),

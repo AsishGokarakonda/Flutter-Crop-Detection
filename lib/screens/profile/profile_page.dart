@@ -42,11 +42,14 @@ class _ProfilePageState extends State<ProfilePage> {
 Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(leading: BackButton() ,title: Text(
-        'Profile'.tr,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
+      appBar: AppBar(leading: BackButton() ,title: Container(
+        margin: EdgeInsets.only(top:5), 
+        child: Text(
+          'Profile'.tr,
+          style: TextStyle(
+            color: Colors.black,
+            // fontSize: 20.0,
+          ),
         ),
       ),
       centerTitle: true ,
