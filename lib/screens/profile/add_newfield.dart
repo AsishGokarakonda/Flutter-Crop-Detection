@@ -20,13 +20,13 @@ class AddField extends StatefulWidget {
 
 class _AddFieldState extends State<AddField> {
   static String fieldName = "";
-  static String cropName = "";
+  static String publicCropName = "";
   static double fieldArea = 0.0;
   static double latitude = 0.0;
   static double longitude = 0.0;
   static int days = 0;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
+  
   //   var locationmessage = "";
   //  void getlocation() async {
   //   // if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
@@ -68,6 +68,7 @@ class _AddFieldState extends State<AddField> {
 
   @override
   Widget build(BuildContext context) {
+    print(publicCropName);
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -89,12 +90,6 @@ class _AddFieldState extends State<AddField> {
                     const GetTextField(
                       hint: 'Name of the field',
                       icon: Icons.person,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-                    const GetTextField(
-                      hint: 'Crop grown in the field',
-                      icon: Icons.agriculture,
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                     ),
@@ -122,6 +117,37 @@ class _AddFieldState extends State<AddField> {
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Select Crop grown in the field',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 15 ),
+                      child: Column(children: [
+                        Row(children: [
+                          freeButton(context, 'Cotton'),
+                          freeButton(context, 'Sugarcane'),
+                          freeButton(context, 'Wheat'),
+                        ],),
+                        Row(children: [
+                          freeButton(context, 'Rice'),
+                          freeButton(context, 'Maize'),
+                          freeButton(context, 'Banana'),
+                        ],),
+                      ],)
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       height: 60.0,
                       width: MediaQuery.of(context).size.width * 0.85,
@@ -133,7 +159,7 @@ class _AddFieldState extends State<AddField> {
                             // 10.196.10.23
                             final validation =
                                 _formkey.currentState!.validate();
-                            if (validation) {
+                            if (validation && publicCropName != "") {
                               _formkey.currentState!.save();
                               const storage = FlutterSecureStorage();
                               var jwt = await storage.read(key: 'jwt');
@@ -146,10 +172,12 @@ class _AddFieldState extends State<AddField> {
                                         'jwt': '$jwt',
                                       },
                                       body: json.encode({
+                                        'crop_name': publicCropName,
                                         'field_name': fieldName,
                                         'area': '$fieldArea',
                                         'latitude': '$latitude',
                                         'longitude': '$longitude',
+                                        'start_day':'$days',
                                       }))
                                   .then(((value) => {
                                         if (value.statusCode == 200)
@@ -181,7 +209,30 @@ class _AddFieldState extends State<AddField> {
                                                   );
                                                 })
                                           }
-                                      }));
+                                      }
+                                      ));
+                            }
+                            else{
+                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Inputs are not valid'),
+                                                    content: const Text(
+                                                        'Please fill all the details'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: const Text('OK'),
+                                                      )
+                                                    ],
+                                                  );
+                                                });
                             }
                           },
                           child: const Text(
@@ -213,6 +264,32 @@ class _AddFieldState extends State<AddField> {
         )),
       ),
     );
+  }
+
+  TextButton freeButton(BuildContext context, String cropName ) {
+
+    return TextButton(
+                          onPressed: () async {
+                            setState(() {
+                              publicCropName = cropName;
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Center(
+                              child: Text(cropName,
+                                  style: TextStyle(
+                                      color: cropName == publicCropName
+                                          ? Colors.green
+                                          : Colors.black)),
+                            ),
+                          ),
+                        );
   }
 }
 
@@ -331,7 +408,7 @@ class GetTextField extends StatelessWidget {
                 } else if (hint == 'Days of crop growth') {
                   _AddFieldState.days = int.parse(value!);
                 } else if (hint == 'Crop grown in the field') {
-                  _AddFieldState.cropName = value!;
+                  _AddFieldState.publicCropName = value!;
                 }
 
               },
