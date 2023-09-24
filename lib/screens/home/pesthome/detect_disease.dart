@@ -7,9 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:path/path.dart';
 import 'dart:io';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:crop_recommend/utils/api.dart';
-import '../../../utils/api.dart';
 import 'package:get/get.dart';
 
 class DetectDisease extends StatefulWidget {

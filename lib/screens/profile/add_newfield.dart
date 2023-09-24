@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/api.dart';
@@ -26,7 +27,11 @@ class _AddFieldState extends State<AddField> {
   static double longitude = 0.0;
   static int days = 0;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  
+  LocationData? locationData;
+  bool isLoading = false;
+  static TextEditingController latitudeController = TextEditingController();
+  static TextEditingController longitudeController = TextEditingController();
+
   //   var locationmessage = "";
   //  void getlocation() async {
   //   // if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
@@ -66,9 +71,34 @@ class _AddFieldState extends State<AddField> {
   //   }
   // }
 
+  void getPermission() async {
+    if (await Permission.location.isGranted) {
+      // Get location
+      getLocation();
+    } else {
+      // Request permission
+      Permission.location.request();
+    }
+  }
+
+  void getLocation() async {
+    setState(() {
+      isLoading = true;
+    });
+    locationData = await Location.instance.getLocation();
+    setState(() {
+      isLoading = false;
+      latitude = locationData!.latitude!;
+      longitude = locationData!.longitude!;
+      latitudeController.text = latitude.toString();
+      longitudeController.text = longitude.toString();
+    });
+    print(latitude);
+    print(longitude);
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(publicCropName);
     return Scaffold(
       appBar: AppBar(
         title: Container(
@@ -77,6 +107,7 @@ class _AddFieldState extends State<AddField> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Center(
             child: Column(
           children: [
@@ -111,6 +142,33 @@ class _AddFieldState extends State<AddField> {
                       inputAction: TextInputAction.next,
                       inputType: TextInputType.text,
                     ),
+Text(
+                      '( Get latitude and longitude )',
+                      style: TextStyle(
+                          // fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: TextButton(
+                        onPressed: () {
+                          getPermission();
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)))),
+                        child: const Text(
+                          'Get location',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
                     const GetTextField(
                       hint: 'Days of crop growth',
                       icon: Icons.access_time,
@@ -131,20 +189,26 @@ class _AddFieldState extends State<AddField> {
                       height: 10,
                     ),
                     Container(
-                      margin: const EdgeInsets.only(left: 15 ),
-                      child: Column(children: [
-                        Row(children: [
-                          freeButton(context, 'Cotton'),
-                          freeButton(context, 'Sugarcane'),
-                          freeButton(context, 'Wheat'),
-                        ],),
-                        Row(children: [
-                          freeButton(context, 'Rice'),
-                          freeButton(context, 'Maize'),
-                          freeButton(context, 'Banana'),
-                        ],),
-                      ],)
-                    ),
+                        margin: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                freeButton(context, 'Cotton'),
+                                freeButton(context, 'Sugarcane'),
+                                freeButton(context, 'Wheat'),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                freeButton(context, 'Tomato'),
+                                freeButton(context, 'Maize'),
+                                freeButton(context, 'Banana'),
+                              ],
+                            ),
+                          ],
+                        )),
+ 
                     const SizedBox(
                       height: 10,
                     ),
@@ -177,7 +241,7 @@ class _AddFieldState extends State<AddField> {
                                         'area': '$fieldArea',
                                         'latitude': '$latitude',
                                         'longitude': '$longitude',
-                                        'start_day':'$days',
+                                        'start_day': '$days',
                                       }))
                                   .then(((value) => {
                                         if (value.statusCode == 200)
@@ -209,30 +273,25 @@ class _AddFieldState extends State<AddField> {
                                                   );
                                                 })
                                           }
-                                      }
-                                      ));
-                            }
-                            else{
+                                      }));
+                            } else {
                               showDialog(
-                                                context: context,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                    title: const Text(
-                                                        'Inputs are not valid'),
-                                                    content: const Text(
-                                                        'Please fill all the details'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: const Text('OK'),
-                                                      )
-                                                    ],
-                                                  );
-                                                });
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Inputs are not valid'),
+                                      content: const Text(
+                                          'Please fill all the details'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        )
+                                      ],
+                                    );
+                                  });
                             }
                           },
                           child: const Text(
@@ -244,52 +303,40 @@ class _AddFieldState extends State<AddField> {
                                 fontSize: 17.0),
                           )),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    )
                   ],
                 )),
-            const Text('GPS TODO'),
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  backgroundColor: Colors.green,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20)))),
-              child: const Text(
-                'Get gps location',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
           ],
         )),
       ),
     );
   }
 
-  TextButton freeButton(BuildContext context, String cropName ) {
-
+  TextButton freeButton(BuildContext context, String cropName) {
     return TextButton(
-                          onPressed: () async {
-                            setState(() {
-                              publicCropName = cropName;
-                            });
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.25,
-                            height: MediaQuery.of(context).size.height * 0.06,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Center(
-                              child: Text(cropName,
-                                  style: TextStyle(
-                                      color: cropName == publicCropName
-                                          ? Colors.green
-                                          : Colors.black)),
-                            ),
-                          ),
-                        );
+      onPressed: () async {
+        setState(() {
+          publicCropName = cropName;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.25,
+        height: MediaQuery.of(context).size.height * 0.06,
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Text(cropName,
+              style: TextStyle(
+                  color: cropName == publicCropName
+                      ? Colors.green
+                      : Colors.black)),
+        ),
+      ),
+    );
   }
 }
 
@@ -325,6 +372,11 @@ class GetTextField extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.85,
             child: TextFormField(
+              controller: hint == 'Latitude of the field'
+                  ? _AddFieldState.latitudeController
+                  : hint == 'Longitude of the field'
+                      ? _AddFieldState.longitudeController
+                      : null,
               cursorColor: Colors.white54,
               style: const TextStyle(color: Colors.black87, height: 1.4),
               decoration: InputDecoration(
@@ -410,7 +462,6 @@ class GetTextField extends StatelessWidget {
                 } else if (hint == 'Crop grown in the field') {
                   _AddFieldState.publicCropName = value!;
                 }
-
               },
             ),
           ),

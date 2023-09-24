@@ -20,8 +20,6 @@ class _SelectedCropsHomeState extends State<SelectedCropsHome> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? encodedMap = prefs.getString('spCropsbool');
     Map<String, dynamic> decodedMap = json.decode(encodedMap!);
-    
-    // print(decodedMap);
   }
   @override
   void initState() {

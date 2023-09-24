@@ -36,7 +36,6 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   modal_progress_hud_nsn: ^0.4.0
   image_picker: ^1.0.2
-  geolocator: ^9.0.2
   permission_handler: ^10.2.0
   shared_preferences: ^2.0.15
   google_maps_flutter: ^2.2.1
@@ -44,6 +43,8 @@ dependencies:
   awesome_notifications: ^0.7.4+1
   flutter_dotenv: ^5.1.0
   get: ^4.1.4
+  geocoding: ^2.1.0
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:

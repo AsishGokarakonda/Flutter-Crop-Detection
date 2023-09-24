@@ -12,82 +12,87 @@ class _PestHomeState extends State<PestHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.black),
-        elevation: 0,
-        centerTitle: true,
-        title: Text('Pest Management'.tr,style: TextStyle(color: Colors.black),),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          iconTheme: const IconThemeData(color: Colors.black),
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Pest Management'.tr,
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+        body: SingleChildScrollView(
+            child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-              
+                PestHomeButtons(
+                  title: 'Detect Disease',
+                  route: '/diseasecheckcrop',
+                  icon: Icons.pest_control,
+                  color: Colors.red[300],
+                ),
+                PestHomeButtons(
+                  route: '/yourcrops',
+                  img: 'assets/home/plantimg.png',
+                  title: 'Your Crops',
+                  color: Colors.green[300],
+                ),
+              ],
+            )
+          ]),
+        )));
+  }
+}
 
-              // make a rounded button and keep a image inside it and on press of that
-              // button navigate to the detect disease page
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/diseasecheckcrop');
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.red[100],
-                            borderRadius: BorderRadius.circular(20)),
-                        child: const Icon(
-                          Icons.pest_control,
+class PestHomeButtons extends StatelessWidget {
+  const PestHomeButtons({
+    super.key,
+    this.route,
+    this.img,
+    required this.title,
+    this.icon,
+    this.color,
+  });
+  final route;
+  final img;
+  final IconData? icon;
+  final String title;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () {
+          Navigator.pushNamed(context, route);
+        },
+        child: Column(
+          children: [
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: color, borderRadius: BorderRadius.circular(20)),
+              child: // if icon is not null then show icon else show image
+                  icon != null
+                      ? Icon(
+                          icon,
                           color: Colors.black,
                           size: 70,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                       Text(
-                        'Detect Disease'.tr,
-                        style: TextStyle(color: Colors.red[300]),
-                      )
-                    ],
-                  )),
-                // make a rounded button and keep a image inside it and on press of that
-                // button navigate to the detect disease page
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/yourcrops');
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            color: Colors.green[100],
-                            borderRadius: BorderRadius.circular(20)),
-                        child: // keep image here and decrease size 
-                         const Image(
-                          image: AssetImage('assets/home/plantimg.png'),
-                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Your Crops'.tr,
-                        style: TextStyle(color: Colors.green[300]),
-                      )
-                    ],
-                  )),
-            ],)
-          ])
-        ,))
-    );
+                        )
+                      : Image.asset(img),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              title.tr,
+              style: TextStyle(color: color),
+            )
+          ],
+        ));
   }
 }

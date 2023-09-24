@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   file_selector_windows
   flutter_secure_storage_windows
-  geolocator_windows
   modal_progress_hud_nsn
   permission_handler_windows
 )
