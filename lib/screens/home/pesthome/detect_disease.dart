@@ -135,11 +135,11 @@ class _DetectDiseaseState extends State<DetectDisease> {
                   ),
 
                   const SizedBox(
-                    height: 40,
+                    height: 10,
                   ),
 
                   // create a input field in which user can enter the day after sowing. And this input field can only take numbers
-                  // keep this
+                  PestManagement.dayaftersowing == '' ? 
                   TextField(
                     keyboardType: TextInputType.number,
                     // after entering the number, user can press done button on keyboard and it will go to next field
@@ -165,7 +165,11 @@ class _DetectDiseaseState extends State<DetectDisease> {
                       ),
                       alignLabelWithHint: true,
                     ),
-                  ),
+                  ): Text('Days after sowing : ${PestManagement.dayaftersowing}',style: const TextStyle(
+                      color: Colors.lightBlue,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),),
 
                   const SizedBox(
                     height: 10,

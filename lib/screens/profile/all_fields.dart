@@ -13,8 +13,8 @@ class AllFields extends StatefulWidget {
 }
 
 class _AllFieldsState extends State<AllFields> {
-  Future <List<Map>> getfields() async {
-  List<Map> fields = [];
+  Future<List<Map>> getfields() async {
+    List<Map> fields = [];
     const storage = FlutterSecureStorage();
     final jwt = await storage.read(key: 'jwt');
     var response =
@@ -30,9 +30,11 @@ class _AllFieldsState extends State<AllFields> {
     return fields;
   }
 
+  late Future<List<Map>> _fields;
+
   @override
   void initState() {
-    // getfields();
+    _fields = getfields();
     super.initState();
   }
 
@@ -70,31 +72,35 @@ class _AllFieldsState extends State<AllFields> {
                 child: Column(
                   children: [
                     FutureBuilder(
-            future: getfields(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data == null) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else {
-                return 
-                    ListView.builder(
-                      itemBuilder: (context, index) {
-                        return 
-                        FieldCard(fieldname: snapshot.data[index]['field_name'], cropname: snapshot.data[index]['crop_name'], days: snapshot.data[index]['cur_day'], area: snapshot.data[index]['area'],); 
-                      },
-                      itemCount: snapshot.data.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                    );
-              }}),
+                        future: _fields,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.data == null) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else {
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return FieldCard(
+                                  fieldname: snapshot.data[index]['field_name'],
+                                  cropname: snapshot.data[index]['crop_name'],
+                                  days: snapshot.data[index]['cur_day'],
+                                  area: snapshot.data[index]['area'],
+                                );
+                              },
+                              itemCount: snapshot.data.length,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                            );
+                          }
+                        }),
                     SizedBox(
                       height: 20,
                     ),
-                    
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/addfield');
@@ -105,8 +111,9 @@ class _AllFieldsState extends State<AllFields> {
                       ),
                       style: TextButton.styleFrom(
                           padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width * 0.3 ,
-                               vertical: 15),
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.3,
+                              vertical: 15),
                           backgroundColor: Colors.green,
                           shape: const RoundedRectangleBorder(
                               borderRadius:
@@ -127,81 +134,88 @@ class FieldCard extends StatelessWidget {
     this.cropname,
     this.days,
     this.area,
+    this.ontap,
   });
   final fieldname;
   final cropname;
   final days;
   final area;
+  final ontap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      width: MediaQuery.of(context).size.width * 0.9,
-      margin: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(
-          image: AssetImage(
-            'assets/fields/$cropname.jpg',
-          ),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.4), BlendMode.darken),
-        ),
-      ),
+    return GestureDetector(
+      onTap: () {
+        if (ontap != null && ontap == 1) {
+          PestManagement.diseaseselectedcrop = cropname;
+          PestManagement.dayaftersowing = days.toString();
+          Navigator.pushNamed(context, '/detectdisease');
+        }
+      },
       child: Container(
-        alignment: Alignment.bottomLeft,
-        margin: const EdgeInsets.all(10),
-        child:  Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end ,
-              children: [
-              Text(
-                'Day: ${days.toString()}',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              ),
-            ]),
-            Row(
-              // keep this row in left and bottom
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end ,
-            children: [
-            Column(
-                // keep this column in left and bottom
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+        height: 180,
+        width: MediaQuery.of(context).size.width * 0.9,
+        margin: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/fields/$cropname.jpg',
+            ),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.4), BlendMode.darken),
+          ),
+        ),
+        child: Container(
+            alignment: Alignment.bottomLeft,
+            margin: const EdgeInsets.all(10),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    cropname,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    fieldname,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ]),
-                Text(
-                  '${area} Acres',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15 ,
-                      fontWeight: FontWeight.bold),
-                )
-          ]),
-          ]
-        )
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Text(
+                      'Day: ${days.toString()}',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ]),
+                  Row(
+                      // keep this row in left and bottom
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Column(
+                            // keep this column in left and bottom
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                cropname,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                fieldname,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ]),
+                        Text(
+                          '${area} Acres',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ]),
+                ])),
       ),
     );
   }

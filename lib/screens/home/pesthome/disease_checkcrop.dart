@@ -371,6 +371,7 @@ return Scaffold(
                     actions: [
                       TextButton(
                         onPressed: () {
+                          PestManagement.dayaftersowing='';
                           Navigator.pushNamedAndRemoveUntil(context, MyRoutes.newrootRoute, (route) => false);
                           Navigator.pushNamed(context, MyRoutes.detectdiseaseRoute);
                         },

@@ -18,7 +18,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
   print(dotenv.env['OPENAI_CHATBOT']);
   }
 
-  final _openAI = OpenAI.instance.build(token: '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', baseOption: HttpSetup(receiveTimeout: const Duration(
+  final _openAI = OpenAI.instance.build(token: '', baseOption: HttpSetup(receiveTimeout: const Duration(
       seconds: 60
   )),
   enableLog: true,
