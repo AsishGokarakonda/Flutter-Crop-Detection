@@ -31,7 +31,13 @@ class _PestHomeState extends State<PestHome> {
               children: [
                 PestHomeButtons(
                   title: 'Detect Disease',
-                  route: '/diseasecheckcrop',
+                  // route: '/diseasecheckcrop',
+                  popuptitle: 'Select Crop',
+                  popupsubtitle: 'Select field crop if you want to detect disease of crop present in field or select new crop if you want to detect disease of new crop',
+                  title1:'Field Crop',
+                  title2:'New Crop',
+                  route1: '/diseasecheckfield',
+                  route2: '/diseasecheckcrop',
                   icon: Icons.pest_control,
                   color: Colors.red[300],
                 ),
@@ -42,7 +48,17 @@ class _PestHomeState extends State<PestHome> {
                   color: Colors.green[300],
                 ),
               ],
-            )
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+            //   children: [
+            //     PestHomeButtons(
+            //       title: 'Detect Disease of field crop',
+            //       route: '/diseasecheckcrop',
+            //       icon: Icons.pest_control,
+            //       color: Colors.red[300],
+            //     ),
+            // ],)
           ]),
         )));
   }
@@ -56,18 +72,86 @@ class PestHomeButtons extends StatelessWidget {
     required this.title,
     this.icon,
     this.color,
+    this.popuptitle,
+    this.popupsubtitle,
+    this.title1,
+    this.title2,
+    this.route1,
+    this.route2,
   });
   final route;
   final img;
   final IconData? icon;
   final String title;
   final Color? color;
+  final String? popuptitle;
+  final String? popupsubtitle;
+  final String? title1;
+  final String? title2;
+  final String? route1;
+  final String? route2;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
+          if (popuptitle != null) {
+            
+            // Get.snackbar('Coming Soon'.tr, 'This feature is coming soon'.tr,
+            //     snackPosition: SnackPosition.BOTTOM,
+            //     backgroundColor: Colors.white,
+            //     colorText: Colors.black);
+            // return;
+
+            // show a dialog box with 2 buttons yes and no
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    title: Text(popuptitle!.tr),
+                    content: Text(popupsubtitle!.tr),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                        children: [
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, route1!);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Text(title1!.tr, style: TextStyle(color: Colors.white),),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, route2!);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Text(title2!.tr, style: TextStyle(color: Colors.white),),
+                          ),
+                        )
+                      ],),
+                    ],
+                  );
+                });
+          }
+          else{
+
           Navigator.pushNamed(context, route);
+          }
         },
         child: Column(
           children: [

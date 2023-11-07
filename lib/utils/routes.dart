@@ -19,9 +19,11 @@ class MyRoutes {
   static String cottonhealthhome = '/cottonhealthhome';
   static String bananahealthhome = '/bananahealthhome';
   static String diseasecheckcrop = '/diseasecheckcrop';
+  static String diseasecheckfield = '/diseasecheckfield';
   static String settingsRoute = '/settings';
   static String addFieldRoute = '/addfield';
   static String pricePredictRoute = '/pricepredict';
   static String searchweather = '/searchweather';
   static String eachweatherinfo = '/eachweatherinfo';
+  static String chatbothome = '/chatbothome';
 }

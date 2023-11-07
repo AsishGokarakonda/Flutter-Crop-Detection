@@ -1,6 +1,6 @@
 import 'package:crop_recommend/screens/marketchoice/price_prediction.dart';
 import 'package:crop_recommend/screens/profile/add_newfield.dart';
-import 'package:crop_recommend/utils/notification_api.dart';
+// import 'package:crop_recommend/utils/notification_api.dart';
 import '../../../screens/home/adminhome/admin_home.dart';
 import '../../../screens/home/adminhome/all_users.dart';
 import '../../../screens/home/adminhome/user_maps.dart';
@@ -14,6 +14,7 @@ import '../../../screens/signing/admin_login.dart';
 import '../../../screens/signing/before_login.dart';
 import '../../../screens/signing/login_page.dart';
 import '../../../utils/routes.dart';
+import 'screens/home/pesthome/disease_checkfield.dart';
 import 'screens/profile/all_fields.dart';
 import '../../../screens/crophealth/selectedcrops.dart';
 import '../../../screens/crophealth/cottonhealth/cotton_home.dart';
@@ -23,6 +24,7 @@ import '../../../screens/home/pesthome/disease_checkcrop.dart';
 import '../../../screens/signing/forgot_password.dart';
 import '../../../screens/signing/signup_page.dart';
 import '../../../screens/profile/settings.dart';
+import '../../../screens/chatbot/chat_homepage.dart';
 
 
 import 'package:flutter/material.dart';
@@ -38,7 +40,6 @@ import 'utils/api.dart';
 int initScreen=0;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationService.initializeNotification();
   // CropHealthselection.intialisevars();
   // WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -99,6 +100,8 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.addFieldRoute:(context) => const AddField(),
           MyRoutes.searchweather: (context) => const WeatherSearchPage(),
           MyRoutes.eachweatherinfo: (context) => const EachAreaWeatherData(),
+          MyRoutes.diseasecheckfield: (context) => const DiseaseCheckField(),
+          MyRoutes.chatbothome: (context) => const ChatHomePage(),
         });
   }
 }

@@ -1,7 +1,7 @@
 import 'package:crop_recommend/screens/crophealth/EachAdvisory.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/notification_api.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:crop_recommend/utils/api.dart';
 import '../../../utils/routes.dart';
 import 'dart:convert';

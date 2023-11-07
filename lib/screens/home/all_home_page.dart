@@ -96,7 +96,7 @@ class _AllHomePageState extends State<AllHomePage> {
                 height: 15,
               ),
 
-              RowOfTwoButtons( image1: 'assets/home/weather.png', title1: 'Weather Info'.tr, route1: '/searchweather', title2: 'Pest Management'.tr, image2: 'assets/home/pest.png', route2: '/pesthome',),
+              RowOfTwoButtons( image1: 'assets/home/weather.png', title1: 'Weather Info'.tr, route1: '/searchweather', title2: 'Chat Bot'.tr, image2: 'assets/home/chatbot.png', route2: '/chatbothome',),
             ]),
           )),
     );
