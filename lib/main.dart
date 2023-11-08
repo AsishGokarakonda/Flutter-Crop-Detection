@@ -15,6 +15,7 @@ import '../../../screens/signing/before_login.dart';
 import '../../../screens/signing/login_page.dart';
 import '../../../utils/routes.dart';
 import 'screens/home/pesthome/disease_checkfield.dart';
+import 'screens/marketchoice/market_info.dart';
 import 'screens/profile/all_fields.dart';
 import '../../../screens/crophealth/selectedcrops.dart';
 import '../../../screens/crophealth/cottonhealth/cotton_home.dart';
@@ -102,6 +103,7 @@ static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
           MyRoutes.eachweatherinfo: (context) => const EachAreaWeatherData(),
           MyRoutes.diseasecheckfield: (context) => const DiseaseCheckField(),
           MyRoutes.chatbothome: (context) => const ChatHomePage(),
+          MyRoutes.marketinfo: (context) => const MarketInfo(),
         });
   }
 }

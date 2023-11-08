@@ -26,4 +26,5 @@ class MyRoutes {
   static String searchweather = '/searchweather';
   static String eachweatherinfo = '/eachweatherinfo';
   static String chatbothome = '/chatbothome';
+  static String marketinfo = '/marketinfo';
 }

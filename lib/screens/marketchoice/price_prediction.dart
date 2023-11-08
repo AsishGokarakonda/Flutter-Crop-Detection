@@ -264,6 +264,27 @@ class _PricePredictState extends State<PricePredict> {
                                 ]),
                           ])
                         : Container(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text('Markets',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold, 
+                        )
+                        ),
+                        MarketCard(
+                          marketname: 'Dharwad market',
+                          bgimage: 'market1',
+                        ),
+                        MarketCard(
+                          marketname: 'Fresh veggies',
+                          bgimage: 'market2',
+                        ),
+                        MarketCard(
+                          marketname: 'Mr. Herbs',
+                          bgimage: 'market3',
+                        ),
                   ]),
                 )
               : Container(
@@ -284,25 +305,28 @@ class PriceContainer extends StatelessWidget {
   }) : super(key: key);
 
   final List<BoxShadow> shadowList;
-  var data;
+  final data;
   final String type;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 100,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: shadowList),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
+    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+    padding: const EdgeInsets.all(10),
+    width: MediaQuery.of(context).size.width * 0.4,
+    decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: shadowList),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10) ,
+          child: Column(
+            children: [
+        Text(
             '$type',
             style: TextStyle(
                 color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
@@ -327,7 +351,65 @@ class PriceContainer extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-        ],
+            ],
+          ),
+        ),
+      ],
+    ),
+        );
+  }
+}
+
+
+class MarketCard extends StatelessWidget {
+  const MarketCard({
+    super.key,
+    this.marketname,
+    this.ontap,
+    this.bgimage
+  });
+  final marketname;
+  final ontap;
+  final bgimage;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+          MarketInformation.marketname = marketname;
+          Navigator.pushNamed(context, '/marketinfo');
+      },
+      child: Container(
+        height: 180,
+        width: MediaQuery.of(context).size.width * 0.9,
+        margin: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/marketchoice/$bgimage.jpg',
+            ),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.4), BlendMode.darken),
+          ),
+        ),
+        child: Container(
+            alignment: Alignment.bottomLeft,
+            margin: const EdgeInsets.all(10),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text(
+                      marketname,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ])),
       ),
     );
   }

@@ -108,6 +108,14 @@ class PestManagement {
   static String dayaftersowing = '';
 }
 
+class MarketInformation{
+  static String marketname = '';
+  static String marketdistrict = '';
+  static String marketaddress = '';
+  static String marketphone = '';
+  static String marketdescription = '';
+}
+
 class Settings {
   static String language = 'en_US';
 }
