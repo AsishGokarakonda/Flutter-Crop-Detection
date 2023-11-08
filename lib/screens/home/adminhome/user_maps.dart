@@ -16,15 +16,8 @@ class UserMaps extends StatefulWidget {
 class _UserMapsState extends State<UserMaps> {
   // get all user locations from api and show them on map
   List<Marker> allMarkers = [];
-  List<Polyline> allPolylines = [];
   List<Circle> allcircles = [];
-  List<LatLng> building = [
-    LatLng(12.974567, 77.592199),
-    LatLng(12.972270, 77.592083),
-    LatLng(12.971392, 77.590279),
-    LatLng(12.972894, 77.588854),
-    LatLng(12.974567, 77.592199),
-  ];
+  List<Polygon> allPolygons =[];
 
   Future getLocations() async {
     // get jwt token from secure storage
@@ -41,69 +34,45 @@ class _UserMapsState extends State<UserMaps> {
     // keep them in Marker objects
     List<Marker> markers = [];
     List<Circle> circles = [];
-    List<Polyline> polylines = [];
+    List<Polygon> polygonCoords = [];
     for (var i = 0; i < data.length; i++) {
+    List<LatLng> polylatlang = [];
       markers.add(
         Marker(
           markerId: MarkerId(data[i]['id'].toString()),
-          // convert lat and long to double
           position: LatLng(double.parse(data[i]['latitude']),
               double.parse(data[i]['longitude'])),
           infoWindow: InfoWindow(
-            title: data[i]['username'],
-            // convert area to string
-            snippet: data[i]['area'].toString(),
+            title: data[i]['field_name'],
+            snippet: data[i]['crop_name'],
+           ),
+        ),
+      );
+      for (int j = 0; j < data[i]['coordinates']['latitude'].length; j++) {
+        polylatlang.add(LatLng(data[i]['coordinates']['latitude'][j],
+            data[i]['coordinates']['longitude'][j]));
+      }
+      
+      polygonCoords.add(
+          Polygon(
+            polygonId: PolygonId(data[i]['id'].toString()),
+            points: polylatlang,
+            fillColor: Color.fromARGB(255, 244, 130, 54).withOpacity(0.5),
+            strokeWidth: 0,
           ),
-        ),
-      );
-      circles.add(
-        Circle(
-          circleId: CircleId(data[i]['id'].toString()),
-          center: LatLng(double.parse(data[i]['latitude']),
-              double.parse(data[i]['longitude'])),
-          radius: 1000,
-          fillColor: Colors.red.withOpacity(0.5),
-          strokeWidth: 0,
-        ),
-      );
-      polylines.add(
-        Polyline(
-          polylineId: PolylineId(data[i]['id'].toString()),
-          color: Colors.red,
-          width: 2,
-          points: building,
-        ),
-      );
+        );
     }
     setState(() {
       allMarkers = markers;
       allcircles = circles;
-      allPolylines = [
-        Polyline(
-          polylineId: const PolylineId('building'),
-          color: Colors.red,
-          width: 2,
-          points: building,
-        ),
-      ];
+      allPolygons = polygonCoords;
     });
     return data;
   }
 
-  // List<Marker> allMarkers = [];
-  // List<Marker> list=const [
-  //   Marker(markerId: MarkerId('1'),
-  //       position: LatLng(27.7172, 85.3240),
-  //       infoWindow: InfoWindow(title: 'Kathmandu')),
-  //           Marker(markerId: MarkerId('2'),
-  //       position: LatLng(28, 85.240),
-  //       infoWindow: InfoWindow(title: 'Another')),
-  // ];
-
   @override
   void initState() {
     getLocations();
-    // allMarkers.addAll(list);
     super.initState();
   }
 
@@ -124,14 +93,13 @@ class _UserMapsState extends State<UserMaps> {
       ),
       body: GoogleMap(
         initialCameraPosition: const CameraPosition(
-          target: LatLng(12.974567, 77.592199),
-          zoom: 10,
+          target: LatLng(20, 78),
+          zoom: 5,
         ),
         onMapCreated: (GoogleMapController controller) {
           mapController = controller;
         },
-        polylines: Set.from(allPolylines),
-        circles: Set.from(allcircles),
+        polygons: Set.from(allPolygons),
         mapType: MapType.normal,
         markers: Set.from(allMarkers),
       ),
