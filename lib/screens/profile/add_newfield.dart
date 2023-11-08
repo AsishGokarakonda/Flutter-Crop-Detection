@@ -25,6 +25,8 @@ class _AddFieldState extends State<AddField> {
   static double fieldArea = 0.0;
   static double latitude = 0.0;
   static double longitude = 0.0;
+  // create a list to take (latitude, longitude) pairs
+  static List<List<double>> coordinates = [];
   static int days = 0;
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   LocationData? locationData;
@@ -118,66 +120,6 @@ class _AddFieldState extends State<AddField> {
                 key: _formkey,
                 child: Column(
                   children: [
-                    const GetTextField(
-                      hint: 'Name of the field',
-                      icon: Icons.person,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-                    const GetTextField(
-                      hint: 'Area of the field in acres',
-                      icon: Icons.crop,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-                    const GetTextField(
-                      hint: 'Latitude of the field',
-                      icon: Icons.my_location,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-                    const GetTextField(
-                      hint: 'Longitude of the field',
-                      icon: Icons.my_location,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-Text(
-                      '( Get latitude and longitude )',
-                      style: TextStyle(
-                          // fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      child: TextButton(
-                        onPressed: () {
-                          getPermission();
-                        },
-                        style: TextButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)))),
-                        child: const Text(
-                          'Get location',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const GetTextField(
-                      hint: 'Days of crop growth',
-                      icon: Icons.access_time,
-                      inputAction: TextInputAction.next,
-                      inputType: TextInputType.text,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     const Text(
                       'Select Crop grown in the field',
                       style: TextStyle(
@@ -208,7 +150,127 @@ Text(
                             ),
                           ],
                         )),
- 
+                    const GetTextField(
+                      hint: 'Name of the field',
+                      icon: Icons.person,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Area of the field in acres',
+                      icon: Icons.crop,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Days of crop growth',
+                      icon: Icons.access_time,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Latitude of the field',
+                      icon: Icons.my_location,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    const GetTextField(
+                      hint: 'Longitude of the field',
+                      icon: Icons.my_location,
+                      inputAction: TextInputAction.next,
+                      inputType: TextInputType.text,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: TextButton(
+                        onPressed: () {
+                          getPermission();
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)))),
+                        child: const Text(
+                          'Get location',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Co-ordinates',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    coordinates.length == 0
+                        ? const Text(
+                            'No coordinates added',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black54),
+                          )
+                        : Container(
+                            height: 200,
+                            width: MediaQuery.of(context).size.width * 0.85,
+                            child: ListView.builder(
+                                itemCount: coordinates.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: const EdgeInsets.only(bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '(${coordinates[index][0]}, ${coordinates[index][1]})',
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                coordinates.removeAt(index);
+                                              });
+                                            },
+                                            icon: const Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            ))
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            coordinates.add([latitude, longitude]);
+                          });
+                        },
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)))),
+                        child: const Text(
+                          'Add coordinates',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -223,7 +285,7 @@ Text(
                             // 10.196.10.23
                             final validation =
                                 _formkey.currentState!.validate();
-                            if (validation && publicCropName != "") {
+                            if (validation && publicCropName != "" && coordinates.length >= 4 ) {
                               _formkey.currentState!.save();
                               const storage = FlutterSecureStorage();
                               var jwt = await storage.read(key: 'jwt');
@@ -242,6 +304,14 @@ Text(
                                         'latitude': '$latitude',
                                         'longitude': '$longitude',
                                         'start_day': '$days',
+                                        'coordinates': {
+                                          'latitude': coordinates
+                                              .map((e) => e[0])
+                                              .toList(),
+                                          'longitude': coordinates
+                                              .map((e) => e[1])
+                                              .toList()
+                                        }
                                       }))
                                   .then(((value) => {
                                         if (value.statusCode == 200)
@@ -275,23 +345,45 @@ Text(
                                           }
                                       }));
                             } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Inputs are not valid'),
-                                      content: const Text(
-                                          'Please fill all the details'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        )
-                                      ],
-                                    );
-                                  });
+                              if (coordinates.length < 4) {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            'Insufficient Coordinates'),
+                                        content: const Text(
+                                            'Please add atleast 4 coordinates'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('OK'),
+                                          )
+                                        ],
+                                      );
+                                    });
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title:
+                                            const Text('Inputs are not valid'),
+                                        content: const Text(
+                                            'Please fill all the details'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('OK'),
+                                          )
+                                        ],
+                                      );
+                                    });
+                              }
                             }
                           },
                           child: const Text(

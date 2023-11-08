@@ -39,7 +39,7 @@ class _AdminHomeState extends State<AdminHome> {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                            color: Colors.red[100],
+                            color: Colors.blue[500],
                             borderRadius: BorderRadius.circular(20)),
                         child: // keep image here
                         // change image size
@@ -52,7 +52,7 @@ class _AdminHomeState extends State<AdminHome> {
                       ),
                        Text(
                         'All users',
-                        style: TextStyle(color: Colors.red[300]),
+                        style: TextStyle(color: Colors.blue[500]),
                       )
                     ],
                   )),
@@ -68,7 +68,7 @@ class _AdminHomeState extends State<AdminHome> {
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                            color: Colors.green[100],
+                            color: Colors.green[500],
                             borderRadius: BorderRadius.circular(20)),
                         child: const Icon(
                           Icons.map,
@@ -81,7 +81,7 @@ class _AdminHomeState extends State<AdminHome> {
                       ),
                       Text(
                         'User Maps',
-                        style: TextStyle(color: Colors.green[300]),
+                        style: TextStyle(color: Colors.green[500]),
                       )
                     ],
                   )),
@@ -106,7 +106,7 @@ class _AdminHomeState extends State<AdminHome> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                          color: Colors.blue[100],
+                          color: Colors.red[500],
                           borderRadius: BorderRadius.circular(20)),
                       child: const Icon(
                         Icons.logout,
@@ -119,16 +119,16 @@ class _AdminHomeState extends State<AdminHome> {
                     ),
                     Text(
                       'Logout',
-                      style: TextStyle(color: Colors.blue[300]),
+                      style: TextStyle(color: Colors.red[500]),
                     )
                   ],
                 )),
                 TextButton(
                 onPressed: () {
                   // delete jwt token from secure storage
-                  const storage = FlutterSecureStorage();
-                  storage.delete(key: 'jwt');
-                  Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
+                  // const storage = FlutterSecureStorage();
+                  // storage.delete(key: 'jwt');
+                  // Navigator.pushNamedAndRemoveUntil(context,MyRoutes.beforeloginRoute, (route) => false);
                 },
                 child: Column(
                   children: [
@@ -136,10 +136,10 @@ class _AdminHomeState extends State<AdminHome> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                          color: Colors.blue[100],
+                          color: Color.fromARGB(255, 252, 169, 54),
                           borderRadius: BorderRadius.circular(20)),
                       child: const Icon(
-                        Icons.logout,
+                        Icons.query_stats,
                         color: Colors.black,
                         size: 70,
                       ),
@@ -149,7 +149,7 @@ class _AdminHomeState extends State<AdminHome> {
                     ),
                     Text(
                       'Statistics',
-                      style: TextStyle(color: Colors.blue[300]),
+                      style: TextStyle(color: Color.fromARGB(255, 252, 169, 54)),
                     )
                   ],
                 )),
