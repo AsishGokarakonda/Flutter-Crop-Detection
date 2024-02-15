@@ -34,45 +34,6 @@ class _AddFieldState extends State<AddField> {
   static TextEditingController latitudeController = TextEditingController();
   static TextEditingController longitudeController = TextEditingController();
 
-  //   var locationmessage = "";
-  //  void getlocation() async {
-  //   // if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
-  //   //   // Use location.
-  //   //   print("Hi");
-  //     // get permission to access location
-  //     var permission = await Permission.locationWhenInUse.request();
-  //     // check if permission is granted
-  //     if (permission == PermissionStatus.granted) {
-  //       // get current location
-  //       var position = await Geolocator.getCurrentPosition(
-  //           desiredAccuracy: LocationAccuracy.high);
-  //       var lastposition = await Geolocator.getLastKnownPosition();
-  //       print(position);
-  //       print(lastposition);
-  //       setState(() {
-  //         locationmessage = "$position";
-  //       });
-  //     } else {
-  //       print("Location Permission Denied");
-  //     }
-  //   }
-  //   // else {
-  //   //   // Open app settings.
-  //   //   print("COOL");
-  //   //   openAppSettings();
-  //   // }
-
-  // Future<void> _validationcheck() async {
-  //   final validation = _formkey.currentState!.validate();
-  //   if (validation) {
-  //     _formkey.currentState!.save();
-  //     // print(username);
-  //     // print(name);
-  //     // print(email);
-  //     // print(password);
-  //   }
-  // }
-
   void getPermission() async {
     if (await Permission.location.isGranted) {
       // Get location

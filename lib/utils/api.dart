@@ -7,7 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 class APILoad {
-  static String api = 'http://10.196.10.102:8000';
+  static String api = 'http://10.200.253.130:8000';
   // http://10.196.10.102:8000/api/login/
   // this should be the ip address of the machine where the server is running.
   // for simplicity connect phone and laptop to same wifi and use the ip address of the laptop

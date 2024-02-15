@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PricePredict extends StatefulWidget {
   const PricePredict({super.key});
@@ -19,14 +21,6 @@ class _PricePredictState extends State<PricePredict> {
         blurRadius: 30,
         offset: Offset(0, 10))
   ];
-  // {
-  // "min_price": 5270.0,
-  // "max_price": 10450.0,
-  // "avg_price": 7860.0,
-  // "start": "Mar 2023",
-  // "end": "Dec 2023"
-// }
-  // create variables for min_price, max_price, avg_price, start, end
 
   double min_price = 0.0;
   double max_price = 0.0;
@@ -36,7 +30,43 @@ class _PricePredictState extends State<PricePredict> {
   int showgraph = 0;
   int months = 0;
   int buffering = 0;
-  String imagestring ='';
+  String imagestring = '';
+  // create an array of market names
+  List<String> marketnames = [];
+  LocationData? locationData;
+
+  static double latitude = 0.0;
+  static double longitude = 0.0;
+
+  static TextEditingController latitudeController = TextEditingController();
+  static TextEditingController longitudeController = TextEditingController();
+
+  void getPermission() async {
+    if (await Permission.location.isGranted) {
+      // Get location
+      getLocation();
+    } else {
+      // Request permission
+      Permission.location.request();
+    }
+  }
+
+  void getLocation() async {
+     setState(() {
+      buffering = 1;
+    });
+    locationData = await Location.instance.getLocation();
+    setState(() {
+      buffering = 0;
+      latitude = locationData!.latitude!;
+      longitude = locationData!.longitude!;
+      latitudeController.text = latitude.toString();
+      longitudeController.text = longitude.toString();
+    });
+    print(latitude);
+    print(longitude);
+  }
+
   void getpriceprediction() async {
     var request = await http.post(
         Uri.parse('${APILoad.api}/marketchoice/predictmarketprice/'),
@@ -58,9 +88,45 @@ class _PricePredictState extends State<PricePredict> {
     });
   }
 
+  Future<List> getnearestmarkets() async {
+    // get latitute and longitude of the user
+    setState(() {
+      buffering = 1;
+    });
+    locationData = await Location.instance.getLocation();
+    setState(() {
+      buffering = 0;
+      latitude = locationData!.latitude!;
+      longitude = locationData!.longitude!;
+      latitudeController.text = latitude.toString();
+      longitudeController.text = longitude.toString();
+    });
+    var request = await http.get(
+      Uri.parse('${APILoad.api}/marketchoice/getnearestmarkets/'),
+      headers: {
+        'Accept': 'application/json',
+        'latitude': locationData!.latitude!.toString(),
+        'longitude': locationData!.longitude!.toString(),
+      },
+    );
+    var data = json.decode(request.body);
+    print(data);
+    for (var i = 0; i < data.length; i++) {
+      marketnames.add(data[i]['name']);
+    }
+    setState(() {
+      buffering = 0;
+    });
+    print(marketnames);
+    return marketnames;
+  }
+
+  late Future<List> _markets;
   @override
   void initState() {
-    // getpriceprediction();
+    _markets = getnearestmarkets();
+    print('hi');
+    print(_markets);
     super.initState();
   }
 
@@ -139,11 +205,13 @@ class _PricePredictState extends State<PricePredict> {
                         getpriceprediction();
                         setState(() {
                           // update the network image
-                          imagestring = "${APILoad.api}/images/crops/pricePrediction.png";
+                          imagestring =
+                              "${APILoad.api}/images/crops/pricePrediction.png";
+                          
                         });
                       },
                       child: Text(
-                        '  Predict  ',
+                        'Predict',
                         style: TextStyle(color: Colors.white),
                       ),
                       style: TextButton.styleFrom(
@@ -160,131 +228,52 @@ class _PricePredictState extends State<PricePredict> {
                     // if showgraph is 1 then show text graph
 
                     showgraph == 1
-                        ? Column(children: [
-                            Text('Price Vs Time',
+                        ? Container(
+                            padding: const EdgeInsets.all(20),
+                            child: Text(
+                                'Price prediction is completed. Go to each market to see price!',
                                 style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold, 
-                                )),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                                                        Text('Entered number of months: $months',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.grey,
-                                )),
-                            GestureDetector(
-                              // on tap open the image in full screen
-                              onTap: () async {
-                                // show image in full screen
-                                await showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Dialog(
-                                        child: InteractiveViewer(
-                                          panEnabled: false,
-                                          maxScale: 3,
-                                          minScale: 1,
-                                          child: Container(
-                                            width: 300,
-                                            height: 300,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(20),
-                                                      topRight:
-                                                          Radius.circular(20),
-                                                      bottomLeft:
-                                                          Radius.circular(20),
-                                                      bottomRight:
-                                                          Radius.circular(20)),
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    "${APILoad.api}/images/crops/pricePrediction.png"),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    });
-                              },
-                              child: Container(
-                                width: 400,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      imagestring
-                                        ),
-                                    fit: BoxFit.scaleDown
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            PriceContainer(
-                                shadowList: shadowList,
-                                data: avg_price,
-                                type: 'Avg Price'),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  PriceContainer(
-                                      shadowList: shadowList,
-                                      data: min_price,
-                                      type: 'Min Price'),
-                                  PriceContainer(
-                                      shadowList: shadowList,
-                                      data: max_price,
-                                      type: 'Max Price'),
-                                ]),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  PriceContainer(
-                                      shadowList: shadowList,
-                                      data: start,
-                                      type: 'Start Date'),
-                                  PriceContainer(
-                                      shadowList: shadowList,
-                                      data: end,
-                                      type: 'End Date'),
-                                ]),
-                          ])
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green)),
+                          )
                         : Container(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text('Markets',
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text('Available Markets',
                         style: TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.bold, 
-                        )
-                        ),
-                        MarketCard(
-                          marketname: 'Dharwad market',
-                          bgimage: 'market1',
-                        ),
-                        MarketCard(
-                          marketname: 'Fresh veggies',
-                          bgimage: 'market2',
-                        ),
-                        MarketCard(
-                          marketname: 'Mr. Herbs',
-                          bgimage: 'market3',
-                        ),
+                          fontWeight: FontWeight.bold,
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    FutureBuilder(
+                        future: _markets,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.data == null) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else {
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return MarketCard(
+                                  marketname: snapshot.data[index],
+                                  bgimage: snapshot.data[index],
+                                );
+                              },
+                              itemCount: snapshot.data.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                            );
+                          }
+                        }),
                   ]),
                 )
               : Container(
@@ -297,7 +286,7 @@ class _PricePredictState extends State<PricePredict> {
 }
 
 class PriceContainer extends StatelessWidget {
-   PriceContainer({
+  PriceContainer({
     Key? key,
     required this.shadowList,
     required this.data,
@@ -311,63 +300,57 @@ class PriceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-    padding: const EdgeInsets.all(10),
-    width: MediaQuery.of(context).size.width * 0.4,
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: shadowList),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10) ,
-          child: Column(
-            children: [
-        Text(
-            '$type',
-            style: TextStyle(
-                color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            // if type of data is double then show rupees symbol and if type of data is date then show date
-            type == 'Start Date' || type == 'End Date'
-                ? data
-                : '₹ $data',
-            style: TextStyle(
-              color: // if type is min price then show red and if type is avg price then show green and if type is max price then show blue
-                  type == 'Min Price'
-                      ? Colors.red
-                      : type == 'Avg Price'
-                          ? Colors.blue
-                          : type == 'Max Price'
-                          ? Colors.green
-                          : Color.fromARGB(255, 248, 183, 18),
-              fontSize: 20,
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: const EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width * 0.4,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: shadowList),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: Column(
+              children: [
+                Text(
+                  '$type',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  // if type of data is double then show rupees symbol and if type of data is date then show date
+                  type == 'Start Date' || type == 'End Date' ? data : '₹ $data',
+                  style: TextStyle(
+                    color: // if type is min price then show red and if type is avg price then show green and if type is max price then show blue
+                        type == 'Min Price'
+                            ? Colors.red
+                            : type == 'Avg Price'
+                                ? Colors.blue
+                                : type == 'Max Price'
+                                    ? Colors.green
+                                    : Color.fromARGB(255, 248, 183, 18),
+                    fontSize: 20,
+                  ),
+                ),
+              ],
             ),
           ),
-            ],
-          ),
-        ),
-      ],
-    ),
-        );
+        ],
+      ),
+    );
   }
 }
 
-
 class MarketCard extends StatelessWidget {
-  const MarketCard({
-    super.key,
-    this.marketname,
-    this.ontap,
-    this.bgimage
-  });
+  const MarketCard({super.key, this.marketname, this.ontap, this.bgimage});
   final marketname;
   final ontap;
   final bgimage;
@@ -376,8 +359,8 @@ class MarketCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-          MarketInformation.marketname = marketname;
-          Navigator.pushNamed(context, '/marketinfo');
+        MarketInformation.marketname = marketname;
+        Navigator.pushNamed(context, '/marketinfo');
       },
       child: Container(
         height: 180,
@@ -387,7 +370,7 @@ class MarketCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
             image: AssetImage(
-              'assets/marketchoice/$bgimage.jpg',
+              'assets/marketchoice/market1.jpg',
             ),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
@@ -397,19 +380,18 @@ class MarketCard extends StatelessWidget {
         child: Container(
             alignment: Alignment.bottomLeft,
             margin: const EdgeInsets.all(10),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      marketname,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ])),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Center(
+                child: Text(
+                  marketname,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ])),
       ),
     );
   }

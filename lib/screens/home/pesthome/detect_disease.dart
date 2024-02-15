@@ -63,7 +63,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
     request.headers.addAll(headers);
     request.fields.addAll({
       'crop_name': PestManagement.diseaseselectedcrop,
-      'dayaftersowing': das.toString(),
+      'dayaftersowing': PestManagement.dayaftersowing.toString(),
     });
     print("done");
     var response = await request.send();
@@ -251,7 +251,7 @@ class _DetectDiseaseState extends State<DetectDisease> {
                   GestureDetector(
                     onTap: () {
                       // if var das is null, then show a dialog box saying enter day after sowing
-                      if (das == null) {
+                      if (das == null && PestManagement.dayaftersowing == '') {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
